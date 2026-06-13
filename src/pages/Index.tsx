@@ -1,5 +1,5 @@
 import { ShieldCheck, BadgeCheck, Clock, Lock } from "lucide-react";
-import NidForm from "@/components/NidForm";
+import { NidForm } from "@/features/nid";
 
 const features = [
   {
