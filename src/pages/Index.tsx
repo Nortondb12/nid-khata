@@ -27,6 +27,12 @@ const features = [
 const Index = () => {
   return (
     <div className="min-h-dvh w-full bg-background flex flex-col items-center px-4 py-10 sm:py-14">
+      <a
+        href="#form-heading"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-[var(--shadow-primary)]"
+      >
+        ফর্মে যান
+      </a>
       {/* Header */}
       <header className="flex flex-col items-center text-center mb-10 sm:mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
         <div

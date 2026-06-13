@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 interface InfoRowProps {
   icon: ReactNode;
   label: string;
-  value: string;
+  value: ReactNode;
 }
 
 const InfoRow = ({ icon, label, value }: InfoRowProps) => (
