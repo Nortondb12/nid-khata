@@ -48,7 +48,7 @@ export async function lookupNid(
     if (!parsed.success) {
       throw new NidLookupError("সার্ভারের উত্তর প্রক্রিয়া করা যায়নি।", parsed.error);
     }
-    return parsed.data;
+    return parsed.data as NidData;
   } catch (err) {
     if (err instanceof NidLookupError) throw err;
     if ((err as Error)?.name === "AbortError") {

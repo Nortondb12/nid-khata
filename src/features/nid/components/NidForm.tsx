@@ -34,7 +34,7 @@ const NidForm = () => {
   const { mutate, data, isPending, error, reset } = useNidLookup();
 
   const onSubmit = (values: NidLookupInput) => {
-    mutate(values);
+    mutate(values as Required<NidLookupInput>);
   };
 
   const apiErrorMessage =
