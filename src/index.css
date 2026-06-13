@@ -98,6 +98,12 @@
 .lovable-badge,
 [class*="lovable-badge"],
 [id*="lovable-badge"],
+[class*="lovable" i][class*="badge" i],
+[id*="lovable" i][id*="badge" i],
+[data-lovable],
+[data-lovable-badge],
+[aria-label*="Lovable" i],
+[title*="Lovable" i],
 a[href*="lovable.dev"][target="_blank"],
 iframe[src*="lovable"],
 div[data-lovable-badge] {
