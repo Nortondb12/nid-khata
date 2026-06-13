@@ -93,3 +93,21 @@
     font-family: 'Hind Siliguri', sans-serif;
   }
 }
+
+/* Hide Lovable badge completely */
+.lovable-badge,
+[class*="lovable-badge"],
+[id*="lovable-badge"],
+a[href*="lovable.dev"][target="_blank"],
+iframe[src*="lovable"],
+div[data-lovable-badge] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
