@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download, User, MapPin, Calendar, CreditCard } from "lucide-react";
-import type { NidData } from "./NidForm";
+import type { NidData } from "../types";
+import InfoRow from "./InfoRow";
 
 interface NidResultProps {
   data: NidData;
@@ -9,12 +10,14 @@ interface NidResultProps {
 
 const NidResult = ({ data }: NidResultProps) => {
   const handleDownload = () => {
-    // TODO: Implement actual download logic from your API
     window.print();
   };
 
   return (
-    <Card className="shadow-[var(--shadow-elevated)] border-border/60 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <Card
+      className="shadow-[var(--shadow-elevated)] border-border/60 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 motion-reduce:animate-none"
+      aria-live="polite"
+    >
       <div className="bg-primary p-4">
         <h3 className="text-lg font-bold text-primary-foreground text-center">
           গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — জাতীয় পরিচয়পত্র
@@ -25,11 +28,16 @@ const NidResult = ({ data }: NidResultProps) => {
           {data.photo ? (
             <img
               src={data.photo}
-              alt="NID Photo"
+              alt={`${data.name_en} এর ছবি`}
+              loading="lazy"
+              decoding="async"
               className="w-24 h-28 object-cover rounded-lg border-2 border-border shadow-sm"
             />
           ) : (
-            <div className="w-24 h-28 rounded-lg border-2 border-border bg-muted flex items-center justify-center">
+            <div
+              className="w-24 h-28 rounded-lg border-2 border-border bg-muted flex items-center justify-center"
+              aria-hidden="true"
+            >
               <User className="w-10 h-10 text-muted-foreground" />
             </div>
           )}
@@ -49,22 +57,12 @@ const NidResult = ({ data }: NidResultProps) => {
           onClick={handleDownload}
           className="w-full h-11 bg-accent text-accent-foreground hover:bg-accent/90 font-semibold"
         >
-          <Download className="w-5 h-5 mr-2" />
+          <Download className="w-5 h-5 mr-2" aria-hidden="true" />
           সার্ভার কপি ডাউনলোড করুন
         </Button>
       </CardContent>
     </Card>
   );
 };
-
-const InfoRow = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => (
-  <div className="flex items-start gap-2">
-    <span className="text-primary mt-0.5 shrink-0">{icon}</span>
-    <div className="min-w-0">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="text-sm font-medium text-foreground break-words">{value}</p>
-    </div>
-  </div>
-);
 
 export default NidResult;
