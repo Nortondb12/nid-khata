@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { nidLookupSchema } from "../schema";
+import { nidLookupSchema } from "./schema";
 
 describe("nidLookupSchema", () => {
   const validDob = "1990-01-15";
