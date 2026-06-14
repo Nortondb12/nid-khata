@@ -1,4 +1,4 @@
-import { ShieldCheck, BadgeCheck, Clock, Lock } from "lucide-react";
+import { ShieldCheck, BadgeCheck, Clock, Lock, Sparkles, ChevronDown } from "lucide-react";
 import { NidForm } from "@/features/nid";
 
 const features = [
@@ -24,79 +24,160 @@ const features = [
   },
 ];
 
+const steps = [
+  { n: "১", title: "তথ্য দিন", desc: "NID নম্বর ও জন্ম তারিখ লিখুন" },
+  { n: "২", title: "যাচাই করুন", desc: "সার্ভার থেকে তথ্য আনা হবে" },
+  { n: "৩", title: "ডাউনলোড", desc: "সার্ভার কপি সংরক্ষণ করুন" },
+];
+
 const Index = () => {
   return (
-    <div className="min-h-dvh w-full bg-background flex flex-col items-center px-4 py-10 sm:py-14">
+    <div className="min-h-dvh w-full bg-hero">
+      {/* Skip link */}
       <a
         href="#form-heading"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-[var(--shadow-primary)]"
       >
         ফর্মে যান
       </a>
-      {/* Header */}
-      <header className="flex flex-col items-center text-center mb-10 sm:mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
-        <div
-          className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-3 shadow-[var(--shadow-primary)]"
-          aria-hidden="true"
-        >
-          <ShieldCheck className="w-8 h-8 text-primary-foreground" strokeWidth={1.75} />
+
+      {/* Sticky header */}
+      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl no-print">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-glow))] flex items-center justify-center shadow-[var(--shadow-primary)] group-hover:scale-105 transition-transform">
+              <ShieldCheck className="w-5 h-5 text-primary-foreground" strokeWidth={2.2} aria-hidden="true" />
+            </div>
+            <div className="leading-tight">
+              <p className="text-sm font-bold text-foreground">NID সার্ভার কপি</p>
+              <p className="text-[11px] text-muted-foreground -mt-0.5">সরকারি সেবা পোর্টাল</p>
+            </div>
+          </a>
+          <nav aria-label="প্রধান নেভিগেশন" className="hidden sm:flex items-center gap-1 text-sm">
+            <a href="#features" className="px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">বৈশিষ্ট্য</a>
+            <a href="#steps" className="px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">কীভাবে কাজ করে</a>
+            <a
+              href="#form-heading"
+              className="ml-1 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors shadow-sm"
+            >
+              শুরু করুন
+            </a>
+          </nav>
         </div>
-        <h1 className="text-2xl font-bold text-foreground tracking-tight">
-          NID সার্ভার কপি সেবা
-        </h1>
-        <p className="text-muted-foreground text-sm font-medium mt-1">
-          জাতীয় পরিচয়পত্র যাচাই ও ডাউনলোড
-        </p>
       </header>
 
-      <main className="w-full flex flex-col items-center">
-        {/* Hero */}
-        <section className="text-center max-w-2xl mb-8 sm:mb-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4">
-            আপনার NID কার্ডের{" "}
-            <span className="text-primary">সার্ভার কপি</span>
-            <br className="hidden md:block" />
-            ডাউনলোড করুন
-          </h2>
-          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-            NID নম্বর এবং জন্ম তারিখ দিয়ে সহজেই আপনার জাতীয় পরিচয়পত্রের সার্ভার কপি সংগ্রহ করুন।
-          </p>
+      <main className="relative">
+        {/* Decorative grid */}
+        <div className="absolute inset-x-0 top-0 h-[520px] bg-grid pointer-events-none" aria-hidden="true" />
+
+        {/* Hero + form */}
+        <section className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-20">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+            {/* Hero copy */}
+            <div className="text-center lg:text-left animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20">
+                <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+                ডেমো মোড সক্রিয় — পরীক্ষার জন্য
+              </span>
+              <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-tight">
+                আপনার NID কার্ডের{" "}
+                <span className="text-gradient-primary">সার্ভার কপি</span>{" "}
+                মুহূর্তেই
+              </h1>
+              <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                NID নম্বর এবং জন্ম তারিখ দিয়ে সরাসরি সরকারি সার্ভার থেকে আপনার জাতীয় পরিচয়পত্রের অফিসিয়াল কপি সংগ্রহ করুন।
+              </p>
+
+              {/* Trust badges */}
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start text-sm text-muted-foreground">
+                <li className="flex items-center gap-1.5"><BadgeCheck className="w-4 h-4 text-primary" aria-hidden="true" /> সরকারি যাচাই</li>
+                <li className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-primary" aria-hidden="true" /> SSL এনক্রিপ্টেড</li>
+                <li className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" aria-hidden="true" /> ২৪/৭ সেবা</li>
+              </ul>
+
+              <a
+                href="#steps"
+                className="mt-8 hidden lg:inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                কীভাবে কাজ করে দেখুন <ChevronDown className="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
+
+            {/* Form column */}
+            <div id="form" className="flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150 fill-mode-both">
+              <NidForm />
+            </div>
+          </div>
         </section>
 
-        {/* Form */}
-        <section aria-labelledby="form-heading" className="w-full flex justify-center mb-14 sm:mb-16">
-          <NidForm />
+        {/* Steps */}
+        <section
+          id="steps"
+          aria-label="কীভাবে কাজ করে"
+          className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 sm:pb-20"
+        >
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">কীভাবে কাজ করে</h2>
+            <p className="text-muted-foreground mt-2">মাত্র ৩টি সহজ ধাপে আপনার কপি পান</p>
+          </div>
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {steps.map((s, i) => (
+              <li
+                key={s.n}
+                className="relative bg-card border border-border rounded-2xl p-6 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-shadow"
+              >
+                <div className="absolute -top-4 left-6 w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-glow))] text-primary-foreground font-bold flex items-center justify-center shadow-[var(--shadow-primary)]">
+                  {s.n}
+                </div>
+                <h3 className="mt-3 text-lg font-bold text-foreground">{s.title}</h3>
+                <p className="text-muted-foreground text-sm mt-1 leading-relaxed">{s.desc}</p>
+                {i < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-border" aria-hidden="true" />
+                )}
+              </li>
+            ))}
+          </ol>
         </section>
 
         {/* Features */}
         <section
+          id="features"
           aria-label="পরিষেবার বৈশিষ্ট্য"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full max-w-6xl"
+          className="mx-auto max-w-6xl px-4 sm:px-6 pb-20"
         >
-          {features.map((f) => (
-            <article
-              key={f.title}
-              className="bg-card/60 backdrop-blur-sm p-6 rounded-2xl border border-border hover:border-primary/40 hover:bg-primary/5 transition-all group"
-            >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-primary/10 text-primary group-hover:scale-110 transition-transform"
-                aria-hidden="true"
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">কেন আমাদের সেবা</h2>
+            <p className="text-muted-foreground mt-2">নিরাপদ, দ্রুত এবং নির্ভরযোগ্য</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {features.map((f) => (
+              <article
+                key={f.title}
+                className="group relative bg-card p-6 rounded-2xl border border-border hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)]"
               >
-                <f.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-foreground mb-1">{f.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
-            </article>
-          ))}
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                  aria-hidden="true"
+                >
+                  <f.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-base font-bold text-foreground mb-1">{f.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
+              </article>
+            ))}
+          </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 sm:mt-20 py-8 border-t border-border w-full max-w-6xl text-center">
-        <p className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()}{" "}
-          <span className="text-primary font-semibold">NID সার্ভার কপি সেবা</span>। সর্বস্বত্ব সংরক্ষিত।
-        </p>
+      <footer className="no-print border-t border-border/60 bg-card/40 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row gap-3 items-center justify-between text-sm text-muted-foreground">
+          <p>
+            © {new Date().getFullYear()}{" "}
+            <span className="text-primary font-semibold">NID সার্ভার কপি সেবা</span>। সর্বস্বত্ব সংরক্ষিত।
+          </p>
+          <p className="text-xs">তথ্য সংরক্ষিত হয় না • শুধু পরীক্ষার জন্য</p>
+        </div>
       </footer>
     </div>
   );
