@@ -47,13 +47,11 @@ describe("lookupNid", () => {
     [500, "সার্ভারে সমস্যা"],
     [503, "সার্ভারে সমস্যা"],
   ])("maps status %i to a Bengali message", async (status, fragment) => {
-    fetchMock.mockResolvedValueOnce({ ok: false, status, json: async () => ({}) });
-    await expect(lookupNid(validPayload)).rejects.toThrow(NidLookupError);
-    try {
-      await lookupNid(validPayload);
-    } catch (err) {
-      expect((err as Error).message).toContain(fragment);
-    }
+    fetchMock.mockResolvedValue({ ok: false, status, json: async () => ({}) });
+    await expect(lookupNid(validPayload)).rejects.toMatchObject({
+      name: "NidLookupError",
+      message: expect.stringContaining(fragment as string),
+    });
   });
 
   it("throws NidLookupError when response schema is invalid", async () => {
