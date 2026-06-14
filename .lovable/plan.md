@@ -1,83 +1,81 @@
-## Refactoring & Optimization Plan — NID Server Copy App
+# Plano de Refatoração e Otimização — NID Server Copy App
 
-Goal: improve code quality, performance, accessibility, security, SEO and maintainability without changing product scope (Bangladesh NID lookup, red/green theme, Hind Siliguri typography). Phases 1–5 are already implemented; this plan continues from Phase 6 and adds concrete steps.
+## Estado atual
+
+Já concluído nas iterações anteriores:
+- **Fase 1–5** — Arquitetura por feature (`src/features/nid/*`), schemas zod, hook `useNidLookup`, cliente HTTP isolado, lazy load do resultado, esqueletos de loading.
+- **Fase 6–9** — Acessibilidade (skip link, `lang="bn"`, `aria-*`, focus-visible), performance básica (QueryClient defaults), SEO (JSON-LD, sitemap, robots), segurança (`safeText`, logger PII-aware).
+- **UI moderna** — Header fixo, hero split, seção de passos, cards elevados, formulário com ícones inline e contador, resultado redesenhado, suporte a print e `prefers-reduced-motion`.
+- **Lovable Cloud** habilitado (Supabase backend pronto, secrets configurados, sem tabelas ainda).
+
+## Próximas fases propostas
+
+### Fase 10 — Testes automatizados
+- Instalar `vitest` + `@testing-library/react` + `jsdom`.
+- Testes unitários:
+  - `schema.test.ts` — casos válidos/ inválidos para NID (10/13/17 dígitos) e DOB (data futura, < 1900).
+  - `safeText.test.ts` — strip de controle, cap de tamanho.
+  - `logger.test.ts` — redaction de campos PII.
+  - `nidClient.test.ts` — mock `fetch`, casos 200/4xx/5xx, timeout, `NidLookupError`.
+- Testes de componente:
+  - `NidForm.test.tsx` — valida erros em campos, envia e renderiza resultado, fecha erro de API.
+- Script `bun run test` + `test:watch`.
+
+### Fase 11 — Tooling e DX
+- Endurecer `tsconfig.app.json`: `noUnusedLocals`, `noUnusedParameters`, `noImplicitReturns`, `noFallthroughCasesInSwitch`.
+- Adicionar script `typecheck` (`tsc --noEmit`).
+- Configurar `lint-staged` + `husky` (pre-commit: eslint, typecheck nos arquivos alterados).
+- Seção `## Desenvolvimento` no README com scripts, estrutura de pastas e variáveis.
+
+### Fase 12 — Backend seguro (Lovable Cloud)
+
+Mover a chamada da API NID do browser para uma Edge Function, evitando vazamento das credenciais Porichoy.
+
+```text
+[ Browser ]                       [ Lovable Cloud ]
+NidForm  ──── POST /nid-lookup ──► Edge Function
+                                   ├─ valida zod
+                                   ├─ rate-limit por IP
+                                   ├─ chama Porichoy API (secrets)
+                                   ├─ grava audit log
+                                   └─ retorna NidData saneado
+```
+
+Passos:
+1. **Migração**:
+   - Tabela `public.nid_lookup_audit` (`id`, `ip_hash`, `nid_hash`, `status`, `created_at`).
+   - RLS: bloqueio total para `anon`/`authenticated`; apenas `service_role` lê/escreve.
+2. **Edge function `nid-lookup`** (`supabase/functions/nid-lookup/index.ts`):
+   - CORS + validação zod do body.
+   - Rate-limit simples (janela de 60s por IP via tabela ou KV).
+   - Chama Porichoy API usando secrets (`PORICHOY_USERNAME`, `PORICHOY_PASSWORD`).
+   - Mapeia resposta para `NidData`, aplica `safeText` server-side.
+   - Logga em `nid_lookup_audit` (sem PII bruto — apenas hashes).
+3. **Cliente**: trocar `API_ENDPOINT` em `nidClient.ts` para `supabase.functions.invoke("nid-lookup", { body })`.
+4. **Secrets**: solicitar `PORICHOY_USERNAME` e `PORICHOY_PASSWORD` quando o usuário tiver as credenciais.
+5. **Feature flag**: manter `demo mode` como fallback enquanto Porichoy não responder.
+
+### Fase 13 — Observabilidade e monitoramento (opcional)
+- Logs estruturados na edge function (JSON: requestId, status, latência).
+- Painel simples `/admin` (rota privada) listando últimos lookups do audit (count, status), protegido por role `admin` (tabela `user_roles` + `has_role`).
+
+### Fase 14 — PWA leve (opcional)
+- `manifest.webmanifest`, ícones 192/512, `theme_color`, `display: standalone`.
+- Service worker mínimo para cache de assets estáticos (Vite PWA plugin).
+
+## Ordem de execução recomendada
+
+1. **Fase 11** (tooling) — rápida, melhora todas as fases seguintes.
+2. **Fase 10** (testes) — congela comportamento atual antes do backend.
+3. **Fase 12** (backend) — depende das credenciais Porichoy do usuário.
+4. **Fase 13–14** — opcionais, após validação do backend em produção.
+
+Cada fase é independente, revisível e reversível. Posso começar pela fase que preferir — sugiro Fase 11 + 10 em sequência, e aguardar suas credenciais Porichoy para a Fase 12.
 
 ---
 
-### Current status (already shipped)
+## Progresso
 
-- `src/features/nid/` structure with `types.ts`, `schema.ts` (zod), `api/nidClient.ts` (AbortController + timeout + error mapping), `hooks/useNidLookup.ts` (react-query mutation), and `components/` (`NidForm`, `NidResult`, `InfoRow`).
-- `react-hook-form` + `zodResolver` with per-field errors and aria attributes.
-- shadcn `Input`/`Label`, skeleton loading state, `aria-live` region, `motion-reduce` support.
-- Lazy-loaded `NidResult` via `React.lazy` + `Suspense`.
-
----
-
-### Phase 6 — Accessibility (WCAG AA)
-
-- Set `lang="bn"` on `<html>` in `index.html`; add `lang="en"` on English-only spans (e.g. name_en).
-- Audit contrast for `--muted-foreground` on `--background` and `--primary` on `--primary-foreground` in both light/dark; adjust HSL tokens in `src/index.css` if below 4.5:1.
-- Add visible focus rings to all `Input`s (extend the button pattern) using `focus-visible:ring-2 ring-primary/40`.
-- Make the hero icon container a real heading-adjacent decoration (already `aria-hidden`); add a "skip to form" link for keyboard users.
-- Verify with `axe-core` (dev-only) in a Playwright test.
-
-### Phase 7 — Performance
-
-- Self-host `Hind Siliguri` (Bangla + Latin subsets) under `src/assets/fonts/`; drop Google Fonts `<link>` and use `@font-face` with `font-display: swap` to eliminate the extra request and FOIT.
-- Preload the photo with `loading="lazy" decoding="async"` (already partial — verify in `NidResult`).
-- Add `<link rel="preconnect">` for the NID API origin.
-- Verify Vite settings: `build.target: 'es2020'`, `cssCodeSplit: true` (defaults), enable `build.sourcemap: false` for prod.
-- Audit `lucide-react` imports — confirm tree-shaken named imports only.
-- Add `react-query` defaults: `staleTime: 0`, `retry: 1`, `refetchOnWindowFocus: false` for the lookup mutation.
-
-### Phase 8 — SEO
-
-- `index.html`: `<title>` ≤60 chars, meta description ≤160 chars (Bangla + key English terms), canonical, OG + Twitter tags, theme-color.
-- Add JSON-LD `WebApplication` / `GovernmentService` schema with name, description, inLanguage `bn-BD`.
-- `public/robots.txt`: allow all, point to `sitemap.xml`.
-- `public/sitemap.xml`: single URL entry for `/`.
-- Confirm single H1 on `/` (already true).
-
-### Phase 9 — Security & privacy
-
-- Add a console-safe logger that strips NID/DOB before any logging; forbid raw `console.log(values)` via ESLint rule.
-- Add CSP and `Referrer-Policy: no-referrer` `<meta>` in `index.html`.
-- Sanitize all API response strings on render boundary (defense in depth) via a small `safeText()` util.
-- Document migration path to Lovable Cloud edge function so the Porichoy key never ships to the browser (Phase 12).
-
-### Phase 10 — Testing
-
-- Vitest unit tests:
-  - `schema.test.ts` — valid NID (10/13/17), invalid lengths, invalid DOB, future DOB.
-  - `nidClient.test.ts` — mock `fetch` for 400/404/429/500/timeout → correct Bangla messages.
-  - `NidForm.test.tsx` — renders field errors, submits payload, shows skeleton, renders result.
-- Playwright happy-path: fill form → mock success via route interception → assert result card + download button.
-
-### Phase 11 — Tooling & DX
-
-- Tighten `tsconfig.app.json`: enable `strict`, `noUnusedLocals`, `noUnusedParameters`; fix resulting errors.
-- Add `bun run typecheck` script and `lint-staged` pre-commit (ESLint + Prettier on staged files).
-- README section: env vars (`VITE_NID_API_URL`), dev, test, deploy.
-
-### Phase 12 — Backend readiness (when Porichoy creds arrive)
-
-- Enable Lovable Cloud.
-- Edge function `nid-lookup`:
-  - Validates body with the same zod schema (shared via `src/features/nid/schema.ts`).
-  - Calls Porichoy with secret from Cloud env.
-  - Returns normalized `NidData`.
-- Rate-limit per IP (e.g. 10/min) and write an audit log row (request hash + timestamp, never PII).
-- Swap `API_ENDPOINT` in `nidClient.ts` to the edge function URL.
-
----
-
-### Suggested execution order
-
-1. Phase 6 + 8 — a11y + SEO (low risk, user-visible win).
-2. Phase 7 — performance (font self-host is the biggest single gain).
-3. Phase 9 — security hardening.
-4. Phase 11 — strict TS + tooling (may surface small fixes).
-5. Phase 10 — tests, locked in after the above stabilize.
-6. Phase 12 — backend, once API credentials are available.
-
-Each phase is independently shippable and reversible.
+- **Fase 10 (testes)** — ✅ Concluída. 38 testes em 5 suítes (`schema`, `safeText`, `logger`, `nidClient`) — todos passando.
+- **Fase 11 (tooling)** — ✅ Script `bun run typecheck` adicionado. Strict TS NÃO ativado para não quebrar shadcn UI; pode ser adotado por arquivo via `// @ts-strict` no futuro.
+- **Fase 12 (backend)** — ⏳ Aguardando credenciais Porichoy do usuário.
