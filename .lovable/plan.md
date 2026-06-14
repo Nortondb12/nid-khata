@@ -71,3 +71,11 @@ Passos:
 4. **Fase 13–14** — opcionais, após validação do backend em produção.
 
 Cada fase é independente, revisível e reversível. Posso começar pela fase que preferir — sugiro Fase 11 + 10 em sequência, e aguardar suas credenciais Porichoy para a Fase 12.
+
+---
+
+## Progresso
+
+- **Fase 10 (testes)** — ✅ Concluída. 38 testes em 5 suítes (`schema`, `safeText`, `logger`, `nidClient`) — todos passando.
+- **Fase 11 (tooling)** — ✅ Script `bun run typecheck` adicionado. Strict TS NÃO ativado para não quebrar shadcn UI; pode ser adotado por arquivo via `// @ts-strict` no futuro.
+- **Fase 12 (backend)** — ⏳ Aguardando credenciais Porichoy do usuário.
