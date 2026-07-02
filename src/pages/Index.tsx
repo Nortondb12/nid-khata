@@ -71,25 +71,25 @@ const Index = () => {
         <div className="absolute inset-x-0 top-0 h-[520px] bg-grid pointer-events-none" aria-hidden="true" />
 
         {/* Hero + form */}
-        <section className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-20">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+        <section className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-12 lg:pt-16 pb-14 sm:pb-20">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Hero copy */}
-            <div className="text-center lg:text-left animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="text-center md:text-left animate-in fade-in slide-in-from-bottom-4 duration-700">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20">
                 <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
                 ডেমো মোড সক্রিয় — পরীক্ষার জন্য
               </span>
-              <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-tight">
+              <h1 className="mt-4 text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-[1.15] tracking-tight">
                 আপনার NID কার্ডের{" "}
                 <span className="text-gradient-primary">সার্ভার কপি</span>{" "}
                 মুহূর্তেই
               </h1>
-              <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="mt-4 sm:mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
                 NID নম্বর এবং জন্ম তারিখ দিয়ে সরাসরি সরকারি সার্ভার থেকে আপনার জাতীয় পরিচয়পত্রের অফিসিয়াল কপি সংগ্রহ করুন।
               </p>
 
               {/* Trust badges */}
-              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start text-sm text-muted-foreground">
+              <ul className="mt-5 sm:mt-6 flex flex-wrap gap-x-5 gap-y-2 justify-center md:justify-start text-sm text-muted-foreground">
                 <li className="flex items-center gap-1.5"><BadgeCheck className="w-4 h-4 text-primary" aria-hidden="true" /> সরকারি যাচাই</li>
                 <li className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-primary" aria-hidden="true" /> SSL এনক্রিপ্টেড</li>
                 <li className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" aria-hidden="true" /> ২৪/৭ সেবা</li>
@@ -104,7 +104,7 @@ const Index = () => {
             </div>
 
             {/* Form column */}
-            <div id="form" className="flex justify-center lg:justify-end animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150 fill-mode-both">
+            <div id="form" className="w-full flex justify-center md:justify-end animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150 fill-mode-both">
               <NidForm />
             </div>
           </div>
