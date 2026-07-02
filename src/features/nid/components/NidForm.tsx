@@ -43,8 +43,8 @@ const NidForm = () => {
     error instanceof NidLookupError ? error.message : error ? "কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।" : null;
 
   return (
-    <div className="w-full max-w-lg space-y-6">
-      <div className="relative w-full bg-card rounded-3xl shadow-[var(--shadow-elevated)] border border-border/80 p-6 sm:p-8 overflow-hidden">
+    <div className="w-full max-w-md sm:max-w-lg mx-auto space-y-5 sm:space-y-6">
+      <div className="relative w-full bg-card rounded-2xl sm:rounded-3xl shadow-[var(--shadow-elevated)] border border-border/80 p-5 sm:p-7 lg:p-8 overflow-hidden">
         {/* Top accent gradient */}
         <div
           className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-primary via-[hsl(var(--primary-glow))] to-accent"
