@@ -4,6 +4,8 @@ import { lookupNid, NidLookupError } from "./nidClient";
 const validPayload = {
   nid_number: "1234567890",
   date_of_birth: "1990-01-15",
+  full_name: "Mohammad Rahim",
+  father_name: "Mohammad Karim",
 };
 
 const validResponse = {
