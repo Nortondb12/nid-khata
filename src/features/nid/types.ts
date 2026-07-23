@@ -12,4 +12,6 @@ export interface NidData {
 export interface NidLookupRequest {
   nid_number: string;
   date_of_birth: string;
+  full_name: string;
+  father_name: string;
 }
