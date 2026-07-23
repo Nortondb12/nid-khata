@@ -70,6 +70,57 @@ const NidForm = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+            {Object.keys(errors).length > 0 && (
+              <div
+                role="alert"
+                aria-live="assertive"
+                className="rounded-xl border border-destructive/30 bg-destructive/10 p-4"
+              >
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 mt-0.5 text-destructive shrink-0" aria-hidden="true" />
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold text-destructive">
+                      অনুগ্রহ করে নিচের {Object.keys(errors).length}টি ফিল্ড ঠিক করুন:
+                    </p>
+                    <ul className="mt-2 space-y-1 text-xs text-destructive list-disc list-inside">
+                      {(Object.entries(errors) as [keyof NidLookupInput, { message?: string }][]).map(
+                        ([field, err]) => {
+                          const idMap: Record<keyof NidLookupInput, string> = {
+                            nid_number: "nid",
+                            date_of_birth: "dob",
+                            full_name: "full_name",
+                            father_name: "father_name",
+                          };
+                          const labelMap: Record<keyof NidLookupInput, string> = {
+                            nid_number: "NID নম্বর",
+                            date_of_birth: "জন্ম তারিখ",
+                            full_name: "পূর্ণ নাম",
+                            father_name: "পিতার নাম",
+                          };
+                          return (
+                            <li key={field}>
+                              <a
+                                href={`#${idMap[field]}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  const el = document.getElementById(idMap[field]);
+                                  el?.focus();
+                                  el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                                }}
+                                className="underline underline-offset-2 hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive/50 rounded"
+                              >
+                                {labelMap[field]}: {err?.message}
+                              </a>
+                            </li>
+                          );
+                        },
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* NID */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -94,7 +145,7 @@ const NidForm = () => {
                   maxLength={17}
                   aria-invalid={!!errors.nid_number}
                   aria-describedby={errors.nid_number ? "nid-error" : "nid-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("nid_number", {
                     onChange: (e) => {
                       const sanitized = e.target.value.replace(/\D/g, "");
@@ -132,7 +183,7 @@ const NidForm = () => {
                   min="1900-01-01"
                   aria-invalid={!!errors.date_of_birth}
                   aria-describedby={errors.date_of_birth ? "dob-error" : undefined}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("date_of_birth")}
                 />
               </div>
@@ -162,7 +213,7 @@ const NidForm = () => {
                   maxLength={100}
                   aria-invalid={!!errors.full_name}
                   aria-describedby={errors.full_name ? "full_name-error" : "full_name-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("full_name")}
                 />
               </div>
@@ -197,7 +248,7 @@ const NidForm = () => {
                   maxLength={100}
                   aria-invalid={!!errors.father_name}
                   aria-describedby={errors.father_name ? "father_name-error" : "father_name-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("father_name")}
                 />
               </div>
