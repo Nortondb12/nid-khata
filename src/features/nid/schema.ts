@@ -4,13 +4,18 @@ const today = () => new Date().toISOString().slice(0, 10);
 
 const nameField = (label: string) =>
   z
-    .string()
+    .string({ required_error: `${label} লিখুন।`, invalid_type_error: `${label} লিখুন।` })
     .trim()
+    .min(1, { message: `${label} লিখুন।` })
     .min(2, { message: `${label} কমপক্ষে ২ অক্ষরের হতে হবে।` })
-    .max(100, { message: `${label} ১০০ অক্ষরের মধ্যে দিন।` })
+    .max(100, { message: `${label} ১০০ অক্ষরের বেশি হতে পারবে না।` })
     .regex(/^[\p{L}\p{M}.'\-\s]+$/u, {
-      message: `${label}-এ শুধু অক্ষর ব্যবহার করুন।`,
+      message: `${label}-এ শুধু বাংলা বা ইংরেজি অক্ষর, স্পেস, হাইফেন (-), অ্যাপোস্ট্রফি (') এবং ডট (.) ব্যবহার করা যাবে।`,
+    })
+    .refine((v) => !/\s{2,}/.test(v), {
+      message: `${label}-এ পরপর একাধিক স্পেস ব্যবহার করা যাবে না।`,
     });
+
 
 export const nidLookupSchema = z.object({
   nid_number: z
