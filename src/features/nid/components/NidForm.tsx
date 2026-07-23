@@ -39,6 +39,24 @@ const NidForm = () => {
     mutate(values as Required<NidLookupInput>);
   };
 
+  const fieldIdMap: Record<keyof NidLookupInput, string> = {
+    nid_number: "nid",
+    date_of_birth: "dob",
+    full_name: "full_name",
+    father_name: "father_name",
+  };
+  const fieldOrder: (keyof NidLookupInput)[] = ["nid_number", "date_of_birth", "full_name", "father_name"];
+
+  const onInvalid = (errs: typeof errors) => {
+    const first = fieldOrder.find((f) => errs[f]);
+    if (!first) return;
+    const el = document.getElementById(fieldIdMap[first]);
+    if (!el) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "center" });
+    setTimeout(() => (el as HTMLElement).focus({ preventScroll: true }), prefersReduced ? 0 : 300);
+  };
+
   const apiErrorMessage =
     error instanceof NidLookupError ? error.message : error ? "কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।" : null;
 
