@@ -144,6 +144,66 @@ const NidForm = () => {
               )}
             </div>
 
+            {/* Full name */}
+            <div className="space-y-2">
+              <Label htmlFor="full_name" className="text-sm font-semibold">
+                পূর্ণ নাম
+              </Label>
+              <div className="relative group">
+                <User
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors"
+                  aria-hidden="true"
+                />
+                <Input
+                  id="full_name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="NID কার্ডে যেমন আছে"
+                  maxLength={100}
+                  aria-invalid={!!errors.full_name}
+                  aria-describedby={errors.full_name ? "full_name-error" : undefined}
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  {...register("full_name")}
+                />
+              </div>
+              {errors.full_name && (
+                <p id="full_name-error" role="alert" className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                  {errors.full_name.message}
+                </p>
+              )}
+            </div>
+
+            {/* Father's name */}
+            <div className="space-y-2">
+              <Label htmlFor="father_name" className="text-sm font-semibold">
+                পিতার নাম
+              </Label>
+              <div className="relative group">
+                <Users
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors"
+                  aria-hidden="true"
+                />
+                <Input
+                  id="father_name"
+                  type="text"
+                  autoComplete="off"
+                  placeholder="NID কার্ডে যেমন আছে"
+                  maxLength={100}
+                  aria-invalid={!!errors.father_name}
+                  aria-describedby={errors.father_name ? "father_name-error" : undefined}
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  {...register("father_name")}
+                />
+              </div>
+              {errors.father_name && (
+                <p id="father_name-error" role="alert" className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                  {errors.father_name.message}
+                </p>
+              )}
+            </div>
+
             {apiErrorMessage && (
               <div
                 role="alert"
