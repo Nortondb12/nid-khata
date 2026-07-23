@@ -2,6 +2,16 @@ import { z } from "zod";
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+const nameField = (label: string) =>
+  z
+    .string()
+    .trim()
+    .min(2, { message: `${label} কমপক্ষে ২ অক্ষরের হতে হবে।` })
+    .max(100, { message: `${label} ১০০ অক্ষরের মধ্যে দিন।` })
+    .regex(/^[\p{L}\p{M}.'\-\s]+$/u, {
+      message: `${label}-এ শুধু অক্ষর ব্যবহার করুন।`,
+    });
+
 export const nidLookupSchema = z.object({
   nid_number: z
     .string()
@@ -16,6 +26,8 @@ export const nidLookupSchema = z.object({
     .refine((v) => !isNaN(Date.parse(v)), { message: "সঠিক তারিখ দিন।" })
     .refine((v) => v <= today(), { message: "ভবিষ্যৎ তারিখ গ্রহণযোগ্য নয়।" })
     .refine((v) => v >= "1900-01-01", { message: "সঠিক জন্ম সাল দিন।" }),
+  full_name: nameField("পূর্ণ নাম"),
+  father_name: nameField("পিতার নাম"),
 });
 
 export type NidLookupInput = z.infer<typeof nidLookupSchema>;
