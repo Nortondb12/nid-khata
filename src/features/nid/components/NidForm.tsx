@@ -28,7 +28,7 @@ const NidForm = () => {
     watch,
   } = useForm<NidLookupInput>({
     resolver: zodResolver(nidLookupSchema),
-    defaultValues: { nid_number: "", date_of_birth: "" },
+    defaultValues: { nid_number: "", date_of_birth: "", full_name: "", father_name: "" },
     mode: "onTouched",
   });
 
