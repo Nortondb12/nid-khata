@@ -87,7 +87,7 @@ const NidForm = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+          <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-5" noValidate>
             {Object.keys(errors).length > 0 && (
               <div
                 role="alert"
