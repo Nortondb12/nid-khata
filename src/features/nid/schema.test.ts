@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { nidLookupSchema } from "./schema";
 
+const base = { full_name: "Mohammad Rahim", father_name: "Mohammad Karim" };
+
 describe("nidLookupSchema", () => {
+  const validDob = "1990-01-15";
   const validDob = "1990-01-15";
 
   it.each([10, 13, 17])("accepts %i-digit NID", (len) => {
