@@ -114,6 +114,29 @@ const NidResult = ({ data }: NidResultProps) => {
         </div>
       )}
 
+      {progress && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="no-print rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-2"
+        >
+          <div className="flex items-center gap-2">
+            {progress.stage === "done" ? (
+              <CheckCircle2 className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
+            ) : (
+              <Loader2 className="w-4 h-4 text-primary animate-spin shrink-0" aria-hidden="true" />
+            )}
+            <p className="text-sm font-semibold text-foreground flex-1">{progress.message}</p>
+            <span className="text-xs font-medium text-muted-foreground tabular-nums" aria-hidden="true">
+              {Math.round(progress.percent)}%
+            </span>
+          </div>
+          <Progress value={progress.percent} className="h-2" aria-label="ডাউনলোড অগ্রগতি" />
+        </div>
+      )}
+
+
+
       <div className="no-print grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Button
           onClick={() => handleDownload("pdf")}
