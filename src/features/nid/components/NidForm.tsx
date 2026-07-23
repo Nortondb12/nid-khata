@@ -12,10 +12,24 @@ import { NidLookupError } from "../api/nidClient";
 const NidResult = lazy(() => import("./NidResult"));
 
 const ResultSkeleton = () => (
-  <div className="space-y-3" aria-hidden="true">
-    <Skeleton className="h-12 w-full rounded-2xl" />
-    <Skeleton className="h-40 w-full rounded-2xl" />
-    <Skeleton className="h-11 w-full rounded-xl" />
+  <div className="space-y-3">
+    <div
+      role="status"
+      aria-live="polite"
+      className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4"
+    >
+      <Loader2 className="w-5 h-5 text-primary animate-spin shrink-0" aria-hidden="true" />
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold text-foreground">যাচাই করা হচ্ছে...</p>
+        <p className="text-xs text-muted-foreground">
+          আপনার তথ্য সার্ভারে যাচাই করা হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন। ডাউনলোড বোতাম যাচাই সম্পন্ন হলে সক্রিয় হবে।
+        </p>
+      </div>
+    </div>
+    <div aria-hidden="true" className="space-y-3">
+      <Skeleton className="h-40 w-full rounded-2xl" />
+      <Skeleton className="h-11 w-full rounded-xl" />
+    </div>
   </div>
 );
 
