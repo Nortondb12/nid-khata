@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X } from "lucide-react";
+import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X, User, Users } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
