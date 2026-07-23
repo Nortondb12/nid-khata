@@ -7,33 +7,63 @@ export type DownloadFormat = "pdf" | "png";
 const sanitizeFilename = (input: string) =>
   input.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24) || "nid";
 
+export type DownloadStage = "preparing" | "rendering" | "encoding" | "saving" | "done";
+
+export interface DownloadProgress {
+  stage: DownloadStage;
+  percent: number;
+  message: string;
+}
+
+export type DownloadProgressHandler = (p: DownloadProgress) => void;
+
+const STAGE_MESSAGES: Record<DownloadStage, string> = {
+  preparing: "প্রস্তুত করা হচ্ছে...",
+  rendering: "কার্ড রেন্ডার করা হচ্ছে...",
+  encoding: "ফাইল এনকোড করা হচ্ছে...",
+  saving: "ফাইল সংরক্ষণ করা হচ্ছে...",
+  done: "সম্পন্ন হয়েছে",
+};
+
+const emit = (cb: DownloadProgressHandler | undefined, stage: DownloadStage, percent: number) => {
+  cb?.({ stage, percent, message: STAGE_MESSAGES[stage] });
+};
+
 /**
  * Renders the given element to a canvas and downloads it as PDF or PNG.
- * The element must already be mounted and visible (or at least in the layout).
  */
 export async function downloadNidCopy(
   element: HTMLElement,
   format: DownloadFormat,
   nidNumber: string,
+  onProgress?: DownloadProgressHandler,
 ): Promise<void> {
   const safe = sanitizeFilename(nidNumber);
   const filename = `nid-server-copy-${safe}`;
 
   try {
+    emit(onProgress, "preparing", 5);
+    await new Promise((r) => setTimeout(r, 50));
+
+    emit(onProgress, "rendering", 20);
     const canvas = await html2canvas(element, {
       scale: Math.min(window.devicePixelRatio || 1, 2) * 1.5,
       backgroundColor: "#ffffff",
       useCORS: true,
       logging: false,
     });
+    emit(onProgress, "rendering", 60);
 
     if (format === "png") {
+      emit(onProgress, "encoding", 75);
       const url = canvas.toDataURL("image/png");
+      emit(onProgress, "saving", 92);
       triggerDownload(url, `${filename}.png`);
+      emit(onProgress, "done", 100);
       return;
     }
 
-    // PDF — A4 portrait, fit width preserving aspect ratio
+    emit(onProgress, "encoding", 75);
     const imgData = canvas.toDataURL("image/jpeg", 0.95);
     const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const pageW = pdf.internal.pageSize.getWidth();
@@ -51,7 +81,9 @@ export async function downloadNidCopy(
     const x = (pageW - w) / 2;
     const y = margin;
     pdf.addImage(imgData, "JPEG", x, y, w, h, undefined, "FAST");
+    emit(onProgress, "saving", 92);
     pdf.save(`${filename}.pdf`);
+    emit(onProgress, "done", 100);
   } catch (err) {
     logger.error("Failed to generate NID copy download", err);
     throw new Error("ডাউনলোড তৈরি করা যায়নি। আবার চেষ্টা করুন।");
