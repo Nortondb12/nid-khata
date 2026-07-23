@@ -196,17 +196,22 @@ const NidForm = () => {
                   placeholder="NID কার্ডে যেমন আছে"
                   maxLength={100}
                   aria-invalid={!!errors.father_name}
-                  aria-describedby={errors.father_name ? "father_name-error" : undefined}
+                  aria-describedby={errors.father_name ? "father_name-error" : "father_name-hint"}
                   className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
                   {...register("father_name")}
                 />
               </div>
-              {errors.father_name && (
+              {errors.father_name ? (
                 <p id="father_name-error" role="alert" className="text-xs text-destructive flex items-center gap-1">
-                  <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
-                  {errors.father_name.message}
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                  <span>{errors.father_name.message}</span>
+                </p>
+              ) : (
+                <p id="father_name-hint" className="text-xs text-muted-foreground">
+                  NID কার্ডে উল্লেখিত পিতার পূর্ণ নাম লিখুন
                 </p>
               )}
+
             </div>
 
             {apiErrorMessage && (
