@@ -145,7 +145,7 @@ const NidForm = () => {
                   maxLength={17}
                   aria-invalid={!!errors.nid_number}
                   aria-describedby={errors.nid_number ? "nid-error" : "nid-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("nid_number", {
                     onChange: (e) => {
                       const sanitized = e.target.value.replace(/\D/g, "");
@@ -183,7 +183,7 @@ const NidForm = () => {
                   min="1900-01-01"
                   aria-invalid={!!errors.date_of_birth}
                   aria-describedby={errors.date_of_birth ? "dob-error" : undefined}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("date_of_birth")}
                 />
               </div>
@@ -213,7 +213,7 @@ const NidForm = () => {
                   maxLength={100}
                   aria-invalid={!!errors.full_name}
                   aria-describedby={errors.full_name ? "full_name-error" : "full_name-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("full_name")}
                 />
               </div>
@@ -248,7 +248,7 @@ const NidForm = () => {
                   maxLength={100}
                   aria-invalid={!!errors.father_name}
                   aria-describedby={errors.father_name ? "father_name-error" : "father_name-hint"}
-                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary transition-colors text-base"
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
                   {...register("father_name")}
                 />
               </div>
