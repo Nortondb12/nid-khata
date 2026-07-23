@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Download, FileImage, User, MapPin, Calendar, CreditCard, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import type { NidData } from "../types";
 import InfoRow from "./InfoRow";
 import { safeText } from "@/lib/safeText";
-import { downloadNidCopy, type DownloadFormat } from "../utils/downloadCopy";
+import { downloadNidCopy, type DownloadFormat, type DownloadProgress } from "../utils/downloadCopy";
 
 interface NidResultProps {
   data: NidData;
@@ -15,19 +16,24 @@ const NidResult = ({ data }: NidResultProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState<DownloadFormat | null>(null);
   const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [progress, setProgress] = useState<DownloadProgress | null>(null);
 
   const handleDownload = async (format: DownloadFormat) => {
     if (!cardRef.current || busy) return;
     setDownloadError(null);
+    setProgress({ stage: "preparing", percent: 0, message: "শুরু হচ্ছে..." });
     setBusy(format);
     try {
-      await downloadNidCopy(cardRef.current, format, data.nid_number);
+      await downloadNidCopy(cardRef.current, format, data.nid_number, (p) => setProgress(p));
+      setTimeout(() => setProgress(null), 1200);
     } catch (err) {
       setDownloadError(err instanceof Error ? err.message : "ডাউনলোড ব্যর্থ হয়েছে।");
+      setProgress(null);
     } finally {
       setBusy(null);
     }
   };
+
 
   const name_bn = safeText(data.name_bn);
   const name_en = safeText(data.name_en);
