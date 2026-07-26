@@ -136,7 +136,7 @@ const NidResult = ({ data }: NidResultProps) => {
         <div
           role="status"
           aria-live="polite"
-          className="no-print rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-2"
+          className="no-print rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3"
         >
           <div className="flex items-center gap-2">
             {progress.stage === "done" ? (
@@ -150,8 +150,35 @@ const NidResult = ({ data }: NidResultProps) => {
             </span>
           </div>
           <Progress value={progress.percent} className="h-2" aria-label="ডাউনলোড অগ্রগতি" />
+          {progress.stage !== "done" && (
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={handleCancel}
+                variant="ghost"
+                size="sm"
+                className="h-8 text-destructive hover:text-destructive hover:bg-destructive/10 focus-visible:ring-2 focus-visible:ring-destructive/40"
+                aria-label="ডাউনলোড বাতিল করুন"
+              >
+                <X className="w-4 h-4 mr-1" aria-hidden="true" />
+                বাতিল করুন
+              </Button>
+            </div>
+          )}
         </div>
       )}
+
+      {cancelled && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="no-print flex items-start gap-2 text-sm bg-muted border border-border p-3 rounded-xl text-muted-foreground"
+        >
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+          <span>ডাউনলোড বাতিল করা হয়েছে।</span>
+        </div>
+      )}
+
 
 
 
