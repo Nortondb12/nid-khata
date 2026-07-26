@@ -17,6 +17,13 @@ export interface DownloadProgress {
 
 export type DownloadProgressHandler = (p: DownloadProgress) => void;
 
+export class DownloadCancelledError extends Error {
+  constructor() {
+    super("ডাউনলোড বাতিল করা হয়েছে।");
+    this.name = "DownloadCancelledError";
+  }
+}
+
 const STAGE_MESSAGES: Record<DownloadStage, string> = {
   preparing: "প্রস্তুত করা হচ্ছে...",
   rendering: "কার্ড রেন্ডার করা হচ্ছে...",
@@ -29,6 +36,10 @@ const emit = (cb: DownloadProgressHandler | undefined, stage: DownloadStage, per
   cb?.({ stage, percent, message: STAGE_MESSAGES[stage] });
 };
 
+const checkAborted = (signal?: AbortSignal) => {
+  if (signal?.aborted) throw new DownloadCancelledError();
+};
+
 /**
  * Renders the given element to a canvas and downloads it as PDF or PNG.
  */
@@ -37,13 +48,16 @@ export async function downloadNidCopy(
   format: DownloadFormat,
   nidNumber: string,
   onProgress?: DownloadProgressHandler,
+  signal?: AbortSignal,
 ): Promise<void> {
   const safe = sanitizeFilename(nidNumber);
   const filename = `nid-server-copy-${safe}`;
 
   try {
+    checkAborted(signal);
     emit(onProgress, "preparing", 5);
     await new Promise((r) => setTimeout(r, 50));
+    checkAborted(signal);
 
     emit(onProgress, "rendering", 20);
     const canvas = await html2canvas(element, {
@@ -52,11 +66,13 @@ export async function downloadNidCopy(
       useCORS: true,
       logging: false,
     });
+    checkAborted(signal);
     emit(onProgress, "rendering", 60);
 
     if (format === "png") {
       emit(onProgress, "encoding", 75);
       const url = canvas.toDataURL("image/png");
+      checkAborted(signal);
       emit(onProgress, "saving", 92);
       triggerDownload(url, `${filename}.png`);
       emit(onProgress, "done", 100);
@@ -65,6 +81,7 @@ export async function downloadNidCopy(
 
     emit(onProgress, "encoding", 75);
     const imgData = canvas.toDataURL("image/jpeg", 0.95);
+    checkAborted(signal);
     const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
@@ -81,10 +98,12 @@ export async function downloadNidCopy(
     const x = (pageW - w) / 2;
     const y = margin;
     pdf.addImage(imgData, "JPEG", x, y, w, h, undefined, "FAST");
+    checkAborted(signal);
     emit(onProgress, "saving", 92);
     pdf.save(`${filename}.pdf`);
     emit(onProgress, "done", 100);
   } catch (err) {
+    if (err instanceof DownloadCancelledError) throw err;
     logger.error("Failed to generate NID copy download", err);
     throw new Error("ডাউনলোড তৈরি করা যায়নি। আবার চেষ্টা করুন।");
   }
