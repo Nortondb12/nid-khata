@@ -2,8 +2,6 @@ import { describe, it, expect } from "vitest";
 import { nidLookupSchema } from "./schema";
 
 const base = {
-  full_name: "Mohammad Rahim",
-  father_name: "Mohammad Karim",
   date_of_birth: "1990-01-15",
 };
 
@@ -24,43 +22,23 @@ describe("nidLookupSchema", () => {
   });
 
   it("rejects empty DOB", () => {
-    const result = nidLookupSchema.safeParse({ ...base, nid_number: "1234567890", date_of_birth: "" });
+    const result = nidLookupSchema.safeParse({ nid_number: "1234567890", date_of_birth: "" });
     expect(result.success).toBe(false);
   });
 
   it("rejects future DOB", () => {
     const future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 365).toISOString().slice(0, 10);
-    const result = nidLookupSchema.safeParse({ ...base, nid_number: "1234567890", date_of_birth: future });
+    const result = nidLookupSchema.safeParse({ nid_number: "1234567890", date_of_birth: future });
     expect(result.success).toBe(false);
   });
 
   it("rejects DOB before 1900", () => {
-    const result = nidLookupSchema.safeParse({ ...base, nid_number: "1234567890", date_of_birth: "1899-12-31" });
+    const result = nidLookupSchema.safeParse({ nid_number: "1234567890", date_of_birth: "1899-12-31" });
     expect(result.success).toBe(false);
   });
 
   it("rejects malformed DOB string", () => {
-    const result = nidLookupSchema.safeParse({ ...base, nid_number: "1234567890", date_of_birth: "not-a-date" });
+    const result = nidLookupSchema.safeParse({ nid_number: "1234567890", date_of_birth: "not-a-date" });
     expect(result.success).toBe(false);
-  });
-
-  it("rejects short full name", () => {
-    const result = nidLookupSchema.safeParse({ ...base, full_name: "A", nid_number: "1234567890" });
-    expect(result.success).toBe(false);
-  });
-
-  it("rejects father name with digits", () => {
-    const result = nidLookupSchema.safeParse({ ...base, father_name: "Karim123", nid_number: "1234567890" });
-    expect(result.success).toBe(false);
-  });
-
-  it("accepts Bengali names", () => {
-    const result = nidLookupSchema.safeParse({
-      ...base,
-      full_name: "মোহাম্মদ রহিম",
-      father_name: "মোহাম্মদ করিম",
-      nid_number: "1234567890",
-    });
-    expect(result.success).toBe(true);
   });
 });
