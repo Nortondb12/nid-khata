@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X, User, Users } from "lucide-react";
+import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -42,7 +42,7 @@ const NidForm = () => {
     watch,
   } = useForm<NidLookupInput>({
     resolver: zodResolver(nidLookupSchema),
-    defaultValues: { nid_number: "", date_of_birth: "", full_name: "", father_name: "" },
+    defaultValues: { nid_number: "", date_of_birth: "" },
     mode: "onTouched",
   });
 
@@ -56,10 +56,8 @@ const NidForm = () => {
   const fieldIdMap: Record<keyof NidLookupInput, string> = {
     nid_number: "nid",
     date_of_birth: "dob",
-    full_name: "full_name",
-    father_name: "father_name",
   };
-  const fieldOrder: (keyof NidLookupInput)[] = ["nid_number", "date_of_birth", "full_name", "father_name"];
+  const fieldOrder: (keyof NidLookupInput)[] = ["nid_number", "date_of_birth"];
 
   const onInvalid = (errs: typeof errors) => {
     const first = fieldOrder.find((f) => errs[f]);
@@ -70,6 +68,7 @@ const NidForm = () => {
     el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "center" });
     setTimeout(() => (el as HTMLElement).focus({ preventScroll: true }), prefersReduced ? 0 : 300);
   };
+
 
   const apiErrorMessage =
     error instanceof NidLookupError ? error.message : error ? "কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।" : null;
@@ -120,15 +119,12 @@ const NidForm = () => {
                           const idMap: Record<keyof NidLookupInput, string> = {
                             nid_number: "nid",
                             date_of_birth: "dob",
-                            full_name: "full_name",
-                            father_name: "father_name",
                           };
                           const labelMap: Record<keyof NidLookupInput, string> = {
                             nid_number: "NID নম্বর",
                             date_of_birth: "জন্ম তারিখ",
-                            full_name: "পূর্ণ নাম",
-                            father_name: "পিতার নাম",
                           };
+
                           return (
                             <li key={field}>
                               <a
