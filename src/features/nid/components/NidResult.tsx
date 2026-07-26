@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Download, FileImage, User, MapPin, Calendar, CreditCard, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { Download, FileImage, User, MapPin, Calendar, CreditCard, CheckCircle2, Loader2, AlertCircle, X } from "lucide-react";
 import type { NidData } from "../types";
 import InfoRow from "./InfoRow";
 import { safeText } from "@/lib/safeText";
-import { downloadNidCopy, type DownloadFormat, type DownloadProgress } from "../utils/downloadCopy";
+import { downloadNidCopy, DownloadCancelledError, type DownloadFormat, type DownloadProgress } from "../utils/downloadCopy";
 
 interface NidResultProps {
   data: NidData;
@@ -14,24 +14,42 @@ interface NidResultProps {
 
 const NidResult = ({ data }: NidResultProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
   const [busy, setBusy] = useState<DownloadFormat | null>(null);
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<DownloadProgress | null>(null);
+  const [cancelled, setCancelled] = useState(false);
 
   const handleDownload = async (format: DownloadFormat) => {
     if (!cardRef.current || busy) return;
     setDownloadError(null);
+    setCancelled(false);
     setProgress({ stage: "preparing", percent: 0, message: "শুরু হচ্ছে..." });
     setBusy(format);
+    const controller = new AbortController();
+    abortRef.current = controller;
     try {
-      await downloadNidCopy(cardRef.current, format, data.nid_number, (p) => setProgress(p));
+      await downloadNidCopy(cardRef.current, format, data.nid_number, (p) => {
+        if (!controller.signal.aborted) setProgress(p);
+      }, controller.signal);
       setTimeout(() => setProgress(null), 1200);
     } catch (err) {
-      setDownloadError(err instanceof Error ? err.message : "ডাউনলোড ব্যর্থ হয়েছে।");
-      setProgress(null);
+      if (err instanceof DownloadCancelledError) {
+        setCancelled(true);
+        setProgress(null);
+        setTimeout(() => setCancelled(false), 2500);
+      } else {
+        setDownloadError(err instanceof Error ? err.message : "ডাউনলোড ব্যর্থ হয়েছে।");
+        setProgress(null);
+      }
     } finally {
+      abortRef.current = null;
       setBusy(null);
     }
+  };
+
+  const handleCancel = () => {
+    abortRef.current?.abort();
   };
 
 
@@ -118,7 +136,7 @@ const NidResult = ({ data }: NidResultProps) => {
         <div
           role="status"
           aria-live="polite"
-          className="no-print rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-2"
+          className="no-print rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3"
         >
           <div className="flex items-center gap-2">
             {progress.stage === "done" ? (
@@ -132,8 +150,35 @@ const NidResult = ({ data }: NidResultProps) => {
             </span>
           </div>
           <Progress value={progress.percent} className="h-2" aria-label="ডাউনলোড অগ্রগতি" />
+          {progress.stage !== "done" && (
+            <div className="flex justify-end">
+              <Button
+                type="button"
+                onClick={handleCancel}
+                variant="ghost"
+                size="sm"
+                className="h-8 text-destructive hover:text-destructive hover:bg-destructive/10 focus-visible:ring-2 focus-visible:ring-destructive/40"
+                aria-label="ডাউনলোড বাতিল করুন"
+              >
+                <X className="w-4 h-4 mr-1" aria-hidden="true" />
+                বাতিল করুন
+              </Button>
+            </div>
+          )}
         </div>
       )}
+
+      {cancelled && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="no-print flex items-start gap-2 text-sm bg-muted border border-border p-3 rounded-xl text-muted-foreground"
+        >
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+          <span>ডাউনলোড বাতিল করা হয়েছে।</span>
+        </div>
+      )}
+
 
 
 
