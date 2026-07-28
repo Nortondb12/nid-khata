@@ -120,13 +120,13 @@ const Index = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground">কীভাবে কাজ করে</h2>
             <p className="text-muted-foreground mt-2">মাত্র ৩টি সহজ ধাপে আপনার কপি পান</p>
           </div>
-          <ol className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <ol className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 stagger">
             {steps.map((s, i) => (
               <li
                 key={s.n}
-                className="relative bg-card border border-border rounded-2xl p-6 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elevated)] transition-shadow"
+                className="relative bg-card border border-border rounded-2xl p-6 shadow-[var(--shadow-card)] hover-lift"
               >
-                <div className="absolute -top-4 left-6 w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-glow))] text-primary-foreground font-bold flex items-center justify-center shadow-[var(--shadow-primary)]">
+                <div className="absolute -top-4 left-6 w-9 h-9 rounded-xl animated-gradient text-primary-foreground font-bold flex items-center justify-center shadow-[var(--shadow-primary)]">
                   {s.n}
                 </div>
                 <h3 className="mt-3 text-lg font-bold text-foreground">{s.title}</h3>
