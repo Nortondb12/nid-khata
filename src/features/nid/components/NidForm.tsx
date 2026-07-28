@@ -248,7 +248,7 @@ const NidForm = () => {
               type="submit"
               disabled={isPending}
               aria-disabled={isPending}
-              className="relative w-full min-h-12 bg-gradient-to-r from-primary to-[hsl(var(--primary-glow))] text-primary-foreground font-bold py-3.5 rounded-xl shadow-[var(--shadow-primary)] transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-[var(--shadow-glow)] hover:brightness-105 active:scale-[0.99] motion-reduce:active:scale-100 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="relative w-full min-h-12 animated-gradient text-primary-foreground font-bold py-3.5 rounded-xl shadow-[var(--shadow-primary)] transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-[var(--shadow-glow)] hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.99] active:translate-y-0 motion-reduce:active:scale-100 motion-reduce:hover:translate-y-0 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden"
             >
               {isPending ? (
                 <>
@@ -258,7 +258,7 @@ const NidForm = () => {
               ) : (
                 <>
                   <Search
-                    className="w-5 h-5 group-hover:scale-110 transition-transform motion-reduce:group-hover:scale-100"
+                    className="w-5 h-5 group-hover:scale-110 group-hover:rotate-6 transition-transform motion-reduce:group-hover:scale-100 motion-reduce:group-hover:rotate-0"
                     aria-hidden="true"
                   />
                   <span>অনুসন্ধান করুন</span>
