@@ -45,7 +45,7 @@ const Index = () => {
       <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl no-print">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[hsl(var(--primary-glow))] flex items-center justify-center shadow-[var(--shadow-primary)] group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl animated-gradient flex items-center justify-center shadow-[var(--shadow-primary)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
               <ShieldCheck className="w-5 h-5 text-primary-foreground" strokeWidth={2.2} aria-hidden="true" />
             </div>
             <div className="leading-tight">
