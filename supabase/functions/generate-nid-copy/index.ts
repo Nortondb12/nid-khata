@@ -1,9 +1,9 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3.23.8";
-import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.6.2";
+import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.7.0-alpha.2";
 import { jsPDF } from "npm:jspdf@2.5.2";
 
-const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm";
+const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.7.0-alpha.2/index_bg.wasm";
 const FONT_URLS = [
   "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Regular.ttf",
   "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Bold.ttf",
