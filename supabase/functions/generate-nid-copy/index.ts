@@ -28,7 +28,7 @@ const ensureWasm = () => {
 const ensureFonts = () => {
   if (!fontsPromise) {
     fontsPromise = Promise.all(
-      [FONT_REGULAR, FONT_BOLD].map(async (url) => {
+      FONT_URLS.map(async (url) => {
         const res = await fetch(url);
         return new Uint8Array(await res.arrayBuffer());
       }),
