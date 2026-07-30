@@ -25,6 +25,7 @@ export type Database = {
           format: string | null
           id: string
           ip_hash: string | null
+          issued_at: string | null
           nid_masked: string
           outcome: string
           user_agent: string | null
@@ -39,6 +40,7 @@ export type Database = {
           format?: string | null
           id?: string
           ip_hash?: string | null
+          issued_at?: string | null
           nid_masked: string
           outcome: string
           user_agent?: string | null
@@ -53,6 +55,7 @@ export type Database = {
           format?: string | null
           id?: string
           ip_hash?: string | null
+          issued_at?: string | null
           nid_masked?: string
           outcome?: string
           user_agent?: string | null
