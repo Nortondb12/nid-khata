@@ -56,7 +56,12 @@ export const initShaper = () => {
 };
 
 const isBengaliChar = (cp: number) =>
-  (cp >= 0x0980 && cp <= 0x09ff) || cp === 0x200c || cp === 0x200d;
+  (cp >= 0x0980 && cp <= 0x09ff) ||
+  cp === 0x0964 || // danda
+  cp === 0x0965 || // double danda
+  cp === 0x200c ||
+  cp === 0x200d;
+
 
 const isNeutral = (cp: number) =>
   cp === 0x20 || cp === 0x09 || cp === 0x2e || cp === 0x2c || cp === 0x3a;
