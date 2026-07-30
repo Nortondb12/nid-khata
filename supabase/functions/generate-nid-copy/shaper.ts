@@ -136,16 +136,33 @@ export const shapeText = (
   let pen = 0;
   const paths: string[] = [];
 
-  for (const run of runs) {
-    const key = `${run.bengali ? "bn" : "lat"}-${weight}`;
-    const { font, upem } = state.fonts[key];
-    const unitFix = baseUpem / upem;
-
+  const shapeWith = (key: string, value: string) => {
     const buffer = state.hb.createBuffer();
-    buffer.addText(run.text);
+    buffer.addText(value);
     buffer.guessSegmentProperties();
-    state.hb.shape(font, buffer);
-    const glyphs = buffer.json();
+    state.hb.shape(state.fonts[key].font, buffer);
+    // deno-lint-ignore no-explicit-any
+    const glyphs = buffer.json() as any[];
+    buffer.destroy?.();
+    return glyphs;
+  };
+
+  for (const run of runs) {
+    let key = `${run.bengali ? "bn" : "lat"}-${weight}`;
+    let glyphs = shapeWith(key, run.text);
+
+    // Fallback to the other family when the preferred one lacks glyphs (.notdef).
+    if (glyphs.some((g) => g.g === 0)) {
+      const altKey = `${run.bengali ? "lat" : "bn"}-${weight}`;
+      const alt = shapeWith(altKey, run.text);
+      const missing = (gs: typeof glyphs) => gs.filter((g) => g.g === 0).length;
+      if (missing(alt) < missing(glyphs)) {
+        key = altKey;
+        glyphs = alt;
+      }
+    }
+
+    const unitFix = baseUpem / state.fonts[key].upem;
 
     for (const g of glyphs) {
       const d = glyphPath(state, key, g.g);
@@ -160,9 +177,8 @@ export const shapeText = (
       }
       pen += (g.ax ?? 0) * unitFix;
     }
-
-    buffer.destroy?.();
   }
+
 
   const inner =
     `<g transform="translate(${x},${y}) scale(${scale.toFixed(5)},${(-scale).toFixed(5)})" ` +
