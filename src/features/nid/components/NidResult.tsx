@@ -21,7 +21,7 @@ const NidResult = ({ data }: NidResultProps) => {
   const [cancelled, setCancelled] = useState(false);
 
   const handleDownload = async (format: DownloadFormat) => {
-    if (!cardRef.current || busy) return;
+    if (busy) return;
     setDownloadError(null);
     setCancelled(false);
     setProgress({ stage: "preparing", percent: 0, message: "শুরু হচ্ছে..." });
@@ -29,9 +29,23 @@ const NidResult = ({ data }: NidResultProps) => {
     const controller = new AbortController();
     abortRef.current = controller;
     try {
-      await downloadNidCopy(cardRef.current, format, data.nid_number, (p) => {
-        if (!controller.signal.aborted) setProgress(p);
-      }, controller.signal);
+      const result = await downloadNidCopy(
+        {
+          name_bn: data.name_bn,
+          name_en: data.name_en,
+          father_name: data.father_name,
+          mother_name: data.mother_name,
+          date_of_birth: data.date_of_birth,
+          nid_number: data.nid_number,
+          address: data.address,
+        },
+        format,
+        (p) => {
+          if (!controller.signal.aborted) setProgress(p);
+        },
+        controller.signal,
+      );
+      setProvenance(result);
       setTimeout(() => setProgress(null), 1200);
     } catch (err) {
       if (err instanceof DownloadCancelledError) {
@@ -47,6 +61,7 @@ const NidResult = ({ data }: NidResultProps) => {
       setBusy(null);
     }
   };
+
 
   const handleCancel = () => {
     abortRef.current?.abort();
