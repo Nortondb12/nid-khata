@@ -4,10 +4,13 @@ import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.6.2";
 import { jsPDF } from "npm:jspdf@2.5.2";
 
 const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm";
-const FONT_REGULAR =
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/hinted/ttf/NotoSansBengali-Regular.ttf";
-const FONT_BOLD =
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/hinted/ttf/NotoSansBengali-Bold.ttf";
+const FONT_URLS = [
+  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Regular.ttf",
+  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Bold.ttf",
+  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSans/hinted/ttf/NotoSans-Regular.ttf",
+  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSans/hinted/ttf/NotoSans-Bold.ttf",
+];
+
 
 let wasmReady: Promise<void> | null = null;
 let fontsPromise: Promise<Uint8Array[]> | null = null;
