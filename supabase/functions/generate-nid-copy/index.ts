@@ -3,6 +3,7 @@ import { z } from "npm:zod@3.23.8";
 import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.6.2";
 import { jsPDF } from "npm:jspdf@2.5.2";
 import { initShaper, measureText, shapeText, type Weight } from "./shaper.ts";
+import { recordAuditEvent } from "../_shared/audit.ts";
 
 const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm";
 
