@@ -127,7 +127,7 @@ const buildSvg = (
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <style>
-    text { font-family: 'Noto Sans Bengali'; }
+    text { font-family: 'Noto Sans Bengali', 'Noto Sans'; }
     .label { font-size: 22px; fill: #6b7280; }
     .value { font-size: 30px; fill: #0f172a; font-weight: bold; }
     .wm { font-size: 30px; fill: #0f766e; opacity: 0.10; font-weight: bold; }
