@@ -196,6 +196,23 @@ const NidResult = ({ data }: NidResultProps) => {
         </div>
       )}
 
+      {provenance && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="no-print rounded-xl border border-primary/20 bg-primary/5 p-3 text-xs text-muted-foreground space-y-1"
+        >
+          <p>
+            সার্ভারে তৈরি: <span className="font-medium text-foreground">{provenance.issuedAt}</span>
+          </p>
+          <p>
+            যাচাই কোড:{" "}
+            <span className="font-mono font-semibold text-primary tracking-wider">
+              {provenance.checksum}
+            </span>
+          </p>
+        </div>
+      )}
 
 
 
