@@ -19,6 +19,8 @@ const NidResult = ({ data }: NidResultProps) => {
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<DownloadProgress | null>(null);
   const [cancelled, setCancelled] = useState(false);
+  const [provenance, setProvenance] = useState<{ checksum: string; issuedAt: string } | null>(null);
+
 
   const handleDownload = async (format: DownloadFormat) => {
     if (busy) return;
