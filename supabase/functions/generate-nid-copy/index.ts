@@ -1,19 +1,12 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 import { z } from "npm:zod@3.23.8";
-import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.7.0-alpha.2";
+import { initWasm, Resvg } from "npm:@resvg/resvg-wasm@2.6.2";
 import { jsPDF } from "npm:jspdf@2.5.2";
+import { initShaper, measureText, shapeText, type Weight } from "./shaper.ts";
 
-const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.7.0-alpha.2/index_bg.wasm";
-const FONT_URLS = [
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Regular.ttf",
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSansBengali/full/ttf/NotoSansBengali-Bold.ttf",
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSans/hinted/ttf/NotoSans-Regular.ttf",
-  "https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSans/hinted/ttf/NotoSans-Bold.ttf",
-];
-
+const WASM_URL = "https://unpkg.com/@resvg/resvg-wasm@2.6.2/index_bg.wasm";
 
 let wasmReady: Promise<void> | null = null;
-let fontsPromise: Promise<Uint8Array[]> | null = null;
 
 const ensureWasm = () => {
   if (!wasmReady) {
@@ -23,18 +16,6 @@ const ensureWasm = () => {
     })();
   }
   return wasmReady;
-};
-
-const ensureFonts = () => {
-  if (!fontsPromise) {
-    fontsPromise = Promise.all(
-      FONT_URLS.map(async (url) => {
-        const res = await fetch(url);
-        return new Uint8Array(await res.arrayBuffer());
-      }),
-    );
-  }
-  return fontsPromise;
 };
 
 const text = (max: number) => z.string().trim().max(max);
@@ -54,14 +35,6 @@ const BodySchema = z.object({
   }),
 });
 
-const esc = (s: string) =>
-  s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-
 const maskNid = (nid: string) => `${"•".repeat(Math.max(nid.length - 4, 0))}${nid.slice(-4)}`;
 
 const sha256Hex = async (input: string) => {
@@ -69,88 +42,127 @@ const sha256Hex = async (input: string) => {
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
 };
 
-const wrap = (value: string, perLine: number) => {
+const W = 1000;
+const H = 1400;
+const CONTENT_W = W - 140;
+
+// deno-lint-ignore no-explicit-any
+type Shaper = any;
+
+/** Greedy word wrap based on real shaped widths. */
+const wrapByWidth = (
+  shaper: Shaper,
+  value: string,
+  size: number,
+  weight: Weight,
+  maxWidth: number,
+) => {
   const words = value.split(/\s+/).filter(Boolean);
   const lines: string[] = [];
   let current = "";
   for (const word of words) {
-    if ((current + " " + word).trim().length > perLine) {
-      if (current) lines.push(current.trim());
+    const candidate = current ? `${current} ${word}` : word;
+    if (measureText(shaper, candidate, size, weight) > maxWidth && current) {
+      lines.push(current);
       current = word;
     } else {
-      current = `${current} ${word}`;
+      current = candidate;
     }
   }
-  if (current.trim()) lines.push(current.trim());
+  if (current) lines.push(current);
   return lines.length ? lines : [""];
 };
 
-const W = 1000;
-const H = 1400;
-
 const buildSvg = (
+  shaper: Shaper,
   d: z.infer<typeof BodySchema>["data"],
   issuedAt: string,
   checksum: string,
 ) => {
   const masked = maskNid(d.nid_number);
-  const addressLines = wrap(d.address, 52).slice(0, 4);
+  const out: string[] = [];
+  const push = (
+    value: string,
+    x: number,
+    y: number,
+    size: number,
+    fill: string,
+    weight: Weight = "regular",
+    opacity = 1,
+    transform?: string,
+  ) => {
+    if (!value) return;
+    out.push(shapeText(shaper, value, { x, y, size, weight, fill, opacity, transform }).svg);
+  };
 
+  const LABEL = "#6b7280";
+  const VALUE = "#0f172a";
+  const BRAND = "#0f766e";
+
+  // Header
+  push("গণপ্রজাতন্ত্রী বাংলাদেশ সরকার", 70, 90, 38, "#ffffff", "bold");
+  push("জাতীয় পরিচয়পত্র — সার্ভার কপি", 70, 145, 26, "#ffffff", "regular");
+
+  // Watermark tiles
+  const watermarkText = `${masked} • ${issuedAt}`;
+  const tiles: string[] = [];
+  for (let y = 120; y < H; y += 190) {
+    for (let x = -140; x < W; x += 430) {
+      tiles.push(
+        shapeText(shaper, watermarkText, {
+          x,
+          y,
+          size: 30,
+          weight: "bold",
+          fill: BRAND,
+          opacity: 0.1,
+          transform: `rotate(-28 ${x} ${y})`,
+        }).svg,
+      );
+    }
+  }
+
+  // Name block
+  push("নাম", 70, 290, 22, LABEL);
+  push(d.name_bn, 70, 340, 44, VALUE, "bold");
+  push(d.name_en, 70, 386, 26, LABEL);
+
+  // Rows
   const rows: Array<[string, string]> = [
     ["পিতার নাম", d.father_name],
     ["মাতার নাম", d.mother_name],
     ["জন্ম তারিখ", d.date_of_birth],
     ["NID নম্বর", masked],
   ];
+  rows.forEach(([label, value], i) => {
+    push(label, 70, 520 + i * 92, 22, LABEL);
+    push(value, 70, 556 + i * 92, 30, VALUE, "bold");
+  });
 
-  const rowsSvg = rows
-    .map(
-      ([label, value], i) => `
-    <text x="70" y="${520 + i * 92}" class="label">${esc(label)}</text>
-    <text x="70" y="${552 + i * 92}" class="value">${esc(value)}</text>`,
-    )
-    .join("");
+  // Address
+  push("ঠিকানা", 70, 888, 22, LABEL);
+  wrapByWidth(shaper, d.address, 30, "bold", CONTENT_W)
+    .slice(0, 4)
+    .forEach((line, i) => push(line, 70, 926 + i * 42, 30, VALUE, "bold"));
 
-  const addressSvg = addressLines
-    .map((line, i) => `<text x="70" y="${920 + i * 36}" class="value">${esc(line)}</text>`)
-    .join("");
-
-  const watermarkText = `${masked} • ${issuedAt}`;
-  const tiles: string[] = [];
-  for (let y = 120; y < H; y += 190) {
-    for (let x = -140; x < W; x += 430) {
-      tiles.push(
-        `<text x="${x}" y="${y}" class="wm" transform="rotate(-28 ${x} ${y})">${esc(watermarkText)}</text>`,
-      );
-    }
-  }
+  // Footer
+  push(`তৈরি হয়েছে: ${issuedAt} • NID: ${masked}`, 70, H - 108, 20, "#64748b");
+  push(`যাচাই কোড: ${checksum}`, 70, H - 70, 22, BRAND, "bold");
+  push(
+    "এই কপিটি সার্ভারে জেনারেট করা হয়েছে; ওয়াটারমার্ক ও যাচাই কোড পরিবর্তন করা যাবে না।",
+    70,
+    H - 32,
+    20,
+    "#64748b",
+  );
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-  <style>
-    text { font-family: 'Noto Sans Bengali', 'Noto Sans'; }
-    .label { font-size: 22px; fill: #6b7280; }
-    .value { font-size: 30px; fill: #0f172a; font-weight: bold; }
-    .wm { font-size: 30px; fill: #0f766e; opacity: 0.10; font-weight: bold; }
-    .hdr { fill: #ffffff; font-weight: bold; }
-    .foot { font-size: 20px; fill: #64748b; }
-    .mono { font-size: 22px; fill: #0f766e; font-weight: bold; }
-  </style>
   <rect width="${W}" height="${H}" fill="#ffffff"/>
-  <rect x="0" y="0" width="${W}" height="200" fill="#0f766e"/>
-  <text x="70" y="90" class="hdr" font-size="38">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</text>
-  <text x="70" y="145" class="hdr" font-size="26">জাতীয় পরিচয়পত্র — সার্ভার কপি</text>
+  <rect x="0" y="0" width="${W}" height="200" fill="${BRAND}"/>
   <g>${tiles.join("")}</g>
-  <text x="70" y="290" class="label">নাম</text>
-  <text x="70" y="340" class="value" font-size="44">${esc(d.name_bn)}</text>
-  <text x="70" y="386" class="label" font-size="26">${esc(d.name_en)}</text>
   <line x1="70" y1="430" x2="${W - 70}" y2="430" stroke="#e2e8f0" stroke-width="2"/>
-  ${rowsSvg}
-  <text x="70" y="888" class="label">ঠিকানা</text>
-  ${addressSvg}
   <line x1="70" y1="${H - 150}" x2="${W - 70}" y2="${H - 150}" stroke="#e2e8f0" stroke-width="2"/>
-  <text x="70" y="${H - 108}" class="foot">তৈরি হয়েছে: ${esc(issuedAt)} • NID: ${esc(masked)}</text>
-  <text x="70" y="${H - 70}" class="mono">যাচাই কোড: ${esc(checksum)}</text>
-  <text x="70" y="${H - 34}" class="foot">এই কপিটি সার্ভারে জেনারেট করা হয়েছে; ওয়াটারমার্ক ও যাচাই কোড পরিবর্তন করা যাবে না।</text>
+  ${out.join("\n  ")}
 </svg>`;
 };
 
@@ -181,14 +193,10 @@ Deno.serve(async (req) => {
     );
     const checksum = digest.slice(0, 12).toUpperCase().replace(/(.{4})(?=.)/g, "$1-");
 
-    await ensureWasm();
-    const fonts = await ensureFonts();
+    const [, shaper] = await Promise.all([ensureWasm(), initShaper()]);
 
-    const svg = buildSvg(data, issuedAt, checksum);
-    const resvg = new Resvg(svg, {
-      fitTo: { mode: "width", value: W },
-      font: { fontBuffers: fonts, defaultFontFamily: "Noto Sans Bengali", loadSystemFonts: false },
-    });
+    const svg = buildSvg(shaper, data, issuedAt, checksum);
+    const resvg = new Resvg(svg, { fitTo: { mode: "width", value: W } });
     const png = resvg.render().asPng();
 
     if (format === "png") {
