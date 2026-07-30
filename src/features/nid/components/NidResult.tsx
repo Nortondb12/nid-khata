@@ -19,9 +19,11 @@ const NidResult = ({ data }: NidResultProps) => {
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<DownloadProgress | null>(null);
   const [cancelled, setCancelled] = useState(false);
+  const [provenance, setProvenance] = useState<{ checksum: string; issuedAt: string } | null>(null);
+
 
   const handleDownload = async (format: DownloadFormat) => {
-    if (!cardRef.current || busy) return;
+    if (busy) return;
     setDownloadError(null);
     setCancelled(false);
     setProgress({ stage: "preparing", percent: 0, message: "শুরু হচ্ছে..." });
@@ -29,9 +31,23 @@ const NidResult = ({ data }: NidResultProps) => {
     const controller = new AbortController();
     abortRef.current = controller;
     try {
-      await downloadNidCopy(cardRef.current, format, data.nid_number, (p) => {
-        if (!controller.signal.aborted) setProgress(p);
-      }, controller.signal);
+      const result = await downloadNidCopy(
+        {
+          name_bn: data.name_bn,
+          name_en: data.name_en,
+          father_name: data.father_name,
+          mother_name: data.mother_name,
+          date_of_birth: data.date_of_birth,
+          nid_number: data.nid_number,
+          address: data.address,
+        },
+        format,
+        (p) => {
+          if (!controller.signal.aborted) setProgress(p);
+        },
+        controller.signal,
+      );
+      setProvenance(result);
       setTimeout(() => setProgress(null), 1200);
     } catch (err) {
       if (err instanceof DownloadCancelledError) {
@@ -47,6 +63,7 @@ const NidResult = ({ data }: NidResultProps) => {
       setBusy(null);
     }
   };
+
 
   const handleCancel = () => {
     abortRef.current?.abort();
@@ -179,6 +196,23 @@ const NidResult = ({ data }: NidResultProps) => {
         </div>
       )}
 
+      {provenance && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="no-print rounded-xl border border-primary/20 bg-primary/5 p-3 text-xs text-muted-foreground space-y-1"
+        >
+          <p>
+            সার্ভারে তৈরি: <span className="font-medium text-foreground">{provenance.issuedAt}</span>
+          </p>
+          <p>
+            যাচাই কোড:{" "}
+            <span className="font-mono font-semibold text-primary tracking-wider">
+              {provenance.checksum}
+            </span>
+          </p>
+        </div>
+      )}
 
 
 
