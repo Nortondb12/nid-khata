@@ -31,3 +31,13 @@ export const nidDataSchema = z.object({
   address: z.string(),
   photo: z.string().url().optional(),
 });
+
+export const nidRequestFormSchema = nidLookupSchema.extend({
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "ইমেইল ঠিকানা দিন।" })
+    .email({ message: "সঠিক ইমেইল ঠিকানা দিন।" }),
+});
+
+export type NidRequestFormInput = z.infer<typeof nidRequestFormSchema>;
