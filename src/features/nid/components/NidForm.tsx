@@ -50,7 +50,7 @@ const NidForm = () => {
   const nidValue = watch("nid_number") ?? "";
 
   const onSubmit = (values: NidRequestFormInput) => {
-    mutate(values);
+    mutate(values as Required<NidRequestFormInput>);
   };
 
   const fieldIdMap: Record<keyof NidRequestFormInput, string> = {
