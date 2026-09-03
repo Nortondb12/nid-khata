@@ -103,6 +103,14 @@ export default {
           "0%,100%": { boxShadow: "0 0 0 0 hsl(var(--primary) / 0.35)" },
           "50%": { boxShadow: "0 0 0 12px hsl(var(--primary) / 0)" },
         },
+        "blob": {
+          "0%,100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(30px, -40px) scale(1.08)" },
+          "66%": { transform: "translate(-24px, 24px) scale(0.94)" },
+        },
+        "spin-slow": {
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -114,6 +122,8 @@ export default {
         "shimmer": "shimmer 2.5s linear infinite",
         "gradient-shift": "gradient-shift 8s ease infinite",
         "pulse-glow": "pulse-glow 2.4s ease-out infinite",
+        "blob": "blob 12s ease-in-out infinite",
+        "spin-slow": "spin-slow 18s linear infinite",
       },
     },
   },
