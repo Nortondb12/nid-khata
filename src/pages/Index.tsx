@@ -56,6 +56,7 @@ const Index = () => {
           <nav aria-label="প্রধান নেভিগেশন" className="hidden sm:flex items-center gap-1 text-sm">
             <a href="#features" className="px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">বৈশিষ্ট্য</a>
             <a href="#steps" className="px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">কীভাবে কাজ করে</a>
+            <a href="/status" className="px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">আমার স্ট্যাটাস</a>
             <a
               href="#form-heading"
               className="ml-1 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors shadow-sm"
