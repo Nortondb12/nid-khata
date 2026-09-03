@@ -66,6 +66,7 @@ export type Database = {
         Row: {
           created_at: string
           dob_year: string | null
+          email: string | null
           failure_reason: string | null
           id: string
           nid_masked: string
@@ -75,6 +76,7 @@ export type Database = {
         Insert: {
           created_at?: string
           dob_year?: string | null
+          email?: string | null
           failure_reason?: string | null
           id?: string
           nid_masked: string
@@ -84,6 +86,7 @@ export type Database = {
         Update: {
           created_at?: string
           dob_year?: string | null
+          email?: string | null
           failure_reason?: string | null
           id?: string
           nid_masked?: string

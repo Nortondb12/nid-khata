@@ -1,11 +1,11 @@
 import { lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X } from "lucide-react";
+import { Search, Loader2, AlertCircle, CreditCard, Calendar, ShieldCheck, X, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
-import { nidLookupSchema, type NidLookupInput } from "../schema";
+import { nidRequestFormSchema, type NidRequestFormInput } from "../schema";
 import { useNidLookup } from "../hooks/useNidLookup";
 import { NidLookupError } from "../api/nidClient";
 
@@ -40,24 +40,25 @@ const NidForm = () => {
     formState: { errors, isValid },
     setValue,
     watch,
-  } = useForm<NidLookupInput>({
-    resolver: zodResolver(nidLookupSchema),
-    defaultValues: { nid_number: "", date_of_birth: "" },
+  } = useForm<NidRequestFormInput>({
+    resolver: zodResolver(nidRequestFormSchema),
+    defaultValues: { nid_number: "", date_of_birth: "", email: "" },
     mode: "onTouched",
   });
 
   const { mutate, data, isPending, error, reset } = useNidLookup();
   const nidValue = watch("nid_number") ?? "";
 
-  const onSubmit = (values: NidLookupInput) => {
-    mutate(values as Required<NidLookupInput>);
+  const onSubmit = (values: NidRequestFormInput) => {
+    mutate(values as Required<NidRequestFormInput>);
   };
 
-  const fieldIdMap: Record<keyof NidLookupInput, string> = {
+  const fieldIdMap: Record<keyof NidRequestFormInput, string> = {
     nid_number: "nid",
     date_of_birth: "dob",
+    email: "email",
   };
-  const fieldOrder: (keyof NidLookupInput)[] = ["nid_number", "date_of_birth"];
+  const fieldOrder: (keyof NidRequestFormInput)[] = ["nid_number", "date_of_birth", "email"];
 
   const onInvalid = (errs: typeof errors) => {
     const first = fieldOrder.find((f) => errs[f]);
@@ -114,15 +115,17 @@ const NidForm = () => {
                       অনুগ্রহ করে নিচের {Object.keys(errors).length}টি ফিল্ড ঠিক করুন:
                     </p>
                     <ul className="mt-2 space-y-1 text-xs text-destructive list-disc list-inside">
-                      {(Object.entries(errors) as [keyof NidLookupInput, { message?: string }][]).map(
+                      {(Object.entries(errors) as [keyof NidRequestFormInput, { message?: string }][]).map(
                         ([field, err]) => {
-                          const idMap: Record<keyof NidLookupInput, string> = {
+                          const idMap: Record<keyof NidRequestFormInput, string> = {
                             nid_number: "nid",
                             date_of_birth: "dob",
+                            email: "email",
                           };
-                          const labelMap: Record<keyof NidLookupInput, string> = {
+                          const labelMap: Record<keyof NidRequestFormInput, string> = {
                             nid_number: "NID নম্বর",
                             date_of_birth: "জন্ম তারিখ",
+                            email: "ইমেইল",
                           };
 
                           return (
@@ -223,6 +226,38 @@ const NidForm = () => {
               )}
             </div>
 
+            {/* Email */}
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-semibold">
+                ইমেইল ঠিকানা
+              </Label>
+              <div className="relative group">
+                <Mail
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors pointer-events-none"
+                  aria-hidden="true"
+                />
+                <Input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : "email-hint"}
+                  className="h-12 bg-muted/40 rounded-xl pl-11 pr-4 border-border focus-visible:bg-card focus-visible:border-primary aria-[invalid=true]:border-destructive aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-destructive/40 transition-colors text-base"
+                  {...register("email")}
+                />
+              </div>
+              {errors.email ? (
+                <p id="email-error" role="alert" className="text-xs text-destructive flex items-center gap-1">
+                  <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                  {errors.email.message}
+                </p>
+              ) : (
+                <p id="email-hint" className="text-xs text-muted-foreground">
+                  এই ইমেইল দিয়ে লগইন করে আপনি নিজের অনুরোধের স্ট্যাটাস দেখতে পারবেন।
+                </p>
+              )}
+            </div>
 
 
             {apiErrorMessage && (
