@@ -62,6 +62,36 @@ export type Database = {
         }
         Relationships: []
       }
+      nid_requests: {
+        Row: {
+          created_at: string
+          dob_year: string | null
+          failure_reason: string | null
+          id: string
+          nid_masked: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dob_year?: string | null
+          failure_reason?: string | null
+          id?: string
+          nid_masked: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dob_year?: string | null
+          failure_reason?: string | null
+          id?: string
+          nid_masked?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
