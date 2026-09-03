@@ -8,6 +8,7 @@ const maskNid = (nid: string) =>
 export async function createNidRequest(
   nidNumber: string,
   dateOfBirth: string,
+  email?: string,
 ): Promise<string | null> {
   try {
     const { data, error } = await supabase
@@ -15,6 +16,7 @@ export async function createNidRequest(
       .insert({
         nid_masked: maskNid(nidNumber),
         dob_year: dateOfBirth?.slice(0, 4) ?? null,
+        email: email?.trim().toLowerCase() ?? null,
         status: "pending",
       })
       .select("id")
