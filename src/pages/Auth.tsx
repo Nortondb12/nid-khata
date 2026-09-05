@@ -17,7 +17,7 @@ const Auth = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "ক্লায়েন্ট লগইন | NID সার্ভার কপি";
+    document.title = "ক্লায়েন্ট লগইন | NID Service BD";
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       if (session) navigate(redirectPath, { replace: true });
     });
@@ -62,7 +62,7 @@ const Auth = () => {
           <div className="w-9 h-9 rounded-xl animated-gradient flex items-center justify-center">
             <ShieldCheck className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
           </div>
-          <span className="font-bold text-foreground">NID সার্ভার কপি</span>
+          <span className="font-bold text-foreground">NID Service BD</span>
         </Link>
 
         <div className="bg-card border border-border/80 rounded-2xl p-6 sm:p-8 shadow-[var(--shadow-elevated)]">

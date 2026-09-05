@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ShieldCheck, BadgeCheck, Clock, Lock, Sparkles, ChevronDown } from "lucide-react";
 import { NidForm } from "@/features/nid";
 
@@ -31,6 +32,10 @@ const steps = [
 ];
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "NID Service BD — জাতীয় পরিচয়পত্র যাচাই";
+  }, []);
+
   return (
     <div className="min-h-dvh w-full bg-hero">
       {/* Skip link */}
@@ -49,7 +54,7 @@ const Index = () => {
               <ShieldCheck className="w-5 h-5 text-primary-foreground" strokeWidth={2.2} aria-hidden="true" />
             </div>
             <div className="leading-tight">
-              <p className="text-sm font-bold text-foreground">NID সার্ভার কপি</p>
+              <p className="text-sm font-bold text-foreground">NID Service BD</p>
               <p className="text-[11px] text-muted-foreground -mt-0.5">সরকারি সেবা পোর্টাল</p>
             </div>
           </a>
@@ -175,7 +180,7 @@ const Index = () => {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row gap-3 items-center justify-between text-sm text-muted-foreground">
           <p>
             © {new Date().getFullYear()}{" "}
-            <span className="text-primary font-semibold">NID সার্ভার কপি সেবা</span>। সর্বস্বত্ব সংরক্ষিত।
+            <span className="text-primary font-semibold">NID Service BD</span>। সর্বস্বত্ব সংরক্ষিত।
           </p>
           <p className="text-xs">তথ্য সংরক্ষিত হয় না • শুধু পরীক্ষার জন্য</p>
         </div>

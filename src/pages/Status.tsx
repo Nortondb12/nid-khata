@@ -30,7 +30,7 @@ const Status = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    document.title = "আমার অনুরোধের স্ট্যাটাস | NID সার্ভার কপি";
+    document.title = "আমার অনুরোধের স্ট্যাটাস | NID Service BD";
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
       setSession(s);
       if (!s) navigate("/auth", { replace: true });
@@ -72,7 +72,7 @@ const Status = () => {
             <div className="w-9 h-9 rounded-xl animated-gradient flex items-center justify-center">
               <ShieldCheck className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
             </div>
-            <span className="font-bold text-foreground text-sm">NID সার্ভার কপি</span>
+            <span className="font-bold text-foreground text-sm">NID Service BD</span>
           </Link>
           <button
             type="button"

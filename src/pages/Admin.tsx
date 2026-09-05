@@ -65,7 +65,7 @@ const Admin = () => {
   const [failureReason, setFailureReason] = useState("");
 
   useEffect(() => {
-    document.title = "অ্যাডমিন অনুরোধ ব্যবস্থাপনা | NID সার্ভার কপি";
+    document.title = "অ্যাডমিন অনুরোধ ব্যবস্থাপনা | NID Service BD";
 
     const checkAccess = async () => {
       const { data: userData } = await supabase.auth.getUser();
@@ -162,7 +162,10 @@ const Admin = () => {
             <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <ShieldCheck className="h-5 w-5" aria-hidden="true" />
             </span>
-            <span className="font-bold text-foreground">অ্যাডমিন প্যানেল</span>
+            <div className="leading-tight">
+              <span className="font-bold text-foreground block text-sm">NID Service BD</span>
+              <span className="text-[11px] text-muted-foreground block -mt-0.5">অ্যাডমিন প্যানেল</span>
+            </div>
           </Link>
           <Button
             variant="ghost"
