@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Loader2, LogIn, Mail, KeyRound, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectPath = searchParams.get("next") === "/admin" ? "/admin" : "/status";
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,13 +19,13 @@ const Auth = () => {
   useEffect(() => {
     document.title = "ক্লায়েন্ট লগইন | NID সার্ভার কপি";
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate("/status", { replace: true });
+      if (session) navigate(redirectPath, { replace: true });
     });
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate("/status", { replace: true });
+      if (data.session) navigate(redirectPath, { replace: true });
     });
     return () => sub.subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, redirectPath]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +37,7 @@ const Auth = () => {
         const { error: err } = await supabase.auth.signUp({
           email: email.trim(),
           password,
-          options: { emailRedirectTo: `${window.location.origin}/status` },
+          options: { emailRedirectTo: `${window.location.origin}${redirectPath}` },
         });
         if (err) throw err;
         setMessage("অ্যাকাউন্ট তৈরি হয়েছে। ইমেইলে পাঠানো নিশ্চিতকরণ লিংকে ক্লিক করে লগইন করুন।");
