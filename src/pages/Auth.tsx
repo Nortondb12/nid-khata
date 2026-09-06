@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Loader2, LogIn, Mail, KeyRound, ShieldCheck } from "lucide-react";
+import { Loader2, LogIn, Mail, KeyRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import logo from "@/assets/logo.png";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Auth = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "ক্লায়েন্ট লগইন | NID Service BD";
+    document.title = "ক্লায়েন্ট লগইন | NID Khata";
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
       if (session) navigate(redirectPath, { replace: true });
     });
@@ -58,11 +59,9 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        <Link to="/" className="flex items-center justify-center gap-2.5 mb-6">
-          <div className="w-9 h-9 rounded-xl animated-gradient flex items-center justify-center">
-            <ShieldCheck className="w-5 h-5 text-primary-foreground" aria-hidden="true" />
-          </div>
-          <span className="font-bold text-foreground">NID Service BD</span>
+        <Link to="/" className="flex items-center justify-center gap-2.5 mb-6 group">
+          <img src={logo} alt="NID Khata Logo" className="w-10 h-10 object-contain rounded-xl group-hover:scale-105 transition-transform" />
+          <span className="font-bold text-lg text-foreground">NID Khata</span>
         </Link>
 
         <div className="bg-card border border-border/80 rounded-2xl p-6 sm:p-8 shadow-[var(--shadow-elevated)]">

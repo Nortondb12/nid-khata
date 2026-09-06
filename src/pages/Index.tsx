@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ShieldCheck, BadgeCheck, Clock, Lock, Sparkles, ChevronDown } from "lucide-react";
 import { NidForm } from "@/features/nid";
+import logo from "@/assets/logo.png";
 
 const features = [
   {
@@ -50,9 +51,11 @@ const Index = () => {
       <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl no-print">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl animated-gradient flex items-center justify-center shadow-[var(--shadow-primary)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-              <ShieldCheck className="w-5 h-5 text-primary-foreground" strokeWidth={2.2} aria-hidden="true" />
-            </div>
+            <img
+              src={logo}
+              alt="NID Khata Logo"
+              className="w-9 h-9 rounded-xl object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
+            />
             <div className="leading-tight">
               <p className="text-sm font-bold text-foreground">NID Service BD Modern</p>
               <p className="text-[11px] text-muted-foreground -mt-0.5">সরকারি সেবা পোর্টাল</p>
