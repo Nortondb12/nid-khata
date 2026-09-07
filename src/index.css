@@ -1,14 +1,4 @@
-Your message is incomplete. The instruction and plan are provided, and the file path is `src/index.css`, but the current content is cut off mid-way through the CSS (it ends mid-property). Also, there's no specific redesign request about what to change beyond "home page redesign."
-
-To help you, I need the following clarified:
-
-1. Please provide the **complete current content** of `src/index.css` (the file was truncated).
-2. Please describe exactly what changes you want in the homepage redesign — for example, is this a new design using Tailwind, a color-scheme change, layout adjustments, or animations? 
-3. What other files should I be aware of (like `src/pages/Home.jsx` or the router)?
-
-Once I have the full current file and your specific requirements, I can return the complete rewritten file content as requested. 
-
-If you'd like, I can also give you a **placeholder complete `src/index.css`** for a fresh tropical, elegant homepage with the theme "Emerald Prestige" as the names suggest — but I need your confirmation on what should actually change.@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
