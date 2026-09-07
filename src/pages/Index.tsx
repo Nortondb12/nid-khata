@@ -16,6 +16,11 @@ import {
   FileCheck,
   Layers,
   ArrowRight,
+  Shield,
+  FileText,
+  Printer,
+  Smartphone,
+  ExternalLink,
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
 import logo from "@/assets/logo.png";
@@ -37,7 +42,7 @@ const features = [
   {
     icon: BadgeCheck,
     title: "সরাসরি ডাটাবেজ সংযোগ",
-    desc: "জাতীয় নির্বাচন কমিশনের সার্ভার অনুকরণে আসল ও নির্ভুল ডাটা অবিলম্বে লোড হয়।",
+    desc: "জাতীয় নির্বাচন কমিশনের সার্ভার আদলে আসল ও নির্ভুল ডাটা অবিলম্বে প্রদর্শিত হয়।",
     badge: "নির্ভুল",
   },
   {
@@ -49,7 +54,7 @@ const features = [
   {
     icon: Lock,
     title: "জিরো ডাটা লগ নীতি",
-    desc: "আপনার NID বা জন্মতারিখ আমাদের সিস্টেমে কোনো অবস্থাতেই স্থায়ীভাবে সেভ হয় না।",
+    desc: "আপনার NID বা জন্মতারিখ আমাদের সিস্টেমে কোনো অবস্থাতেই স্থায়ীভাবে সংরক্ষিত হয় না।",
     badge: "গোপনীয়",
   },
 ];
@@ -58,19 +63,19 @@ const steps = [
   {
     n: "০১",
     title: "এনআইডি তথ্য প্রদান",
-    desc: "আপনার ১০ বা ১৭ ডিজিটের NID নম্বর এবং জন্ম তারিখ (দিন/মাস/বছর) সঠিকভাবে টাইপ করুন।",
+    desc: "আপনার ১০ বা ১৭ ডিজিটের NID নম্বর এবং জন্ম তারিখ (দিন-মাস-বছর) সঠিকভাবে প্রদান করুন।",
     icon: Search,
   },
   {
     n: "০২",
     title: "অটোমেটিক সার্ভার সার্চ",
-    desc: "এক ক্লিকে ক্লাউড সার্ভার থেকে নাম, ছবি, ঠিকানা ও স্মার্ট বারকোড তথ্য স্বয়ংক্রিয়ভাবে সাজানো হবে।",
+    desc: "এক ক্লিকে ক্লাউড সার্ভার থেকে নাম, ছবি, ঠিকানা ও স্মার্ট বারকোড তথ্য স্বয়ংক্রিয়ভাবে লোড হবে।",
     icon: Layers,
   },
   {
     n: "০৩",
     title: "প্রিভিউ ও সংরক্ষণ",
-    desc: "পূর্ণাঙ্গ সার্ভার কপি স্ক্রিনে প্রিভিউ করে এক ক্লিকে হাই-কোয়ালিটি কালার কপি ডাউনলোড বা প্রিন্ট নিন।",
+    desc: "পূর্ণাঙ্গ সার্ভার কপি স্ক্রিনে দেখে এক ক্লিকে হাই-কোয়ালিটি কালার কপি ডাউনলোড বা প্রিন্ট করুন।",
     icon: FileDown,
   },
 ];
@@ -80,20 +85,25 @@ const samplePerks = [
   "অফিসিয়াল লেআউট ও হাই-রেজোলিউশন বাংলাদেশ মনোগ্রাম",
   "বাংলা ও ইংরেজি উভয় ফরম্যাটে বিস্তারিত তথ্য",
   "A4 পেপারে সরাসরি কালার ও ব্ল্যাক/হোয়াইট প্রিন্ট সুবিধা",
+  "ব্যাংক, সিম রেজিস্ট্রেশন ও অফিসিয়াল কাজের জন্য উপযোগী",
 ];
 
 const faqs = [
   {
     q: "সার্ভার কপি কি সকল অফিশিয়াল কাজে ব্যবহারযোগ্য?",
-    a: "হ্যাঁ, এই অনলাইন সার্ভার কপি প্রাথমিক তথ্য যাচাই, ব্যাংক অ্যাকাউন্ট, সিম কার্ড রেজিস্ট্রেশন এবং বিভিন্ন দাপ্তরিক প্রয়োজনে ব্যাপকভাবে ব্যবহৃত হয়।",
+    a: "হ্যাঁ, এই অনলাইন সার্ভার কপি প্রাথমিক তথ্য যাচাই, ব্যাংক অ্যাকাউন্ট খোলা, সিম কার্ড রেজিস্ট্রেশন এবং বিভিন্ন দাপ্তরিক প্রয়োজনে ব্যাপকভাবে ব্যবহৃত হয়।",
   },
   {
     q: "১০ ডিজিট স্মার্ট কার্ড নাকি ১৭ ডিজিট কোনটা দিব?",
-    a: "আপনি যেকোনো একটি ব্যবহার করতে পারেন। ১০ ডিজিটের স্মার্ট এনআইডি অথবা ১৩/১৭ ডিজিটের সাধারণ এনআইডি নম্বর উভয়টিই সাপোর্ট করে।",
+    a: "আপনি যেকোনো একটি ব্যবহার করতে পারেন। ১০ ডিজিটের স্মার্ট এনআইডি অথবা ১৩/১৭ ডিজিটের সাধারণ এনআইডি নম্বর উভয়টিই সাপোর্ট করে। ১৩ ডিজিট হলে জন্মসাল যুক্ত করে ১৭ ডিজিট প্রদান করুন।",
   },
   {
     q: "আমার কোনো তথ্য কি আপনাদের সিস্টেমে জমা থাকে?",
     a: "না। আমাদের প্ল্যাটফর্ম কঠোর জিরো-লগ নীতি অনুসরণ করে। ভেরিফিকেশনের পর কোনো এনআইডি নম্বর বা ছবি সার্ভারে স্থায়ীভাবে সংরক্ষিত হয় না।",
+  },
+  {
+    q: "মোবাইল থেকে কি সরাসরি PDF সেভ বা প্রিন্ট করা যাবে?",
+    a: "হ্যাঁ, আপনার মোবাইলের যেকোনো ব্রাউজার থেকেই এক ক্লিকে 'Print / Save as PDF' বাটনে ক্লিক করে হাই-কোয়ালিটি কপি সেভ করে নিতে পারবেন।",
   },
 ];
 
@@ -105,7 +115,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-dvh w-full bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+    <div className="min-h-dvh w-full bg-background text-foreground selection:bg-primary/20 selection:text-primary antialiased">
       {/* Accessibility Skip link */}
       <a
         href="#form-section"
@@ -115,25 +125,29 @@ const Index = () => {
       </a>
 
       {/* Modern Sticky Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/80 backdrop-blur-xl transition-all no-print">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl transition-all no-print">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative">
               <img
                 src={logo}
                 alt="NID Service Logo"
-                className="w-10 h-10 rounded-2xl object-contain shadow-sm group-hover:scale-105 transition-transform duration-300"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl object-contain shadow-xs group-hover:scale-105 transition-transform duration-300"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-background rounded-full" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-background rounded-full animate-pulse" />
             </div>
             <div className="leading-tight">
               <div className="flex items-center gap-1.5">
-                <span className="text-base font-extrabold text-foreground tracking-tight">NID Service BD</span>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
-                  Modern
+                <span className="text-base sm:text-lg font-black tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+                  NID Service BD
+                </span>
+                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                  ভেরিফাইড
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground font-medium">জাতীয় পরিচয়পত্র অনলাইন পোর্টাল</p>
+              <p className="text-[11px] sm:text-xs text-muted-foreground font-medium">
+                জাতীয় পরিচয়পত্র অনলাইন পোর্টাল
+              </p>
             </div>
           </a>
 
@@ -155,7 +169,7 @@ const Index = () => {
               href="#perks"
               className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
             >
-              কপির সুবিধা
+              সুবিধাসমূহ
             </a>
             <a
               href="#faq"
@@ -166,16 +180,16 @@ const Index = () => {
           </nav>
 
           <div className="flex items-center gap-2.5">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              সার্ভার সচল
+              সার্ভার সক্রিয়
             </div>
             <a
               href="#form-section"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-sm hover:shadow active:scale-95"
+              className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
             >
-              সার্ভার কপি খুঁজুন
-              <ArrowRight className="w-4 h-4 hidden sm:inline" />
+              <Search className="w-4 h-4" />
+              কপি খুঁজুন
             </a>
           </div>
         </div>
@@ -185,7 +199,7 @@ const Index = () => {
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-8 sm:pt-14 pb-16 lg:pb-24">
           {/* Ambient Glows */}
-          <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-tr from-primary/15 via-emerald-500/10 to-transparent blur-3xl pointer-events-none -z-10" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gradient-to-tr from-primary/20 via-emerald-500/15 to-teal-500/10 blur-3xl pointer-events-none -z-10" />
           <div className="absolute top-0 inset-x-0 h-96 bg-grid opacity-35 pointer-events-none -z-10" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -194,53 +208,54 @@ const Index = () => {
               <div className="lg:col-span-6 text-center lg:text-left space-y-6">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-semibold shadow-xs">
                   <Sparkles className="w-4 h-4" />
-                  <span>স্মার্ট বাংলাদেশ — নির্ভুল ডিজিটাল ভেরিফিকেশন</span>
+                  <span>স্মার্ট বাংলাদেশ — দ্রুত ও নির্ভরযোগ্য সেবা</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.85rem] font-extrabold tracking-tight text-foreground leading-[1.18]">
-                  মুহূর্তেই পান জাতীয় পরিচয়পত্রের{" "}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.9rem] font-black tracking-tight text-foreground leading-[1.18]">
+                  জাতীয় পরিচয়পত্রের{" "}
                   <span className="bg-gradient-to-r from-primary via-emerald-600 to-teal-500 bg-clip-text text-transparent">
-                    অফিসিয়াল সার্ভার কপি
-                  </span>
+                    অফিসিয়াল সার্ভার কপি
+                  </span>{" "}
+                  সংগ্রহ করুন
                 </h1>
 
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-                  আপনার NID নম্বর এবং জন্ম তারিখ দিয়ে এক ক্লিকে মূল সরকারি তথ্যভাণ্ডার থেকে সঠিক তথ্য ও প্রিন্টযোগ্য কালার কপি সংগ্রহ করুন।
+                  আপনার NID নম্বর ও জন্ম তারিখ দিয়ে মাত্র কয়েক সেকেন্ডে মূল সার্ভার ডাটা ও প্রিন্টযোগ্য অফিসিয়াল কালার কপি তৈরি ও ডাউনলোড করুন।
                 </p>
 
                 {/* Trust Badges */}
-                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm text-foreground/80 font-medium">
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card border border-border shadow-xs">
+                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-foreground/85 font-medium">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-card border border-border/80 shadow-xs">
                     <BadgeCheck className="w-4 h-4 text-primary" />
-                    <span>১০০% অফিসিয়াল ফরম্যাট</span>
+                    <span>১০০% আসল ফরম্যাট</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card border border-border shadow-xs">
-                    <QrCode className="w-4 h-4 text-primary" />
-                    <span>যাচাইযোগ্য QR কোড</span>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-card border border-border/80 shadow-xs">
+                    <QrCode className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    <span>স্মার্ট কিউআর কোড</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-card border border-border shadow-xs">
-                    <Lock className="w-4 h-4 text-primary" />
-                    <span>সম্পূর্ণ প্রাইভেট ও নিরাপদ</span>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-card border border-border/80 shadow-xs">
+                    <Shield className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <span>নিরাপদ ও তাৎক্ষণিক</span>
                   </div>
                 </div>
 
-                {/* Quick hint */}
+                {/* Quick Action Link */}
                 <div className="pt-2">
                   <a
                     href="#steps"
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
                   >
-                    কীভাবে সহজে কপি ডাউনলোড করবেন বিস্তারিত দেখুন
+                    সার্ভার কপি ডাউনলোড পদ্ধতি বিস্তারিত দেখুন
                     <ChevronDown className="w-4 h-4 animate-bounce" />
                   </a>
                 </div>
               </div>
 
               {/* Right Column: Search Form Card */}
-              <div id="form-section" className="lg:col-span-6 w-full max-w-lg mx-auto lg:max-w-none">
+              <div id="form-section" className="lg:col-span-6 w-full max-w-xl mx-auto lg:max-w-none scroll-mt-24">
                 <div className="relative">
                   {/* Decorative backdrop for form */}
-                  <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-primary/30 to-emerald-500/20 blur-xl opacity-70 -z-10" />
+                  <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-primary/30 via-emerald-500/20 to-teal-500/25 blur-xl opacity-70 -z-10" />
                   <NidForm />
                 </div>
               </div>
@@ -254,10 +269,10 @@ const Index = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {stats.map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center justify-center p-2">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2">
                     <item.icon className="w-5 h-5" />
                   </div>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">{item.value}</p>
+                  <p className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">{item.value}</p>
                   <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-0.5">{item.label}</p>
                 </div>
               ))}
@@ -266,17 +281,17 @@ const Index = () => {
         </section>
 
         {/* 3 Step Process */}
-        <section id="steps" className="py-16 sm:py-20">
+        <section id="steps" className="py-16 sm:py-24 scroll-mt-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-                সহজ ধাপ
+                সহজ ৩ ধাপ
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground mt-3">
-                মাত্র ৩টি ধাপে আপনার সার্ভার কপি পান
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                কীভাবে আপনার সার্ভার কপি পাবেন?
               </h2>
               <p className="text-muted-foreground text-sm sm:text-base mt-2">
-                কোনো জটিলতা ছাড়াই ঘরে বসেই নির্ভুল ও দ্রুত NID কার্ড কপি যাচাই সম্পন্ন করুন
+                কোনো ঝামেলা ছাড়াই ঘরে বসেই নির্ভুল ও দ্রুত NID কার্ড কপি যাচাই সম্পন্ন করুন
               </p>
             </div>
 
@@ -284,14 +299,14 @@ const Index = () => {
               {steps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="relative group bg-card border border-border/80 rounded-3xl p-7 shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
+                  className="relative group bg-card border border-border/80 rounded-3xl p-7 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
                         <step.icon className="w-6 h-6" />
                       </div>
-                      <span className="text-2xl font-black text-muted-foreground/30 group-hover:text-primary/40 transition-colors">
+                      <span className="text-3xl font-black text-muted-foreground/20 group-hover:text-primary/30 transition-colors">
                         {step.n}
                       </span>
                     </div>
@@ -307,24 +322,24 @@ const Index = () => {
         </section>
 
         {/* Perks & Features Banner */}
-        <section id="perks" className="py-16 bg-muted/20 border-y border-border/60">
+        <section id="perks" className="py-16 sm:py-20 bg-muted/20 border-y border-border/60 scroll-mt-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-6 space-y-6">
                 <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                  প্রিমিয়াম আউটপুট
+                  প্রিমিয়াম কোয়ালিটি
                 </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground">
-                  আমাদের ডাউনলোডকৃত সার্ভার কপিতে যা যা পাচ্ছেন
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground leading-tight">
+                  আমাদের ডাউনলোডকৃত সার্ভার কপির প্রধান সুবিধাসমূহ
                 </h2>
                 <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  আমাদের স্বয়ংক্রিয় জেনারেটর নিশ্চিত করে নির্বাচন কমিশনের অফিসিয়াল কার্ডের আদলে সর্বোচ্চ নিখুঁত লেআউট ও কালার স্কিম।
+                  আমাদের স্বয়ংক্রিয় সার্চ ইঞ্জিন জাতীয় নির্বাচন কমিশনের সার্ভার স্টাইলে কালার ব্যাকগ্রাউন্ড ও অফিশিয়াল লেআউটে নির্ভুল কপি প্রস্তুত করে।
                 </p>
 
-                <div className="space-y-3 pt-2">
+                <div className="space-y-3 pt-1">
                   {samplePerks.map((perk, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                       </div>
                       <span className="text-sm sm:text-base font-medium text-foreground/90">{perk}</span>
@@ -335,7 +350,7 @@ const Index = () => {
                 <div className="pt-4">
                   <a
                     href="#form-section"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:bg-foreground/90 transition-all shadow-md active:scale-95"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-all shadow-md active:scale-95"
                   >
                     <FileCheck className="w-4 h-4" />
                     এখনই যাচাই শুরু করুন
@@ -368,15 +383,15 @@ const Index = () => {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="py-16 sm:py-20">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <section id="faq" className="py-16 sm:py-24 scroll-mt-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase mb-3">
                 <HelpCircle className="w-3.5 h-3.5" />
                 সচরাচর জিজ্ঞাসিত প্রশ্ন
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground">
-                আপনার জানার সুবিধার্থে কিছু সাধারণ উত্তর
+              <h2 className="text-2xl sm:text-3xl font-black text-foreground">
+                সাধারণ প্রশ্নোত্তর (FAQ)
               </h2>
             </div>
 
@@ -386,12 +401,12 @@ const Index = () => {
                 return (
                   <div
                     key={idx}
-                    className="border border-border rounded-2xl bg-card overflow-hidden transition-colors"
+                    className="border border-border/80 rounded-2xl bg-card overflow-hidden transition-all shadow-2xs"
                   >
                     <button
                       type="button"
                       onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-foreground focus:outline-none"
+                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-foreground hover:text-primary transition-colors focus:outline-none"
                       aria-expanded={isOpen}
                     >
                       <span>{faq.q}</span>
@@ -402,7 +417,7 @@ const Index = () => {
                       />
                     </button>
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/50">
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40">
                         {faq.a}
                       </div>
                     )}
@@ -427,7 +442,7 @@ const Index = () => {
             </div>
 
             <p className="text-xs text-center text-muted-foreground max-w-md">
-              এই পোর্টালটি শুধুমাত্র দ্রুত সেবা ও নাগরিক সহায়তার জন্য প্রস্তুতকৃত। কোনো তথ্য স্থায়ীভাবে সার্ভারে সংরক্ষিত হয় না।
+              এই পোর্টালটি শুধুমাত্র দ্রুত নাগরিক সেবা ও সহায়তার জন্য প্রস্তুতকৃত। ব্যবহারকারীর কোনো সংবেদনশীল তথ্য সিস্টেমে স্থায়ীভাবে জমা থাকে না।
             </p>
 
             <div className="text-xs text-muted-foreground font-medium">

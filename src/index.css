@@ -152,6 +152,21 @@
   50% { opacity: 0.88; transform: scale(1.02); }
 }
 
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(-3deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
 @layer utilities {
   .bg-hero {
     background: var(--gradient-hero);
@@ -232,6 +247,18 @@
     pointer-events: none;
   }
 
+  .orb-animate-1 {
+    animation: float-slow 12s ease-in-out infinite;
+  }
+  
+  .orb-animate-2 {
+    animation: float-slower 15s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 6s ease-in-out infinite;
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -263,6 +290,8 @@
   .stagger > *:nth-child(4) { animation-delay: 0.28s; }
   .stagger > *:nth-child(5) { animation-delay: 0.36s; }
   .stagger > *:nth-child(6) { animation-delay: 0.44s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.52s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.60s; }
 
   @media (prefers-reduced-motion: reduce) {
     .animated-gradient,
@@ -271,7 +300,10 @@
     .animate-float,
     .animate-shimmer,
     .animate-gradient-shift,
-    .animate-pulse-glow {
+    .animate-pulse-glow,
+    .orb-animate-1,
+    .orb-animate-2,
+    .animate-glow-pulse {
       animation: none !important;
     }
     .hover-lift:hover { transform: none; }
