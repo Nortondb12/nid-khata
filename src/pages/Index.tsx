@@ -21,6 +21,34 @@ import {
   Printer,
   Smartphone,
   ExternalLink,
+  History,
+  Camera,
+  Mail,
+  Phone,
+  MapPin,
+  Building2,
+  Landmark,
+  Globe,
+  FileSignature,
+  Wallet,
+  Award,
+  TrendingUp,
+  Star,
+  Quote,
+  Menu,
+  X,
+  Download,
+  Eye,
+  BellRing,
+  Timer,
+  Cloud,
+  Check,
+  ChevronRight,
+  Minus,
+  Plus,
+  Info,
+  PhoneCall,
+  MessageSquare,
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
 import logo from "@/assets/logo.png";
@@ -107,8 +135,63 @@ const faqs = [
   },
 ];
 
+const useCases = [
+  {
+    icon: Building2,
+    title: "ব্যাংক ও আর্থিক প্রতিষ্ঠান",
+    desc: "অ্যাকাউন্ট খোলা, লোন আবেদন ও KYC ভেরিফিকেশনে",
+  },
+  {
+    icon: Landmark,
+    title: "সরকারি সেবা",
+    desc: "পাসপোর্ট, ড্রাইভিং লাইসেন্স ও নানা সরকারি সুবিধা পেতে",
+  },
+  {
+    icon: Phone,
+    title: "মোবাইল অপারেটর",
+    desc: "সিম কার্ড রেজিস্ট্রেশন ও নম্বর পোর্টেবিলিটির জন্য",
+  },
+  {
+    icon: Globe,
+    title: "অনলাইন সেবা",
+    desc: "ফ্রিল্যান্সিং, ই-কমার্স ও ডিজিটাল প্ল্যাটফর্মে যাচাইয়ে",
+  },
+  {
+    icon: Wallet,
+    title: "মাইক্রোফাইন্যান্স",
+    desc: "ক্ষুদ্র ঋণ ও এজেন্ট ব্যাংকিং সেবা গ্রহণে",
+  },
+  {
+    icon: FileSignature,
+    title: "চুক্তি ও নোটারি",
+    desc: "দলিল, চুক্তিপত্র ও জমি সংক্রান্ত কাজে পরিচয় নিশ্চিতে",
+  },
+];
+
+const testimonials = [
+  {
+    name: "রাফিন ইসলাম",
+    role: "ব্যাংক কর্মকর্তা, ঢাকা",
+    text: "অসাধারণ একটি সেবা! আগে যেখানে গ্রাহকের তথ্য যাচাই করতে ঘণ্টার পর ঘণ্টা লেগে যেত, এখন মাত্র কয়েক সেকেন্ডেই নির্ভুলভাবে সব তথ্য পেয়ে যাচ্ছি। সময় ও শ্রম দুটোই বেঁচে যায়।",
+    rating: 5,
+  },
+  {
+    name: "নুসরাত জাহান",
+    role: "ফ্রিল্যান্সার, চট্টগ্রাম",
+    text: "বিদেশি ক্লায়েন্টদের সাথে কাজ করার সময় পরিচয় যাচাইয়ের জন্য অনেক সময় NID সার্ভার কপির প্রয়োজন হয়। এই প্ল্যাটফর্ম থেকে খুব সহজেই এবং দ্রুত আমি প্রয়োজনীয় কপি ডাউনলোড করতে পারি।",
+    rating: 5,
+  },
+  {
+    name: "মাহমুদুল হাসান",
+    role: "প্রবাসী, সৌদি আরব",
+    text: "বাংলাদেশে না থেকে বিদেশ থেকেই আমার পরিবারের সদস্যদের NID সার্ভার কপি ডাউনলোড করে দিতে পারছি। ওয়েবসাইটটি খুবই ইউজার-ফ্রেন্ডলি এবং মোবাইল থেকে ব্যবহার করা অত্যন্ত সহজ।",
+    rating: 5,
+  },
+];
+
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "NID Service BD — আধুনিক জাতীয় পরিচয়পত্র যাচাই পোর্টাল";
@@ -140,6 +223,95 @@ const Index = () => {
         <div className="absolute inset-0 bg-grid opacity-25" />
       </div>
 
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-50 bg-background/98 backdrop-blur-sm md:hidden">
+          <div className="flex flex-col h-full">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <img src={logo} alt="Logo" className="w-8 h-8 rounded-xl object-contain" />
+                <span className="font-bold">NID Service BD</span>
+              </div>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-lg hover:bg-muted transition-colors"
+                aria-label="মেনু বন্ধ করুন"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <nav className="flex-1 flex flex-col gap-2 p-4">
+              <a
+                href="#form-section"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                যাচাই ফর্ম
+              </a>
+              <a
+                href="#steps"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                কার্যপদ্ধতি
+              </a>
+              <a
+                href="#features"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                বিশেষত্বসমূহ
+              </a>
+              <a
+                href="#use-cases"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                ব্যবহারের ক্ষেত্র
+              </a>
+              <a
+                href="#testimonials"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                ব্যবহারকারীদের মতামত
+              </a>
+              <a
+                href="#perks"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                সুবিধাসমূহ
+              </a>
+              <a
+                href="#faq"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                প্রশ্নোত্তর
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                যোগাযোগ
+              </a>
+            </nav>
+            <div className="p-4 border-t border-border">
+              <a
+                href="#form-section"
+                onClick={() => setIsMenuOpen(false)}
+                className="block w-full text-center px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors"
+              >
+                <Search className="w-4 h-4 inline mr-2" />
+                কপি খুঁজুন
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Accessibility Skip link */}
       <a
         href="#form-section"
@@ -149,7 +321,7 @@ const Index = () => {
       </a>
 
       {/* Modern Sticky Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl transition-all no-print">
+      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl transition-all no-print shadow-sm shadow-black/[0.02]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
             <div className="relative">
@@ -190,10 +362,16 @@ const Index = () => {
               কার্যপদ্ধতি
             </a>
             <a
-              href="#perks"
+              href="#features"
               className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
             >
-              সুবিধাসমূহ
+              বিশেষত্বসমূহ
+            </a>
+            <a
+              href="#use-cases"
+              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
+            >
+              ব্যবহারের ক্ষেত্র
             </a>
             <a
               href="#faq"
@@ -210,11 +388,18 @@ const Index = () => {
             </div>
             <a
               href="#form-section"
-              className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
             >
               <Search className="w-4 h-4" />
               কপি খুঁজুন
             </a>
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="মেনু খুলুন"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </header>
@@ -246,6 +431,23 @@ const Index = () => {
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
                   আপনার NID নম্বর ও জন্ম তারিখ দিয়ে মাত্র কয়েক সেকেন্ডে মূল সার্ভার ডাটা ও প্রিন্টযোগ্য অফিসিয়াল কালার কপি তৈরি ও ডাউনলোড করুন।
                 </p>
+
+                {/* Live Users Counter */}
+                <div className="flex items-center justify-center lg:justify-start gap-3 text-xs text-muted-foreground">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="w-7 h-7 rounded-full bg-gradient-to-br from-[#006a4e]/20 to-[#f42a41]/20 border-2 border-background flex items-center justify-center text-[10px] font-bold text-[#006a4e]"
+                      >
+                        {["আ", "র", "স", "ম"][i - 1]}
+                      </div>
+                    ))}
+                  </div>
+                  <span>
+                    <span className="font-bold text-foreground">২,৪৫০+</span> জন এখন অনলাইনে
+                  </span>
+                </div>
 
                 {/* Trust Badges */}
                 <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-foreground/85 font-medium">
@@ -292,8 +494,8 @@ const Index = () => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               {stats.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center justify-center p-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center mb-2">
+                <div key={idx} className="flex flex-col items-center justify-center p-2 group">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
                     <item.icon className="w-5 h-5" />
                   </div>
                   <p className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">{item.value}</p>
@@ -319,89 +521,39 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              {steps.map((step, idx) => (
-                <div
-                  key={idx}
-                  className="relative group bg-card border border-border/80 rounded-3xl p-7 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
-                >
-                  {/* Subtle flag color accent on hover */}
-                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-                        <step.icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-3xl font-black text-muted-foreground/20 group-hover:text-[#f42a41]/30 transition-colors">
-                        {step.n}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-[#006a4e] transition-colors">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Perks & Features Banner */}
-        <section id="perks" className="py-16 sm:py-20 bg-muted/20 border-y border-border/60 scroll-mt-16 backdrop-blur-sm">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-6 space-y-6">
-                <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
-                  প্রিমিয়াম কোয়ালিটি
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground leading-tight">
-                  আমাদের ডাউনলোডকৃত সার্ভার কপির প্রধান সুবিধাসমূহ
-                </h2>
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  আমাদের স্বয়ংক্রিয় সার্চ ইঞ্জিন জাতীয় নির্বাচন কমিশনের সার্ভার স্টাইলে কালার ব্যাকগ্রাউন্ড ও অফিশিয়াল লেআউটে নির্ভুল কপি প্রস্তুত করে।
-                </p>
-
-                <div className="space-y-3 pt-1">
-                  {samplePerks.map((perk, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-sm sm:text-base font-medium text-foreground/90">{perk}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="pt-4">
-                  <a
-                    href="#form-section"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#006a4e] to-emerald-600 text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-md active:scale-95"
-                  >
-                    <FileCheck className="w-4 h-4" />
-                    এখনই যাচাই শুরু করুন
-                  </a>
-                </div>
-              </div>
-
-              {/* Right: Feature Grid Cards */}
-              <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
-                {features.map((feat, i) => (
+            <div className="relative">
+              {/* Connector Line */}
+              <div className="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-[#006a4e]/20 via-[#f42a41]/20 to-[#006a4e]/20 -z-10" />
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                {steps.map((step, idx) => (
                   <div
-                    key={i}
-                    className="bg-card border border-border/80 rounded-2xl p-5 shadow-xs hover:border-[#006a4e]/40 transition-all overflow-hidden relative"
+                    key={idx}
+                    className="relative group bg-card border border-border/80 rounded-3xl p-7 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
                   >
-                    <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-transparent opacity-0 hover:opacity-100 transition-opacity" />
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center">
-                        <feat.icon className="w-5 h-5" />
+                    {/* Subtle flag color accent on hover */}
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-xs">
+                          <step.icon className="w-6 h-6" />
+                        </div>
+                        <span className="text-3xl font-black text-muted-foreground/20 group-hover:text-[#f42a41]/30 transition-colors">
+                          {step.n}
+                        </span>
                       </div>
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        {feat.badge}
-                      </span>
+                      <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-[#006a4e] transition-colors">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
                     </div>
-                    <h4 className="font-bold text-base text-foreground mb-1">{feat.title}</h4>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+
+                    {/* Next Arrow */}
+                    {idx < steps.length - 1 && (
+                      <div className="hidden md:flex absolute top-1/2 -right-4 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-card border border-border shadow-md items-center justify-center">
+                        <ArrowRight className="w-4 h-4 text-[#f42a41]" />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -409,81 +561,62 @@ const Index = () => {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="py-16 sm:py-24 scroll-mt-16">
-          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase mb-3">
-                <HelpCircle className="w-3.5 h-3.5" />
-                সচরাচর জিজ্ঞাসিত প্রশ্ন
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-foreground">
-                সাধারণ প্রশ্নোত্তর (FAQ)
-              </h2>
-            </div>
-
-            <div className="space-y-3">
-              {faqs.map((faq, idx) => {
-                const isOpen = openFaq === idx;
-                return (
-                  <div
-                    key={idx}
-                    className="border border-border/80 rounded-2xl bg-card overflow-hidden transition-all shadow-2xs hover:border-[#006a4e]/20"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-foreground hover:text-[#006a4e] transition-colors focus:outline-none"
-                      aria-expanded={isOpen}
-                    >
-                      <span>{faq.q}</span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-[#f42a41]" : ""
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40">
-                        {faq.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Modern Clean Footer */}
-      <footer className="border-t border-border bg-card/60 backdrop-blur-md no-print relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <img src={logo} alt="Logo" className="w-8 h-8 rounded-xl object-contain opacity-90" />
-              <div>
-                <p className="text-sm font-bold text-foreground">NID Service BD Modern</p>
-                <p className="text-xs text-muted-foreground">জাতীয় ডিজিটাল সেবা সহায়ক প্ল্যাটফর্ম</p>
-              </div>
-            </div>
-
-            <p className="text-xs text-center text-muted-foreground max-w-md">
-              এই পোর্টালটি শুধুমাত্র দ্রুত নাগরিক সেবা ও সহায়তার জন্য প্রস্তুতকৃত। ব্যবহারকারীর কোনো সংবেদনশীল তথ্য সিস্টেমে স্থায়ীভাবে জমা থাকে না।
-            </p>
-
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#006a4e]" />
-              <span className="w-2 h-2 rounded-full bg-[#f42a41]" />
-              <span className="text-xs text-muted-foreground font-medium">
-                © {new Date().getFullYear()} NID Service BD। সর্বস্বত্ব সংরক্ষিত।
+        {/* Features Section */}
+        <section id="features" className="py-16 sm:py-20 bg-muted/20 border-y border-border/60 scroll-mt-16 backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
+                প্রিমিয়াম কোয়ালিটি
               </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                আমাদের ডাউনলোডকৃত সার্ভার কপির প্রধান সুবিধাসমূহ
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base mt-2">
+                অত্যাধুনিক প্রযুক্তিতে তৈরি নিরাপদ ও নির্ভুল সার্ভার কপি সেবা
+              </p>
             </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
 
-export default Index;
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              {features.map((feat, i) => (
+                <div
+                  key={i}
+                  className="group bg-card border border-border/80 rounded-3xl p-6 shadow-xs hover:border-[#006a4e]/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
+                >
+                  <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <feat.icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-muted text-muted-foreground group-hover:bg-[#006a4e]/10 group-hover:text-[#006a4e] transition-colors">
+                      {feat.badge}
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-base text-foreground mb-2 group-hover:text-[#006a4e] transition-colors">
+                    {feat.title}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Extra Features Grid */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-card border border-border/80 rounded-3xl p-6 flex items-start gap-4 hover:border-[#006a4e]/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center shrink-0">
+                  <Download className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-foreground mb-1">মাল্টিপল ফরম্যাট ডাউনলোড</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    PDF, জেপিজি সহ একাধিক ফরম্যাটে সার্ভার কপি ডাউনলোড করুন আপনার প্রয়োজন অনুযায়ী
+                  </p>
+                </div>
+              </div>
+              <div className="bg-card border border-border/80 rounded-3xl p-6 flex items-start gap-4 hover:border-[#006a4e]/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#f42a41]/10 text-[#f42a41] flex items-center justify-center shrink-0">
+                  <BellRing className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-foreground mb-1">স্মার্ট নোটিফিকেশন</h4>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    ভেরিফিকেশন সম্পন্ন হলে সাথে সাথে

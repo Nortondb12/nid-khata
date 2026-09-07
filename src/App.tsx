@@ -31,10 +31,22 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
+  type: "tween" as const,
+  ease: "anticipate" as const,
   duration: 0.5,
 };
+
+const AnimatedRoute = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    variants={pageVariants}
+    transition={pageTransition}
+  >
+    {children}
+  </motion.div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -51,62 +63,11 @@ const App = () => (
           >
             <AnimatePresence mode="wait">
               <Routes>
-                <Route path="/" element={
-                  <motion.div
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Index />
-                  </motion.div>
-                } />
-                <Route path="/auth" element={
-                  <motion.div
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Auth />
-                  </motion.div>
-                } />
-                <Route path="/status" element={
-                  <motion.div
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Status />
-                  </motion.div>
-                } />
-                <Route path="/admin" element={
-                  <motion.div
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <Admin />
-                  </motion.div>
-                } />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={
-                  <motion.div
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={pageVariants}
-                    transition={pageTransition}
-                  >
-                    <NotFound />
-                  </motion.div>
-                } />
+                <Route path="/" element={<AnimatedRoute><Index /></AnimatedRoute>} />
+                <Route path="/auth" element={<AnimatedRoute><Auth /></AnimatedRoute>} />
+                <Route path="/status" element={<AnimatedRoute><Status /></AnimatedRoute>} />
+                <Route path="/admin" element={<AnimatedRoute><Admin /></AnimatedRoute>} />
+                <Route path="*" element={<AnimatedRoute><NotFound /></AnimatedRoute>} />
               </Routes>
             </AnimatePresence>
           </motion.div>
