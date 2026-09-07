@@ -623,4 +623,46 @@ const Index = () => {
                   {/* Mock NID Card Preview */}
                   <div className="relative rounded-xl border-2 border-[#006a4e]/20 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-[#f42a41]/5 p-4 sm:p-5">
                     <div className="flex items-start justify-between gap-3">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#006a4e]/10 border border-[#006a4e]/20 flex items-center justify-center text-[#006a4e]">
+                        <ShieldCheck className="w-8 h-8" />
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="h-2.5 w-2/3 rounded bg-[#006a4e]/20" />
+                        <div className="h-2.5 w-1/2 rounded bg-muted" />
+                        <div className="h-2.5 w-3/5 rounded bg-muted" />
+                      </div>
+                    </div>
+                    <div className="mt-4 grid grid-cols-2 gap-2">
+                      <div className="h-2.5 rounded bg-muted" />
+                      <div className="h-2.5 rounded bg-muted" />
+                      <div className="h-2.5 rounded bg-muted" />
+                      <div className="h-2.5 rounded bg-[#f42a41]/20" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Perks List */}
+              <div className="space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
+                  কেন আমাদের সেবা বেছে নেবেন?
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  দ্রুত ডেলিভারি, নিরাপদ তথ্য ব্যবস্থাপনা এবং প্রিন্ট-রেডি সার্ভার কপি — সবই এক জায়গায়।
+                </p>
+                <a
+                  href="#verify"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#006a4e] px-6 py-3 text-white font-semibold shadow-lg hover:bg-[#00583f] transition-colors"
+                >
+                  এখনই যাচাই করুন
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default Index;
