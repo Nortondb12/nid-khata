@@ -554,7 +554,7 @@ const NidForm = () => {
       )}
 
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes progress-indeterminate {
           0% { transform: translateX(0%) scaleX(0.3); }
           50% { transform: translateX(50%) scaleX(0.5); }

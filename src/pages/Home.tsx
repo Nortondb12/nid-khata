@@ -347,7 +347,7 @@ const Home: React.FC = () => {
               <div className="aspect-square max-w-lg mx-auto bg-gradient-to-br from-blue-400/30 via-purple-400/30 to-pink-400/30 dark:from-blue-700/30 dark:via-purple-700/30 dark:to-pink-700/30 rounded-full relative overflow-hidden animate-float shadow-2xl shadow-blue-500/20">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl">
-                    <User className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-4" />
+                    <Users className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-4" />
                     <div className="text-3xl font-bold mb-2">AI Copilot</div>
                     <div className="text-gray-600 dark:text-gray-300 mb-6">
                       Your intelligent assistant for everything
