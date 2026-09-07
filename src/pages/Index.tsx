@@ -548,10 +548,10 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
                     </div>
 
-                    {/* Next Arrow */}
+                    {/* Step separator arrow for desktop */}
                     {idx < steps.length - 1 && (
-                      <div className="hidden md:flex absolute top-1/2 -right-4 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-card border border-border shadow-md items-center justify-center">
-                        <ArrowRight className="w-4 h-4 text-[#f42a41]" />
+                      <div className="hidden md:flex absolute top-1/2 -right-5 -translate-y-1/2 z-10 text-[#f42a41] w-8 h-8 items-center justify-center bg-card border border-border rounded-full shadow-sm">
+                        <ChevronRight className="w-4 h-4" />
                       </div>
                     )}
                   </div>
@@ -562,61 +562,65 @@ const Index = () => {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 sm:py-20 bg-muted/20 border-y border-border/60 scroll-mt-16 backdrop-blur-sm">
+        <section id="features" className="py-16 sm:py-24 scroll-mt-16 bg-muted/30 border-y border-border/70">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
               <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
-                প্রিমিয়াম কোয়ালিটি
+                আমাদের বিশেষত্ব
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
-                আমাদের ডাউনলোডকৃত সার্ভার কপির প্রধান সুবিধাসমূহ
+                কেন আমাদের প্ল্যাটফর্ম বেছে নেবেন?
               </h2>
               <p className="text-muted-foreground text-sm sm:text-base mt-2">
-                অত্যাধুনিক প্রযুক্তিতে তৈরি নিরাপদ ও নির্ভুল সার্ভার কপি সেবা
+                আপনার তথ্যের নিরাপত্তা ও নির্ভুলতা আমাদের প্রথম অগ্রাধিকার
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              {features.map((feat, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {features.map((feature, idx) => (
                 <div
-                  key={i}
-                  className="group bg-card border border-border/80 rounded-3xl p-6 shadow-xs hover:border-[#006a4e]/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
+                  key={idx}
+                  className="relative group bg-card border border-border/80 rounded-3xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <feat.icon className="w-6 h-6" />
+                  <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 group-hover:scale-150 transition-transform duration-500" />
+                  
+                  <div className="relative">
+                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#006a4e] to-emerald-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
+                      <feature.icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-muted text-muted-foreground group-hover:bg-[#006a4e]/10 group-hover:text-[#006a4e] transition-colors">
-                      {feat.badge}
+                    <span className="absolute top-0 right-0 text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+                      {feature.badge}
                     </span>
+                    <h3 className="font-bold text-foreground mb-2">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
                   </div>
-                  <h4 className="font-bold text-base text-foreground mb-2 group-hover:text-[#006a4e] transition-colors">
-                    {feat.title}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
                 </div>
               ))}
             </div>
+          </div>
+        </section>
 
-            {/* Extra Features Grid */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-card border border-border/80 rounded-3xl p-6 flex items-start gap-4 hover:border-[#006a4e]/40 transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center shrink-0">
-                  <Download className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm text-foreground mb-1">মাল্টিপল ফরম্যাট ডাউনলোড</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    PDF, জেপিজি সহ একাধিক ফরম্যাটে সার্ভার কপি ডাউনলোড করুন আপনার প্রয়োজন অনুযায়ী
-                  </p>
-                </div>
-              </div>
-              <div className="bg-card border border-border/80 rounded-3xl p-6 flex items-start gap-4 hover:border-[#006a4e]/40 transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#f42a41]/10 text-[#f42a41] flex items-center justify-center shrink-0">
-                  <BellRing className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm text-foreground mb-1">স্মার্ট নোটিফিকেশন</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    ভেরিফিকেশন সম্পন্ন হলে সাথে সাথে
+        {/* Sample Perks Strip */}
+        <section id="perks" className="py-16 sm:py-20 scroll-mt-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#006a4e]/5 via-transparent to-[#f42a41]/5 pointer-events-none" />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              {/* Left: Download Preview Visual */}
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-br from-[#006a4e]/15 to-[#f42a41]/15 rounded-3xl blur-2xl opacity-70" />
+                <div className="relative bg-card border border-border rounded-2xl p-5 sm:p-6 shadow-xl">
+                  {/* Card Header Simulation */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 bg-gradient-to-br from-[#006a4e] to-emerald-600 rounded-lg flex items-center justify-center text-white">
+                      <FileDown className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-foreground">সার্ভার কপি ডাউনলোড</h4>
+                      <p className="text-xs text-muted-foreground">আপনার দলিল প্রিন্টের জন্য প্রস্তুত</p>
+                    </div>
+                  </div>
+
+                  {/* Mock NID Card Preview */}
+                  <div className="relative rounded-xl border-2 border-[#006a4e]/20 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-[#f42a41]/5 p-4 sm:p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20

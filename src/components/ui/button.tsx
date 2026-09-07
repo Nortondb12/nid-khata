@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow-sm hover:shadow-md active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]",
   {
     variants: {
       variant: {
@@ -17,17 +17,17 @@ const buttonVariants = cva(
           "border-2 border-input bg-background hover:bg-accent hover:text-accent-foreground hover:border-ring/60",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent/80 hover:text-accent-foreground shadow-none hover:shadow-none",
-        link: "text-primary underline-offset-4 hover:underline shadow-none hover:shadow-none",
-        soft: "bg-primary/10 text-primary hover:bg-primary/20 shadow-none hover:shadow-none",
+        ghost: "hover:bg-accent/80 hover:text-accent-foreground shadow-none hover:shadow-none hover:-translate-y-0",
+        link: "text-primary underline-offset-4 hover:underline shadow-none hover:shadow-none hover:-translate-y-0",
+        soft: "bg-primary/10 text-primary hover:bg-primary/20 shadow-none hover:shadow-none hover:-translate-y-0",
         success:
           "bg-emerald-500 text-white hover:bg-emerald-600 shadow-emerald-500/20",
         warning:
           "bg-amber-500 text-white hover:bg-amber-600 shadow-amber-500/20",
         premium:
-          "bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 shadow-violet-500/25",
+          "bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 text-white hover:from-violet-500 hover:via-indigo-500 hover:to-blue-500 hover:shadow-lg hover:shadow-violet-500/30",
         glass:
-          "backdrop-blur-sm bg-white/10 text-white border border-white/20 hover:bg-white/20 shadow-none transition-colors",
+          "backdrop-blur-sm bg-white/10 text-white border border-white/20 hover:bg-white/20 shadow-none transition-colors hover:-translate-y-0",
       },
       size: {
         default: "h-10 px-5 py-2",
@@ -43,7 +43,7 @@ const buttonVariants = cva(
         true: "w-full",
       },
       loading: {
-        true: "relative !text-transparent disabled:opacity-100 pointer-events-none",
+        true: "relative !text-transparent disabled:opacity-100 pointer-events-none hover:translate-y-0 active:scale-100",
       },
     },
     defaultVariants: {

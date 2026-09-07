@@ -1,4 +1,14 @@
-@tailwind base;
+Your message is incomplete. The instruction and plan are provided, and the file path is `src/index.css`, but the current content is cut off mid-way through the CSS (it ends mid-property). Also, there's no specific redesign request about what to change beyond "home page redesign."
+
+To help you, I need the following clarified:
+
+1. Please provide the **complete current content** of `src/index.css` (the file was truncated).
+2. Please describe exactly what changes you want in the homepage redesign — for example, is this a new design using Tailwind, a color-scheme change, layout adjustments, or animations? 
+3. What other files should I be aware of (like `src/pages/Home.jsx` or the router)?
+
+Once I have the full current file and your specific requirements, I can return the complete rewritten file content as requested. 
+
+If you'd like, I can also give you a **placeholder complete `src/index.css`** for a fresh tropical, elegant homepage with the theme "Emerald Prestige" as the names suggest — but I need your confirmation on what should actually change.@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -754,30 +764,4 @@
   }
 
   .nid-error-shake {
-    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  }
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-    20%, 40%, 60%, 80% { transform: translateX(4px); }
-  }
-
-  .nid-data-row {
-    transition: background-color 0.3s ease, padding-left 0.3s ease;
-  }
-  .nid-data-row:hover {
-    background-color: hsl(var(--primary-soft) / 0.6);
-    padding-left: 0.75rem;
-  }
-
-  .nid-number-reveal {
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.05em;
-  }
-  .nid-digits {
-    display: inline-block;
-    border-radius: 4px;
-    padding: 1px 6px;
-    margin: 0 1px;
-    background: hsl(var(--primary-deep));
-    color: hsl(var(--primary-fore
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97)
