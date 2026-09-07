@@ -58,6 +58,11 @@
                      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 100%) 100%);
     --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(var(--primary-soft) / 0.5) 100%);
 
+    /* Bangladesh flag-inspired subtle ambient gradients */
+    --gradient-flag-glow: radial-gradient(60% 45% at 85% 15%, hsl(0 80% 40% / 0.05) 0%, transparent 70%),
+                          radial-gradient(55% 40% at 10% 90%, hsl(140 90% 20% / 0.06) 0%, transparent 70%),
+                          radial-gradient(70% 50% at 90% 85%, hsl(140 90% 25% / 0.04) 0%, transparent 70%);
+
     --shadow-card: 0 10px 30px -12px hsl(158 40% 10% / 0.08), 0 2px 6px -2px hsl(158 40% 10% / 0.04);
     --shadow-elevated: 0 24px 48px -18px hsl(158 85% 14% / 0.16), 0 8px 16px -8px hsl(158 40% 10% / 0.06);
     --shadow-primary: 0 14px 32px -12px hsl(var(--primary) / 0.42);
@@ -97,6 +102,10 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --gradient-flag-glow: radial-gradient(60% 45% at 85% 15%, hsl(0 80% 45% / 0.04) 0%, transparent 70%),
+                          radial-gradient(55% 40% at 10% 90%, hsl(140 90% 25% / 0.05) 0%, transparent 70%),
+                          radial-gradient(70% 50% at 90% 85%, hsl(140 90% 30% / 0.03) 0%, transparent 70%);
   }
 }
 
@@ -113,10 +122,12 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Hind Siliguri', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: var(--gradient-flag-glow);
+    background-attachment: fixed;
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.22);
+    background: hsl(0 80% 40% / 0.14);
     color: hsl(var(--foreground));
   }
 
@@ -169,8 +180,13 @@
 
 @layer utilities {
   .bg-hero {
-    background: var(--gradient-hero);
+    background: var(--gradient-hero), var(--gradient-flag-glow);
   }
+  
+  .bg-flag-ambient {
+    background: var(--gradient-flag-glow);
+  }
+  
   .bg-grid {
     background-image:
       linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px),
@@ -253,6 +269,15 @@
   
   .orb-animate-2 {
     animation: float-slower 15s ease-in-out infinite;
+  }
+
+  /* Bangladesh flag-inspired ambient orbs */
+  .flag-orb-green {
+    background: radial-gradient(circle, hsl(140 90% 20% / 0.10) 0%, transparent 70%);
+  }
+  
+  .flag-orb-red {
+    background: radial-gradient(circle, hsl(0 80% 40% / 0.07) 0%, transparent 70%);
   }
 
   .animate-glow-pulse {

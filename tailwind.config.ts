@@ -22,6 +22,15 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        bd: {
+          green: "#006a4e",
+          "green-dark": "#004d39",
+          "green-light": "#059669",
+          "green-subtle": "#ecfdf5",
+          red: "#f42a41",
+          "red-light": "#fb7185",
+          "red-subtle": "#fff1f2",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -60,6 +69,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        "bd-gradient-subtle": "radial-gradient(ellipse at 15% 15%, rgba(0, 106, 78, 0.08) 0%, transparent 45%), radial-gradient(ellipse at 85% 25%, rgba(244, 42, 65, 0.05) 0%, transparent 40%), radial-gradient(circle at 50% 85%, rgba(0, 106, 78, 0.04) 0%, transparent 50%)",
+        "bd-gradient-subtle-dark": "radial-gradient(ellipse at 15% 15%, rgba(5, 150, 105, 0.12) 0%, transparent 45%), radial-gradient(ellipse at 85% 25%, rgba(244, 42, 65, 0.08) 0%, transparent 40%), radial-gradient(circle at 50% 85%, rgba(5, 150, 105, 0.06) 0%, transparent 50%)",
       },
       borderRadius: {
         lg: "var(--radius)",
