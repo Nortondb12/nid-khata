@@ -163,12 +163,14 @@ const Admin = () => {
 
   if (!isAdmin) {
     return (
-      <main className="min-h-screen bg-background px-4 flex items-center justify-center">
-        <section className="max-w-md text-center">
-          <CircleAlert className="mx-auto h-10 w-10 text-destructive" aria-hidden="true" />
-          <h1 className="mt-4 text-2xl font-bold text-foreground">অ্যাক্সেস অনুমোদিত নয়</h1>
-          <p className="mt-2 text-muted-foreground">এই পেজটি শুধু অনুমোদিত অ্যাডমিনদের জন্য।</p>
-          <Button asChild className="mt-6"><Link to="/">হোম পেজে ফিরুন</Link></Button>
+      <main className="min-h-screen bg-background px-4 pt-16 pb-24 sm:px-6 flex items-center justify-center">
+        <section className="max-w-md rounded-md border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10">
+            <CircleAlert className="h-6 w-6 text-destructive" aria-hidden="true" />
+          </span>
+          <h1 className="mt-5 text-2xl font-bold text-foreground sm:text-3xl">অ্যাক্সেস অনুমোদিত নয়</h1>
+          <p className="mt-3 text-muted-foreground">এই পেজটি শুধু অনুমোদিত অ্যাডমিনদের জন্য।</p>
+          <Button asChild className="mt-7"><Link to="/">হোম পেজে ফিরুন</Link></Button>
         </section>
       </main>
     );
@@ -176,9 +178,9 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link to="/" className="flex items-center gap-2.5">
+      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <Link to="/" className="flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
               <ShieldCheck className="h-5 w-5" aria-hidden="true" />
             </span>
@@ -200,20 +202,20 @@ const Admin = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="flex flex-wrap items-start justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold text-primary">অনুরোধ ব্যবস্থাপনা</p>
-            <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">ভেরিফিকেশন অনুরোধ</h1>
-            <p className="mt-1 text-sm text-muted-foreground">অনুরোধ পর্যালোচনা করে অনুমোদন বা ব্যর্থ হিসেবে চিহ্নিত করুন।</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-primary">অনুরোধ ব্যবস্থাপনা</p>
+            <h1 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">ভেরিফিকেশন অনুরোধ</h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">অনুরোধ পর্যালোচনা করে অনুমোদন বা ব্যর্থ হিসেবে চিহ্নিত করুন।</p>
           </div>
-          <Button variant="outline" size="sm" sm:size="default" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching}>
+          <Button variant="outline" size="sm" sm:size="default" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching} className="mt-1">
             <RefreshCw className={requestsQuery.isFetching ? "animate-spin" : ""} aria-hidden="true" />
             রিফ্রেশ
           </Button>
         </div>
 
-        <div className="mt-7 flex gap-2 overflow-x-auto pb-2 sm:flex-wrap" role="group" aria-label="স্ট্যাটাস দিয়ে ফিল্টার করুন">
+        <div className="mt-8 flex gap-2 overflow-x-auto pb-3 sm:flex-wrap" role="group" aria-label="স্ট্যাটাস দিয়ে ফিল্টার করুন">
           {filters.map((item) => (
             <Button
               key={item.value}
@@ -228,9 +230,9 @@ const Admin = () => {
           ))}
         </div>
 
-        <section className="mt-4 space-y-3" aria-live="polite">
+        <section className="mt-6 space-y-4" aria-live="polite">
           {requestsQuery.isLoading && (
-            <div className="flex items-center gap-2 py-10 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 py-12 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> অনুরোধ লোড হচ্ছে...
             </div>
           )}
@@ -240,9 +242,10 @@ const Admin = () => {
             </p>
           )}
           {!requestsQuery.isLoading && !requestsQuery.error && visibleRequests.length === 0 && (
-            <div className="rounded-md border border-dashed border-border py-14 text-center px-4">
-              <Inbox className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" />
-              <p className="mt-3 text-sm text-muted-foreground">এই স্ট্যাটাসে কোনো অনুরোধ নেই।</p>
+            <div className="rounded-md border border-dashed border-border py-16 text-center px-4">
+              <Inbox className="mx-auto h-10 w-10 text-muted-foreground" aria-hidden="true" />
+              <p className="mt-3 text-sm font-medium text-foreground">কোনো অনুরোধ নেই</p>
+              <p className="mt-1 text-sm text-muted-foreground">এই স্ট্যাটাসে কোনো অনুরোধ এখনও আসেনি।</p>
             </div>
           )}
 
@@ -252,22 +255,26 @@ const Admin = () => {
               : "pending";
             const meta = statusMeta[normalizedStatus];
             return (
-              <article key={request.id} className="rounded-md border border-border bg-card p-4 shadow-[var(--shadow-card)] sm:p-5">
-                <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-start md:justify-between">
+              <article key={request.id} className="rounded-lg border border-border bg-card p-5 shadow-[var(--shadow-card)] sm:p-6">
+                <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                   <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h2 className="font-bold text-foreground tabular-nums">NID: {request.nid_masked}</h2>
-                      <span className={`rounded-full border px-2.5 py-1 text-xs font-semibold ${meta.className}`}>{meta.label}</span>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h2 className="text-lg font-bold text-foreground tabular-nums">NID: {request.nid_masked}</h2>
+                      <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${meta.className}`}>{meta.label}</span>
                     </div>
-                    <dl className="mt-3 grid grid-cols-1 gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
-                      <div><dt className="text-xs text-muted-foreground">জন্ম সাল</dt><dd className="font-medium text-foreground">{request.dob_year ?? "—"}</dd></div>
-                      <div><dt className="text-xs text-muted-foreground">ক্লায়েন্ট ইমেইল</dt><dd className="break-all font-medium text-foreground">{request.email ?? "—"}</dd></div>
-                      <div><dt className="text-xs text-muted-foreground">জমা হয়েছে</dt><dd className="font-medium text-foreground">{formatDate(request.created_at)}</dd></div>
-                      <div><dt className="text-xs text-muted-foreground">সর্বশেষ আপডেট</dt><dd className="font-medium text-foreground">{formatDate(request.updated_at)}</dd></div>
+                    <dl className="mt-4 grid grid-cols-1 gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+                      <div><dt className="text-xs text-muted-foreground">জন্ম সাল</dt><dd className="mt-0.5 font-medium text-foreground">{request.dob_year ?? "—"}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">ক্লায়েন্ট ইমেইল</dt><dd className="mt-0.5 break-all font-medium text-foreground">{request.email ?? "—"}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">জমা হয়েছে</dt><dd className="mt-0.5 font-medium text-foreground">{formatDate(request.created_at)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">সর্বশেষ আপডেট</dt><dd className="mt-0.5 font-medium text-foreground">{formatDate(request.updated_at)}</dd></div>
                     </dl>
-                    {request.failure_reason && <p className="mt-3 text-sm text-destructive">ব্যর্থতার কারণ: {request.failure_reason}</p>}
+                    {request.failure_reason && (
+                      <div className="mt-4 rounded-md border border-destructive/20 bg-destructive/5 p-3">
+                        <p className="text-sm text-destructive">ব্যর্থতার কারণ: {request.failure_reason}</p>
+                      </div>
+                    )}
                   </div>
-                  <div className="flex w-full shrink-0 flex-wrap gap-2 sm:w-auto">
+                  <div className="flex w-full shrink-0 flex-wrap gap-2 sm:w-auto md:flex-col lg:flex-row">
                     <Button
                       size="sm"
                       className="flex-1 sm:flex-none"

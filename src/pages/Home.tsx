@@ -209,7 +209,7 @@ const Home: React.FC = () => {
 
             <motion.p
               variants={animations.fadeInUp}
-              className="text-lg md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10"
+              className="text-lg md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
             >
               The all-in-one platform that combines cutting-edge AI, seamless collaboration,
               and enterprise-grade security to supercharge your entire team.
@@ -285,15 +285,15 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14 md:mb-20"
+            className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               Trust through{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                 Verification
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Simple, transparent verification to keep our community authentic
             </p>
           </motion.div>
@@ -324,13 +324,13 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-6 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-xl transition-all"
+                  className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-xl transition-all"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-5">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{item.description}</p>
                 </motion.div>
               );
             })}
@@ -353,15 +353,15 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14 md:mb-20"
+            className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               Everything you need,{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                 nothing you don't
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Packed with powerful features designed to make your life easier
             </p>
           </motion.div>
@@ -376,7 +376,7 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-6 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:shadow-blue-500/10 transition-all cursor-pointer"
+                  className="group bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:shadow-blue-500/10 transition-all cursor-pointer"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                     <Icon className="w-6 h-6 text-white" />
@@ -402,19 +402,19 @@ const Home: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-14 md:mb-20"
+            className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
                 What's New in NovaTech 3.0
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               We've been busy building the future of work
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -422,11 +422,11 @@ const Home: React.FC = () => {
               transition={{ duration: 0.7 }}
             >
               <div className="aspect-square max-w-lg mx-auto bg-gradient-to-br from-blue-400/30 via-purple-400/30 to-pink-400/30 dark:from-blue-700/30 dark:via-purple-700/30 dark:to-pink-700/30 rounded-full relative overflow-hidden animate-float shadow-2xl shadow-blue-500/20">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl">
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl max-w-sm">
                     <Users className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-4" />
                     <div className="text-3xl font-bold mb-2">AI Copilot</div>
-                    <div className="text-gray-600 dark:text-gray-300 mb-6">
+                    <div className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                       Your intelligent assistant for everything
                     </div>
                     <div className="space-y-2">
@@ -449,14 +449,14 @@ const Home: React.FC = () => {
               transition={{ duration: 0.7 }}
               className="lg:p-6"
             >
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+              <h3 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                 A complete platform redesign focused on you
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
                 We listened to our community and rebuilt every single pixel. The result is
                 an interface that's more intuitive, faster, and more beautiful than ever before.
               </p>
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-5 mb-8">
                 <li className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shrink-0">
                     <Zap className="w-4 h-4 text-white" />
@@ -493,94 +493,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Testimonials Section */}
-      <section className="py-12 md:py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-14 md:mb-20"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Loved by{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                thousands of
-              </span>
-              <span className="block">teams worldwide</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Don't just take our word for it - hear from our amazing customers
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-6 md:p-8 hover:shadow-xl transition-shadow flex flex-col"
-              >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <div className="flex-1 text-gray-700 dark:text-gray-200 text-lg mb-6 italic leading-relaxed">
-                  "{testimonial.quote}"
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold">
-                    {testimonial.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 md:py-20 px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-3xl p-8 md:p-14 text-center text-white relative overflow-hidden"
-        >
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-          <div className="relative">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to Get Verified?
-            </h2>
-            <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Submit your verification request today and experience the power of verified access.
-            </p>
-            <Link to="/status" className="inline-flex px-8 py-4 bg-white text-blue-600 font-semibold rounded-full text-lg hover:shadow-xl transition-all hover:scale-105 items-center gap-2">
-              Go to Status Page
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-10 px-4 border-t border-gray-200 dark:border-gray-700/50">
-        <div className="max-w-7xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
-          <p>© 2024 NovaTech. All rights reserved.</p>
-          <p className="mt-2">Built with care for teams around the world.</p>
-        </div>
-      </footer>
     </div>
   );
 };
