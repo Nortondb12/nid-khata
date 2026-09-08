@@ -103,6 +103,26 @@ const Admin = () => {
 
   const updateStatus = useMutation({
     mutationFn: async ({ id, status, reason }: { id: string; status: RequestStatus; reason?: string }) => {
+      const { data: requestData, error: requestError } = await supabase
+        .from("nid_requests")
+        .select("id, user_id")
+        .eq("id", id)
+        .maybeSingle();
+
+      if (requestError) throw new Error("অনুরোধটি খুঁজে পাওয়া যায়নি।");
+
+      if (status === "success" && requestData?.user_id) {
+        // Grant the requester the 'user' role so they get their own account
+        const { error: roleError } = await supabase
+          .from("user_roles")
+          .insert({ user_id: requestData.user_id, role: "user" });
+
+        if (roleError) {
+          // If duplicate key, role already exists - this is fine
+          if (!roleError.message.includes("duplicate")) throw roleError;
+        }
+      }
+
       const { error } = await supabase
         .from("nid_requests")
         .update({ status, failure_reason: reason?.trim() || null })

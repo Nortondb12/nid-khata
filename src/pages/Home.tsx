@@ -15,7 +15,10 @@ import {
   CheckCircle2,
   PlayCircle,
   Menu,
-  X
+  X,
+  ShieldCheck,
+  ClipboardCheck,
+  LineChart
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -126,9 +129,12 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <button className="px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                Log In
-              </button>
+              <Link to="/status" className="px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Check Status
+              </Link>
+              <Link to="/admin" className="px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                Admin
+              </Link>
               <button className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105">
                 Get Started
               </button>
@@ -154,9 +160,12 @@ const Home: React.FC = () => {
               Documentation
             </button>
             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <button className="w-full px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
-                Log In
-              </button>
+              <Link to="/status" className="block w-full text-left px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                Check Status
+              </Link>
+              <Link to="/admin" className="block w-full text-left px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                Admin
+              </Link>
               <button className="w-full mt-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full">
                 Get Started
               </button>
@@ -210,10 +219,10 @@ const Home: React.FC = () => {
               variants={animations.fadeInUp}
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
-              <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:scale-105 flex items-center justify-center gap-2">
-                Try NovaTech Free
+              <Link to="/status" className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:scale-105 flex items-center justify-center gap-2">
+                Submit Verification Request
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
               <button className="px-8 py-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white font-semibold rounded-full text-lg hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-lg transition-all flex items-center justify-center gap-2">
                 <PlayCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 Watch Demo
@@ -264,6 +273,74 @@ const Home: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Verification Section */}
+      <section className="py-12 md:py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14 md:mb-20"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Trust through{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                Verification
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Simple, transparent verification to keep our community authentic
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
+            {[
+              {
+                icon: ClipboardCheck,
+                title: 'Submit Request',
+                description: 'Order verification from the status page in under a minute.'
+              },
+              {
+                icon: ShieldCheck,
+                title: 'Admin Review',
+                description: 'Our admins carefully review and either approve or reject your request.'
+              },
+              {
+                icon: LineChart,
+                title: 'Instant Account',
+                description: 'Get your account created instantly once the request is approved.'
+              }
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-6 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-xl transition-all"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-5">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <Link to="/status" className="group inline-flex px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-lg shadow-blue-600/20 transition-all hover:shadow-xl hover:shadow-blue-600/30 hover:scale-105 items-center justify-center gap-2">
+              Start Verification Now
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
@@ -484,87 +561,24 @@ const Home: React.FC = () => {
           <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
           <div className="relative">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to supercharge your productivity?
+              Ready to Get Verified?
             </h2>
             <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join over 10,000 companies building faster, smarter, and more efficiently with NovaTech.
+              Submit your verification request today and experience the power of verified access.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-white text-blue-700 font-bold rounded-full text-lg hover:bg-blue-100 transition-all shadow-xl hover:shadow-white/20 hover:scale-105">
-                Start Free Trial
-              </button>
-              <button className="px-8 py-4 bg-transparent border-2 border-white/50 text-white font-bold rounded-full text-lg hover:bg-white/10 hover:border-white transition-all">
-                Contact Sales
-              </button>
-            </div>
-            <p className="text-sm mt-6 text-blue-200">
-              No credit card required · Free 14-day trial · Cancel anytime
-            </p>
+            <Link to="/status" className="inline-flex px-8 py-4 bg-white text-blue-600 font-semibold rounded-full text-lg hover:shadow-xl transition-all hover:scale-105 items-center gap-2">
+              Go to Status Page
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-700/50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-2 rounded-lg">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                  NovaTech
-                </span>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                The future of work, built today. Empowering teams to achieve more.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900 dark:text-white">Product</h4>
-              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pricing</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Integrations</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Changelog</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900 dark:text-white">Company</h4>
-              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Careers</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-gray-900 dark:text-white">Legal</h4>
-              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Terms of Service</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Security</button></li>
-                <li><button className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">GDPR</button></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              © 2024 NovaTech Inc. All rights reserved.
-            </p>
-            <div className="flex space-x-4">
-              <button className="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm">
-                Twitter
-              </button>
-              <button className="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm">
-                LinkedIn
-              </button>
-              <button className="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm">
-                GitHub
-              </button>
-            </div>
-          </div>
+      <footer className="py-10 px-4 border-t border-gray-200 dark:border-gray-700/50">
+        <div className="max-w-7xl mx-auto text-center text-sm text-gray-600 dark:text-gray-400">
+          <p>© 2024 NovaTech. All rights reserved.</p>
+          <p className="mt-2">Built with care for teams around the world.</p>
         </div>
       </footer>
     </div>
