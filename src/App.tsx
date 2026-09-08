@@ -67,6 +67,7 @@ const App = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
               style={{ minHeight: "100vh" }}
+              className="transition-[background-color,color,border-color,fill,stroke] duration-300 ease-in-out"
             >
               <AnimatePresence mode="wait">
                 <Routes>

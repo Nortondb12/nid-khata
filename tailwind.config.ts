@@ -124,6 +124,18 @@ export default {
         "spin-slow": {
           to: { transform: "rotate(360deg)" },
         },
+        "theme-fade": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "theme-slide": {
+          "0%": { opacity: "0", transform: "translateY(8px) scale(0.98)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "theme-pop": {
+          "0%": { opacity: "0", transform: "scale(0.92)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -137,6 +149,16 @@ export default {
         "pulse-glow": "pulse-glow 2.4s ease-out infinite",
         "blob": "blob 12s ease-in-out infinite",
         "spin-slow": "spin-slow 18s linear infinite",
+        "theme-fade": "theme-fade 0.3s ease-out both",
+        "theme-slide": "theme-slide 0.4s cubic-bezier(0.16,1,0.3,1) both",
+        "theme-pop": "theme-pop 0.25s cubic-bezier(0.16,1,0.3,1) both",
+      },
+      transitionDuration: {
+        "theme": "300ms",
+        "theme-slow": "500ms",
+      },
+      transitionTimingFunction: {
+        "theme": "cubic-bezier(0.16,1,0.3,1)",
       },
     },
   },
