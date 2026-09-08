@@ -61,7 +61,7 @@ const ResultSkeleton = () => (
       </div>
 
       {/* Progress steps */}
-      <div className="mt-4 flex items-center gap-2 text-[11px] font-medium text-muted-foreground">
+      <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] font-medium text-muted-foreground">
         <div className="flex items-center gap-1 text-primary">
           <ShieldCheck className="w-3.5 h-3.5" />
           এনক্রিপশন
@@ -91,7 +91,7 @@ const ResultSkeleton = () => (
               <Skeleton className="h-3 w-48" />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Skeleton className="h-12 w-full rounded-xl" />
             <Skeleton className="h-12 w-full rounded-xl" />
             <Skeleton className="h-12 w-full rounded-xl" />
@@ -160,7 +160,7 @@ const NidForm = () => {
   return (
     <div className="w-full max-w-3xl mx-auto space-y-6">
       {/* Form Card */}
-      <div className="relative w-full bg-card/95 backdrop-blur-2xl rounded-3xl border border-border/80 shadow-[0_25px_80px_-15px_rgba(0,0,0,0.12)] dark:shadow-[0_25px_80px_-15px_rgba(0,0,0,0.5)] p-6 sm:p-8 lg:p-10 overflow-hidden transition-all duration-500 hover:shadow-[0_30px_90px_-15px_rgba(0,0,0,0.15)]">
+      <div className="relative w-full bg-card/95 backdrop-blur-2xl rounded-3xl border border-border/80 shadow-[0_25px_80px_-15px_rgba(0,0,0,0.12)] dark:shadow-[0_25px_80px_-15px_rgba(0,0,0,0.5)] p-4 sm:p-6 md:p-8 lg:p-10 overflow-hidden transition-all duration-500 hover:shadow-[0_30px_90px_-15px_rgba(0,0,0,0.15)]">
         {/* Decorative gradient orbs */}
         <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-primary via-emerald-400 to-teal-500" aria-hidden="true" />
         <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" aria-hidden="true" />
@@ -181,20 +181,20 @@ const NidForm = () => {
         <div className="relative">
           {/* Header with refined layout */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6 sm:mb-8 pb-6 border-b border-border/60">
-            <div className="flex items-center gap-4">
-              <div className="relative">
+            <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0">
+              <div className="relative shrink-0">
                 <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-lg opacity-50" aria-hidden="true" />
-                <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-primary to-teal-600 text-white flex items-center justify-center shadow-lg shadow-primary/30 border border-white/10 backdrop-blur-sm">
-                  <Fingerprint className="w-6 h-6" aria-hidden="true" />
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-primary to-teal-600 text-white flex items-center justify-center shadow-lg shadow-primary/30 border border-white/10 backdrop-blur-sm">
+                  <Fingerprint className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
                 </div>
-                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-card flex items-center justify-center">
-                  <ShieldCheck className="w-3 h-3 text-white" aria-hidden="true" />
+                <span className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-500 border-2 border-card flex items-center justify-center">
+                  <ShieldCheck className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" aria-hidden="true" />
                 </span>
               </div>
-              <div>
-                <h2 id="form-heading" className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight flex items-center gap-2 flex-wrap">
-                  <span>NID তথ্য অনুসন্ধান</span>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-wider border border-amber-500/20">
+              <div className="min-w-0">
+                <h2 id="form-heading" className="text-base sm:text-lg lg:text-2xl font-black text-foreground tracking-tight flex items-center gap-2 flex-wrap">
+                  <span className="truncate">NID তথ্য অনুসন্ধান</span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-wider border border-amber-500/20 shrink-0">
                     <Sparkles className="w-3 h-3" aria-hidden="true" />
                     বিনামূল্যে
                   </span>
@@ -205,7 +205,7 @@ const NidForm = () => {
               </div>
             </div>
 
-            <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 text-xs font-bold shadow-sm">
+            <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 text-xs font-bold shadow-sm shrink-0">
               <Lock className="w-3.5 h-3.5" aria-hidden="true" />
               <span>256-bit SSL সুরক্ষা</span>
             </div>
@@ -234,7 +234,7 @@ const NidForm = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-6 sm:space-y-7" noValidate>
+          <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-5 sm:space-y-6 md:space-y-7" noValidate>
             {/* Validation summary */}
             {Object.keys(errors).length > 0 && (
               <div
@@ -243,12 +243,12 @@ const NidForm = () => {
                 className="relative overflow-hidden rounded-2xl border border-destructive/25 bg-destructive/5 backdrop-blur-sm p-4 sm:p-5 animate-in fade-in slide-in-from-top-3 duration-300"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-destructive/60" />
-                <div className="flex items-start gap-3.5">
-                  <div className="w-8 h-8 rounded-xl bg-destructive/15 flex items-center justify-center shrink-0">
-                    <AlertCircle className="w-4 h-4 text-destructive" aria-hidden="true" />
+                <div className="flex items-start gap-2.5 sm:gap-3.5">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-xl bg-destructive/15 flex items-center justify-center shrink-0">
+                    <AlertCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-destructive" aria-hidden="true" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-destructive mb-2">
+                    <p className="text-xs sm:text-sm font-bold text-destructive mb-2">
                       নিচের তথ্যগুলো পরীক্ষা করুন:
                     </p>
                     <ul className="space-y-1.5">
@@ -271,8 +271,8 @@ const NidForm = () => {
                           };
 
                           return (
-                            <li key={field} className="flex items-center gap-2 text-xs sm:text-sm text-destructive font-medium">
-                              <span className="text-destructive/60">{iconMap[field] ?? "•"}</span>
+                            <li key={field} className="flex items-start sm:items-center gap-2 text-xs sm:text-sm text-destructive font-medium">
+                              <span className="text-destructive/60 shrink-0">{iconMap[field] ?? "•"}</span>
                               <a
                                 href={`#${idMap[field]}`}
                                 onClick={(e) => {
@@ -297,15 +297,15 @@ const NidForm = () => {
 
             {/* NID Number Field */}
             <div className="space-y-2.5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <Label htmlFor="nid" className="text-sm font-bold text-foreground flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary">1</span>
-                  <span>জাতীয় পরিচয়পত্র নম্বর (NID)</span>
-                  <span className="text-destructive text-base leading-none">*</span>
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
+                <Label htmlFor="nid" className="text-xs sm:text-sm font-bold text-foreground flex items-center gap-2">
+                  <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary shrink-0">1</span>
+                  <span className="truncate">জাতীয় পরিচয়পত্র নম্বর (NID)</span>
+                  <span className="text-destructive text-base leading-none shrink-0">*</span>
                 </Label>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                   <span
-                    className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full transition-all duration-300 ${
+                    className={`inline-flex items-center gap-1 text-[10px] sm:text-xs px-2 sm:px-2.5 py-1 rounded-full transition-all duration-300 ${
                       isNidValid
                         ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-bold"
                         : nidValue
@@ -316,7 +316,7 @@ const NidForm = () => {
                   >
                     {isNidValid ? (
                       <>
-                        <CheckCircle2 className="w-3 h-3" />
+                        <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         সঠিক
                       </>
                     ) : nidValue ? (
@@ -325,16 +325,16 @@ const NidForm = () => {
                       "প্রয়োজনীয়"
                     )}
                   </span>
-                  <span className="font-mono text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-md">
+                  <span className="font-mono text-[10px] sm:text-xs text-muted-foreground bg-muted px-1.5 sm:px-2 py-0.5 rounded-md">
                     {nidValue.length || 0}/17
                   </span>
                 </div>
               </div>
 
               <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
+                <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
                   <CreditCard
-                    className="w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
                     aria-hidden="true"
                   />
                 </div>
@@ -347,7 +347,7 @@ const NidForm = () => {
                   maxLength={17}
                   aria-invalid={!!errors.nid_number}
                   aria-describedby={errors.nid_number ? "nid-error" : "nid-hint"}
-                  className={`h-14 sm:h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-16 pr-5 border-2 focus-visible:bg-card transition-all duration-300 text-base font-medium w-full ${
+                  className={`h-12 sm:h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-12 sm:pl-16 pr-5 border-2 focus-visible:bg-card transition-all duration-300 text-sm sm:text-base font-medium w-full ${
                     isNidValid && !errors.nid_number
                       ? "border-emerald-500/50 focus-visible:border-emerald-500"
                       : errors.nid_number
@@ -357,37 +357,37 @@ const NidForm = () => {
                   {...register("nid_number", { onChange: handleNidChange })}
                 />
                 {isNidValid && (
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500">
-                    <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
+                  <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-emerald-500">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                   </div>
                 )}
               </div>
               {errors.nid_number ? (
                 <p id="nid-error" role="alert" className="text-xs font-semibold text-destructive flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse shrink-0" aria-hidden="true" />
                   {errors.nid_number.message}
                 </p>
               ) : (
-                <p id="nid-hint" className="text-xs text-muted-foreground flex items-center gap-1.5">
+                <p id="nid-hint" className="text-[11px] sm:text-xs text-muted-foreground flex items-center gap-1.5">
                   <Database className="w-3 h-3 shrink-0" aria-hidden="true" />
-                  স্মার্ট কার্ড: ১০ সংখ্যা | সাধারণ কার্ড: ১৩ অথবা ১৭ সংখ্যা
+                  <span className="truncate">স্মার্ট কার্ড: ১০ সংখ্যা | সাধারণ কার্ড: ১৩ অথবা ১৭ সংখ্যা</span>
                 </p>
               )}
             </div>
 
             {/* DOB + Email Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {/* DOB Field */}
-              <div className="space-y-2.5">
-                <Label htmlFor="dob" className="text-sm font-bold text-foreground flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary">2</span>
+              <div className="space-y-2.5 min-w-0">
+                <Label htmlFor="dob" className="text-xs sm:text-sm font-bold text-foreground flex items-center gap-2">
+                  <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary shrink-0">2</span>
                   <span>জন্ম তারিখ</span>
-                  <span className="text-destructive text-base leading-none">*</span>
+                  <span className="text-destructive text-base leading-none shrink-0">*</span>
                 </Label>
                 <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
+                  <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
                     <Calendar
-                      className="w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
                       aria-hidden="true"
                     />
                   </div>
@@ -398,7 +398,7 @@ const NidForm = () => {
                     min="1900-01-01"
                     aria-invalid={!!errors.date_of_birth}
                     aria-describedby={errors.date_of_birth ? "dob-error" : undefined}
-                    className={`h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-16 pr-4 border-2 focus-visible:bg-card transition-all duration-300 text-base font-medium w-full ${
+                    className={`h-12 sm:h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-12 sm:pl-16 pr-3 sm:pr-4 border-2 focus-visible:bg-card transition-all duration-300 text-sm sm:text-base font-medium w-full ${
                       hasDob && !errors.date_of_birth
                         ? "border-emerald-500/50 focus-visible:border-emerald-500"
                         : errors.date_of_birth
@@ -410,29 +410,29 @@ const NidForm = () => {
                 </div>
                 {errors.date_of_birth && (
                   <p id="dob-error" role="alert" className="text-xs font-semibold text-destructive flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" aria-hidden="true" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse shrink-0" aria-hidden="true" />
                     {errors.date_of_birth.message}
                   </p>
                 )}
               </div>
 
               {/* Email Field */}
-              <div className="space-y-2.5">
+              <div className="space-y-2.5 min-w-0">
                 <div className="flex items-center justify-between gap-2">
-                  <Label htmlFor="email" className="text-sm font-bold text-foreground flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary">3</span>
+                  <Label htmlFor="email" className="text-xs sm:text-sm font-bold text-foreground flex items-center gap-2">
+                    <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary shrink-0">3</span>
                     <span>ইমেইল ঠিকানা</span>
-                    <span className="text-destructive text-base leading-none">*</span>
+                    <span className="text-destructive text-base leading-none shrink-0">*</span>
                   </Label>
-                  <span className="hidden sm:flex items-center gap-1 text-[10px] text-muted-foreground font-medium">
+                  <span className="hidden sm:flex items-center gap-1 text-[10px] text-muted-foreground font-medium shrink-0">
                     <Mail className="w-3 h-3" />
                     ফলাফল কপি পেতে
                   </span>
                 </div>
                 <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
+                  <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-muted to-muted/50 group-focus-within:from-primary/15 group-focus-within:to-primary/5 border border-border/50 group-focus-within:border-primary/30 flex items-center justify-center transition-all duration-300 pointer-events-none">
                     <Mail
-                      className="w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
+                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300"
                       aria-hidden="true"
                     />
                   </div>
@@ -443,7 +443,7 @@ const NidForm = () => {
                     placeholder="আপনার ইমেইল লিখুন"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "email-error" : "email-hint"}
-                    className={`h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-16 pr-4 border-2 focus-visible:bg-card transition-all duration-300 text-base font-medium w-full ${
+                    className={`h-12 sm:h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-12 sm:pl-16 pr-3 sm:pr-4 border-2 focus-visible:bg-card transition-all duration-300 text-sm sm:text-base font-medium w-full ${
                       errors.email
                         ? "border-destructive/60 focus-visible:border-destructive"
                         : "border-border/70 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/15"
@@ -453,7 +453,7 @@ const NidForm = () => {
                 </div>
                 {errors.email && (
                   <p id="email-error" role="alert" className="text-xs font-semibold text-destructive flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" aria-hidden="true" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse shrink-0" aria-hidden="true" />
                     {errors.email.message}
                   </p>
                 )}
@@ -465,107 +465,56 @@ const NidForm = () => {
               <div
                 role="alert"
                 aria-live="polite"
-                className="flex items-start gap-3 text-destructive text-sm bg-destructive/5 border border-destructive/25 p-4 rounded-2xl animate-in fade-in slide-in-from-top-3 relative overflow-hidden"
+                className="flex items-start gap-3 p-4 sm:p-5 rounded-2xl border border-destructive/25 bg-destructive/5 text-destructive animate-in fade-in duration-300"
               >
-                <span className="absolute top-0 left-0 w-1 h-full bg-destructive/60" />
-                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
-                <div className="flex-1">
-                  <p className="font-bold text-sm">যাচাই ব্যর্থ হয়েছে</p>
-                  <p className="text-xs mt-1 opacity-90">{apiErrorMessage}</p>
+                <X className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 cursor-pointer hover:opacity-70 transition-opacity" onClick={reset} aria-hidden="true" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold">{apiErrorMessage}</p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => reset()}
-                  aria-label="বার্তা বন্ধ করুন"
-                  className="shrink-0 p-1.5 rounded-lg hover:bg-destructive/15 transition-colors cursor-pointer"
-                >
-                  <X className="w-4 h-4" aria-hidden="true" />
-                </button>
               </div>
             )}
 
             {/* Submit Button */}
-            <div className="pt-3">
-              <button
-                type="submit"
-                disabled={isPending}
-                aria-disabled={isPending}
-                className="relative w-full h-14 sm:h-15 bg-gradient-to-r from-primary via-primary to-teal-600 text-white font-bold text-base rounded-2xl shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/35 transition-all duration-300 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-none overflow-hidden cursor-pointer hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 ring-offset-background"
-              >
-                {/* Shine effect */}
-                <div
-                  className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 ease-out pointer-events-none"
-                  aria-hidden="true"
-                />
-                {/* Bottom gradient overlay for depth */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent opacity-60 group-hover:opacity-30 transition-opacity" aria-hidden="true" />
-
-                {isPending ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                    <span>সার্ভারে যাচাই করা হচ্ছে...</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="relative flex items-center justify-center gap-2.5 z-10">
-                      <Search className="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
-                      <span>তথ্য যাচাই করুন</span>
-                    </span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Trust & Processing Info */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-muted-foreground pt-1">
-              <div className="flex items-center justify-center gap-1.5 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/15 font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                <span>তাৎক্ষণিক ফলাফল</span>
-              </div>
-              <div className="flex items-center justify-center gap-1.5 bg-primary/5 px-3 py-1.5 rounded-full border border-primary/15 font-medium">
-                <ShieldCheck className="w-3.5 h-3.5 text-primary shrink-0" />
-                <span>শতভাগ গোপনীয়</span>
-              </div>
-              <div className="hidden sm:flex items-center justify-center gap-1.5 bg-teal-500/5 px-3 py-1.5 rounded-full border border-teal-500/15 font-medium">
-                <Lock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-300 shrink-0" />
-                <span>এনক্রিপ্টেড চ্যানেল</span>
-              </div>
-              <div className="hidden md:flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full font-semibold text-foreground/60">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span>সার্ভার অনলাইন</span>
-              </div>
-            </div>
-
-            {/* Processing agreement */}
-            <p className="text-center text-[10px] sm:text-[11px] leading-relaxed text-muted-foreground/80 px-4 pt-1 border-t border-border/40">
-              <Lock className="inline w-2.5 h-2.5 mr-1 opacity-60" aria-hidden="true" />
-              আপনার তথ্য শুধু যাচাইয়ের জন্য ব্যবহৃত হয় — কোনো ডেটা সংরক্ষণ বা তৃতীয় পক্ষের সাথে শেয়ার করা হয় না।
-            </p>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="relative w-full overflow-hidden rounded-2xl h-12 sm:h-14 bg-gradient-to-r from-primary to-teal-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 group"
+            >
+              {isPending ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" aria-hidden="true" />
+                  অনুসন্ধান হচ্ছে...
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  <Search className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
+                  যাচাই করুন
+                </span>
+              )}
+            </button>
           </form>
+
+          {/* Trust badges */}
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[10px] sm:text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5">
+              <Lock className="w-3 h-3 text-emerald-500 shrink-0" aria-hidden="true" />
+              SSL এনক্রিপ্টেড
+            </span>
+            <span className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3 h-3 text-primary shrink-0" aria-hidden="true" />
+              সরকারি ডেটাবেইস
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Loading or Result Section */}
-      {isPending && <ResultSkeleton />}
-      {data && (
+      {/* Results section */}
+      {data && !isPending && !error && (
         <Suspense fallback={<ResultSkeleton />}>
           <NidResult data={data} />
         </Suspense>
       )}
-
-      {/* Custom CSS for animations */}
-      <style>{`
-        @keyframes progress-indeterminate {
-          0% { transform: translateX(0%) scaleX(0.3); }
-          50% { transform: translateX(50%) scaleX(0.5); }
-          100% { transform: translateX(100%) scaleX(0.3); }
-        }
-        .animate-progress {
-          animation: progress-indeterminate 1.5s ease-in-out infinite;
-          transform-origin: left center;
-          width: 100%;
-        }
-      `}</style>
     </div>
   );
 };

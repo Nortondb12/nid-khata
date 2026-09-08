@@ -189,6 +189,7 @@ const Admin = () => {
           </Link>
           <Button
             variant="ghost"
+            size="sm"
             onClick={async () => {
               await supabase.auth.signOut();
               navigate("/auth", { replace: true });
@@ -206,13 +207,13 @@ const Admin = () => {
             <h1 className="mt-1 text-2xl font-bold text-foreground sm:text-3xl">ভেরিফিকেশন অনুরোধ</h1>
             <p className="mt-1 text-sm text-muted-foreground">অনুরোধ পর্যালোচনা করে অনুমোদন বা ব্যর্থ হিসেবে চিহ্নিত করুন।</p>
           </div>
-          <Button variant="outline" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching}>
+          <Button variant="outline" size="sm" sm:size="default" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching}>
             <RefreshCw className={requestsQuery.isFetching ? "animate-spin" : ""} aria-hidden="true" />
             রিফ্রেশ
           </Button>
         </div>
 
-        <div className="mt-7 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="স্ট্যাটাস দিয়ে ফিল্টার করুন">
+        <div className="mt-7 flex gap-2 overflow-x-auto pb-2 sm:flex-wrap" role="group" aria-label="স্ট্যাটাস দিয়ে ফিল্টার করুন">
           {filters.map((item) => (
             <Button
               key={item.value}
@@ -239,7 +240,7 @@ const Admin = () => {
             </p>
           )}
           {!requestsQuery.isLoading && !requestsQuery.error && visibleRequests.length === 0 && (
-            <div className="rounded-md border border-dashed border-border py-14 text-center">
+            <div className="rounded-md border border-dashed border-border py-14 text-center px-4">
               <Inbox className="mx-auto h-8 w-8 text-muted-foreground" aria-hidden="true" />
               <p className="mt-3 text-sm text-muted-foreground">এই স্ট্যাটাসে কোনো অনুরোধ নেই।</p>
             </div>
@@ -252,13 +253,13 @@ const Admin = () => {
             const meta = statusMeta[normalizedStatus];
             return (
               <article key={request.id} className="rounded-md border border-border bg-card p-4 shadow-[var(--shadow-card)] sm:p-5">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="min-w-0">
+                <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-start md:justify-between">
+                  <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <h2 className="font-bold text-foreground tabular-nums">NID: {request.nid_masked}</h2>
                       <span className={`rounded-full border px-2.5 py-1 text-xs font-semibold ${meta.className}`}>{meta.label}</span>
                     </div>
-                    <dl className="mt-3 grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+                    <dl className="mt-3 grid grid-cols-1 gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
                       <div><dt className="text-xs text-muted-foreground">জন্ম সাল</dt><dd className="font-medium text-foreground">{request.dob_year ?? "—"}</dd></div>
                       <div><dt className="text-xs text-muted-foreground">ক্লায়েন্ট ইমেইল</dt><dd className="break-all font-medium text-foreground">{request.email ?? "—"}</dd></div>
                       <div><dt className="text-xs text-muted-foreground">জমা হয়েছে</dt><dd className="font-medium text-foreground">{formatDate(request.created_at)}</dd></div>
@@ -266,9 +267,10 @@ const Admin = () => {
                     </dl>
                     {request.failure_reason && <p className="mt-3 text-sm text-destructive">ব্যর্থতার কারণ: {request.failure_reason}</p>}
                   </div>
-                  <div className="flex shrink-0 flex-wrap gap-2">
+                  <div className="flex w-full shrink-0 flex-wrap gap-2 sm:w-auto">
                     <Button
                       size="sm"
+                      className="flex-1 sm:flex-none"
                       disabled={updateStatus.isPending || normalizedStatus === "success"}
                       onClick={() => updateStatus.mutate({ id: request.id, status: "success" })}
                     >
@@ -277,6 +279,7 @@ const Admin = () => {
                     <Button
                       size="sm"
                       variant="destructive"
+                      className="flex-1 sm:flex-none"
                       disabled={updateStatus.isPending || normalizedStatus === "failed"}
                       onClick={() => {
                         setFailedRequest(request);
@@ -294,7 +297,7 @@ const Admin = () => {
       </main>
 
       <Dialog open={failedRequest !== null} onOpenChange={(open) => !open && setFailedRequest(null)}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="w-[calc(100%-2rem)] max-w-md sm:max-w-md">
           <DialogHeader>
             <DialogTitle>অনুরোধটি ব্যর্থ হিসেবে চিহ্নিত করবেন?</DialogTitle>
             <DialogDescription>ক্লায়েন্টকে দেখানোর জন্য সংক্ষিপ্ত কারণ লিখুন।</DialogDescription>
@@ -306,7 +309,7 @@ const Admin = () => {
             placeholder="যেমন: প্রদত্ত তথ্য মেলেনি"
             aria-label="ব্যর্থতার কারণ"
           />
-          <DialogFooter>
+          <DialogFooter className="flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <Button variant="outline" onClick={() => setFailedRequest(null)}>বাতিল</Button>
             <Button
               variant="destructive"
