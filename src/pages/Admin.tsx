@@ -209,7 +209,7 @@ const Admin = () => {
             <h1 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">ভেরিফিকেশন অনুরোধ</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">অনুরোধ পর্যালোচনা করে অনুমোদন বা ব্যর্থ হিসেবে চিহ্নিত করুন।</p>
           </div>
-          <Button variant="outline" size="sm" sm:size="default" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching} className="mt-1">
+          <Button variant="outline" size="sm" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching} className="mt-1">
             <RefreshCw className={requestsQuery.isFetching ? "animate-spin" : ""} aria-hidden="true" />
             রিফ্রেশ
           </Button>
