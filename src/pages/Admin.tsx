@@ -103,26 +103,6 @@ const Admin = () => {
 
   const updateStatus = useMutation({
     mutationFn: async ({ id, status, reason }: { id: string; status: RequestStatus; reason?: string }) => {
-      const { data: requestData, error: requestError } = await supabase
-        .from("nid_requests")
-        .select("id, user_id")
-        .eq("id", id)
-        .maybeSingle();
-
-      if (requestError) throw new Error("অনুরোধটি খুঁজে পাওয়া যায়নি।");
-
-      if (status === "success" && requestData?.user_id) {
-        // Grant the requester the 'user' role so they get their own account
-        const { error: roleError } = await supabase
-          .from("user_roles")
-          .insert({ user_id: requestData.user_id, role: "user" });
-
-        if (roleError) {
-          // If duplicate key, role already exists - this is fine
-          if (!roleError.message.includes("duplicate")) throw roleError;
-        }
-      }
-
       const { error } = await supabase
         .from("nid_requests")
         .update({ status, failure_reason: reason?.trim() || null })
@@ -209,7 +189,7 @@ const Admin = () => {
             <h1 className="mt-2 text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">ভেরিফিকেশন অনুরোধ</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">অনুরোধ পর্যালোচনা করে অনুমোদন বা ব্যর্থ হিসেবে চিহ্নিত করুন।</p>
           </div>
-          <Button variant="outline" size="sm" sm:size="default" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching} className="mt-1">
+          <Button variant="outline" size="sm" onClick={() => requestsQuery.refetch()} disabled={requestsQuery.isFetching} className="mt-1">
             <RefreshCw className={requestsQuery.isFetching ? "animate-spin" : ""} aria-hidden="true" />
             রিফ্রেশ
           </Button>
