@@ -45,7 +45,7 @@ export function ThemeToggle({ theme, onToggle, className }: ThemeToggleProps) {
       <span
         className={cn(
           'relative h-4 w-4 transition-transform duration-300',
-          isDark ? '-rotate-90 scale-0' : 'rotate-0 scale-100'
+          isDark ? 'rotate-90 scale-0' : 'rotate-0 scale-100'
         )}
       >
         <svg
@@ -72,7 +72,7 @@ export function ThemeToggle({ theme, onToggle, className }: ThemeToggleProps) {
       <span
         className={cn(
           'absolute h-4 w-4 transition-all duration-300',
-          isDark ? 'rotate-0 scale-100 opacity-100' : 'rotate-90 scale-0 opacity-0'
+          isDark ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
         )}
       >
         <svg

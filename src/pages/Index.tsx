@@ -52,6 +52,7 @@ import {
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
 import logo from "@/assets/logo.png";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const stats = [
   { label: "সফল ভেরিফিকেশন", value: "৫,০০,০০০+", icon: Users },
@@ -127,11 +128,11 @@ const faqs = [
   },
   {
     q: "আমার কোনো তথ্য কি আপনাদের সিস্টেমে জমা থাকে?",
-    a: "না। আমাদের প্ল্যাটফর্ম কঠোর জিরো-লগ নীতি অনুসরণ করে। ভেরিফিকেশনের পর কোনো এনআইডি নম্বর বা ছবি সার্ভারে স্থায়ীভাবে সংরক্ষিত হয় না।",
+    a: "না। আমাদের প্ল্যাটফর্ম কঠোর জিরো-লগ নীতি অনুসরণ করে। ভেরিফিকেশনের পর কোনো এনআইডি নম্বর বা ছবি সার্ভারে স্থায়ীভাবে সংরক্ষিত হয় না।",
   },
   {
     q: "মোবাইল থেকে কি সরাসরি PDF সেভ বা প্রিন্ট করা যাবে?",
-    a: "হ্যাঁ, আপনার মোবাইলের যেকোনো ব্রাউজার থেকেই এক ক্লিকে 'Print / Save as PDF' বাটনে ক্লিক করে হাই-কোয়ালিটি কপি সেভ করে নিতে পারবেন।",
+    a: "হ্যাঁ, আপনার মোবাইলের যেকোনো ব্রাউজার থেকেই এক ক্লিকে 'Print / Save as PDF' বাটনে ক্লিক করে হাই-কোয়ালিটি কপি সেভ করে নিতে পারবেন।",
   },
 ];
 
@@ -232,13 +233,16 @@ const Index = () => {
                 <img src={logo} alt="Logo" className="w-8 h-8 rounded-xl object-contain" />
                 <span className="font-bold">NID Service BD</span>
               </div>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="p-2 rounded-lg hover:bg-muted transition-colors"
-                aria-label="মেনু বন্ধ করুন"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1">
+                <ThemeToggle />
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 rounded-lg hover:bg-muted transition-colors"
+                  aria-label="মেনু বন্ধ করুন"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
             <nav className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto">
               <a
@@ -386,6 +390,7 @@ const Index = () => {
               <span className="w-2 h-2 rounded-full bg-[#f42a41] animate-ping" />
               সার্ভার সক্রিয়
             </div>
+            <ThemeToggle />
             <a
               href="#form-section"
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
@@ -542,330 +547,23 @@ const Index = () => {
                           {step.n}
                         </span>
                       </div>
-                      <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 group-hover:text-[#006a4e] transition-colors">
-                        {step.title}
-                      </h3>
+                      <h3 className="text-base sm:text-lg lg:text-xl font-bold text-foreground mb-2">{step.title}</h3>
                       <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
                     </div>
+                    {idx < steps.length - 1 && (
+                      <div className="hidden md:flex absolute top-1/2 -right-5 lg:-right-6 -translate-y-1/2 z-10">
+                        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-card border-2 border-[#006a4e]/30 text-[#006a4e] flex items-center justify-center shadow-md">
+                          <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </section>
-
-        {/* Features Section */}
-        <section id="features" className="py-12 sm:py-20 lg:py-24 bg-muted/20 border-y border-border/60 scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
-                আমাদের বৈশিষ্ট্য
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
-                কেন আমাদের সেবা বেছে নেবেন?
-              </h2>
-              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
-                সবচেয়ে উন্নত প্রযুক্তি ও দ্রুততম ইন্টারফেসের সমন্বয়ে নির্মিত
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {features.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-card border border-border/70 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-primary/30 transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                        <item.icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        {item.badge}
-                      </span>
-                    </div>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground mb-1.5">{item.title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Use Cases Section */}
-        <section id="use-cases" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-              <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
-                প্রয়োগক্ষেত্র
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
-                যেসব ক্ষেত্রে সার্ভার কপি প্রয়োজন
-              </h2>
-              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
-                দৈনন্দিন অফিশিয়াল ও ব্যক্তিগত নানা গুরুত্বপূর্ণ কাজে এই সার্ভার কপি ব্যবহৃত হয়
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {useCases.map((uc, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border/80 shadow-xs hover:border-primary/40 transition-all"
-                >
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-muted text-primary flex items-center justify-center shrink-0">
-                    <uc.icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-base font-bold text-foreground mb-1">{uc.title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{uc.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Sample / Perks Section */}
-        <section id="perks" className="py-12 sm:py-20 lg:py-24 bg-gradient-to-b from-muted/30 to-background border-y border-border/60 scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              <div className="lg:col-span-6 space-y-5">
-                <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
-                  প্রিন্ট-রেডি লেআউট
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground">
-                  আসল জাতীয় নির্বাচন কমিশনের মতো নির্ভুল ডিজাইন
-                </h2>
-                <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed">
-                  আমাদের প্রস্তুতকৃত সার্ভার কপি জাতীয় নির্বাচন কমিশনের অফিশিয়াল ডাটা ফরম্যাটের সাথে সম্পূর্ণ সামঞ্জস্যপূর্ণ।
-                </p>
-
-                <ul className="space-y-2.5 pt-2">
-                  {samplePerks.map((perk, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground/90 font-medium">
-                      <div className="w-5 h-5 rounded-full bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-3.5 h-3.5" />
-                      </div>
-                      <span>{perk}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="pt-2">
-                  <a
-                    href="#form-section"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 transition-all shadow-md shadow-primary/20"
-                  >
-                    <Search className="w-4 h-4" />
-                    এখনই নিজের কপি দেখুন
-                  </a>
-                </div>
-              </div>
-
-              {/* Sample Visual Card */}
-              <div className="lg:col-span-6">
-                <div className="relative mx-auto max-w-md bg-card border-2 border-primary/20 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xl">
-                  <div className="flex items-center justify-between border-b border-border/80 pb-3.5 mb-4">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center font-bold text-xs">
-                        BD
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold text-foreground leading-tight">জাতীয় পরিচয়পত্র সার্ভার কপি</p>
-                        <p className="text-[10px] text-muted-foreground">National Identity Card Summary</p>
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                      ভেরিফাইড
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3 items-center mb-4">
-                    <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-xl bg-muted/70 border border-border flex items-center justify-center text-muted-foreground text-xs font-semibold">
-                      ছবি নমুনা
-                    </div>
-                    <div className="col-span-2 space-y-1.5 text-xs">
-                      <div>
-                        <span className="text-[10px] text-muted-foreground block">জাতীয় পরিচয়পত্র নম্বর</span>
-                        <span className="font-mono font-bold text-foreground text-xs sm:text-sm">১৯৯*****৭৮৯০</span>
-                      </div>
-                      <div>
-                        <span className="text-[10px] text-muted-foreground block">নাম (বাংলা)</span>
-                        <span className="font-bold text-foreground">মোহাম্মদ আব্দুল্লাহ</span>
-                      </div>
-                      <div>
-                        <span className="text-[10px] text-muted-foreground block">Name (English)</span>
-                        <span className="font-medium text-foreground">MD ABDULLAH</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-border/80 pt-3 flex items-center justify-between text-[11px] text-muted-foreground">
-                    <span>বারকোড ও কিউআর সমৃদ্ধ</span>
-                    <span className="text-primary font-semibold">প্রিন্ট-রেডি ফরম্যাট</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
-                গ্রাহক প্রতিক্রিয়া
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
-                ব্যবহারকারীরা কী বলছেন?
-              </h2>
-              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
-                হাজারো সন্তুষ্ট ব্যবহারকারীর মূল্যবান মতামত
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-              {testimonials.map((t, idx) => (
-                <div
-                  key={idx}
-                  className="bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center gap-1 text-amber-500 mb-3">
-                      {[...Array(t.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-amber-500" />
-                      ))}
-                    </div>
-                    <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed mb-4 italic">
-                      "{t.text}"
-                    </p>
-                  </div>
-                  <div className="border-t border-border/60 pt-3">
-                    <p className="text-sm font-bold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="py-12 sm:py-20 lg:py-24 bg-muted/20 border-y border-border/60 scroll-mt-16">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 sm:mb-16">
-              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
-                সাধারণ জিজ্ঞাসা
-              </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
-                সচরাচর জিজ্ঞাসিত প্রশ্নাবলী
-              </h2>
-              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
-                আপনার মনে থাকা সাধারণ প্রশ্নগুলোর সহজ উত্তর
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {faqs.map((faq, idx) => (
-                <div
-                  key={idx}
-                  className="bg-card border border-border/80 rounded-2xl overflow-hidden transition-all"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-bold text-sm sm:text-base text-foreground hover:bg-muted/30 transition-colors"
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-muted-foreground shrink-0 ml-3 transition-transform duration-200 ${
-                        openFaq === idx ? "rotate-180 text-primary" : ""
-                      }`}
-                    />
-                  </button>
-                  {openFaq === idx && (
-                    <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA / Contact Strip */}
-        <section id="contact" className="py-12 sm:py-16 bg-gradient-to-r from-[#006a4e] to-emerald-800 text-white scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
-              আপনার NID সার্ভার কপি এখুনি সংগ্রহ করুন
-            </h2>
-            <p className="text-emerald-100 text-xs sm:text-sm md:text-base max-w-xl mx-auto">
-              কোনো দীর্ঘ প্রক্রিয়ার ঝামেলা নেই — মাত্র ৩ সেকেন্ডে আসল ডাটা ও কালার কপি রেডি।
-            </p>
-            <div className="pt-2">
-              <a
-                href="#form-section"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[#006a4e] font-black text-sm hover:bg-emerald-50 transition-all shadow-lg active:scale-95"
-              >
-                <Search className="w-4 h-4" />
-                তথ্য যাচাই শুরু করুন
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border/80 bg-background py-10 sm:py-12 no-print">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <img src={logo} alt="Logo" className="w-8 h-8 rounded-xl object-contain" />
-                <span className="font-bold text-base">NID Service BD</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                অনলাইনে দ্রুত, নির্ভরযোগ্য ও সুরক্ষিত জাতীয় পরিচয়পত্র যাচাইয়ের আধুনিক ডিজিটাল প্ল্যাটফর্ম।
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-foreground mb-3">দ্রুত লিঙ্ক</h4>
-              <ul className="space-y-2 text-xs text-muted-foreground">
-                <li><a href="#form-section" className="hover:text-primary transition-colors">যাচাই ফর্ম</a></li>
-                <li><a href="#steps" className="hover:text-primary transition-colors">কার্যপদ্ধতি</a></li>
-                <li><a href="#features" className="hover:text-primary transition-colors">বিশেষত্বসমূহ</a></li>
-                <li><a href="#faq" className="hover:text-primary transition-colors">প্রশ্নোত্তর</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-foreground mb-3">ব্যবহারের ক্ষেত্র</h4>
-              <ul className="space-y-2 text-xs text-muted-foreground">
-                <li><span>ব্যাংক ও ফাইন্যান্স</span></li>
-                <li><span>সরকারি দাপ্তরিক কাজ</span></li>
-                <li><span>সিম বায়োমেট্রিক ও নোটারি</span></li>
-                <li><span>অনলাইন ফ্রিল্যান্সিং</span></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-foreground mb-3">নিরাপত্তা ও গোপনীয়তা</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                আমরা আপনার ব্যক্তিগত গোপনীয়তা রক্ষা করতে প্রতিশ্রুতিবদ্ধ। ভেরিফিকেশনের পর কোনো তথ্য স্থায়ীভাবে জমা রাখা হয় না।
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground text-center sm:text-left">
-            <p>© {new Date().getFullYear()} NID Service BD — সর্বস্বত্ব সংরক্ষিত।</p>
-            <p>ডিজিটাল বাংলাদেশ এর অংশীদারিত্বে পরিচালিত</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

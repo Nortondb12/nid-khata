@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Auth from "./pages/Auth.tsx";
 import Status from "./pages/Status.tsx";
 import Admin from "./pages/Admin.tsx";
+import { ThemeProvider } from "@/hooks/use-theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,33 +57,35 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <AppToastProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              style={{ minHeight: "100vh" }}
-              className="transition-[background-color,color,border-color,fill,stroke] duration-300 ease-in-out"
-            >
-              <AnimatePresence mode="wait">
-                <Routes>
-                  <Route path="/" element={<AnimatedRoute><Index /></AnimatedRoute>} />
-                  <Route path="/auth" element={<AnimatedRoute><Auth /></AnimatedRoute>} />
-                  <Route path="/status" element={<AnimatedRoute><Status /></AnimatedRoute>} />
-                  <Route path="/admin" element={<AnimatedRoute><Admin /></AnimatedRoute>} />
-                  <Route path="*" element={<AnimatedRoute><NotFound /></AnimatedRoute>} />
-                </Routes>
-              </AnimatePresence>
-            </motion.div>
-          </BrowserRouter>
-        </AppToastProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <AppToastProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                style={{ minHeight: "100vh" }}
+                className="transition-[background-color,color,border-color,fill,stroke] duration-300 ease-in-out"
+              >
+                <AnimatePresence mode="wait">
+                  <Routes>
+                    <Route path="/" element={<AnimatedRoute><Index /></AnimatedRoute>} />
+                    <Route path="/auth" element={<AnimatedRoute><Auth /></AnimatedRoute>} />
+                    <Route path="/status" element={<AnimatedRoute><Status /></AnimatedRoute>} />
+                    <Route path="/admin" element={<AnimatedRoute><Admin /></AnimatedRoute>} />
+                    <Route path="*" element={<AnimatedRoute><NotFound /></AnimatedRoute>} />
+                  </Routes>
+                </AnimatePresence>
+              </motion.div>
+            </BrowserRouter>
+          </AppToastProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 
