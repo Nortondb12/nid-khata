@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image, { type StaticImageData } from "next/image";
 
 import { cn } from "@/lib/utils";
 
@@ -92,4 +93,43 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, CardSpotlight };
+const CardImage = React.forwardRef<HTMLDivElement, { image?: StaticImageData | string; alt?: string } & React.HTMLAttributes<HTMLDivElement>>(
+  ({ image, alt = "", className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("relative z-10 flex-shrink-0 p-6 pt-0", className)}
+      {...props}
+    >
+      {image && (
+        <div className="h-24 w-24 overflow-hidden rounded-2xl border border-border/30">
+          <Image
+            src={image}
+            alt={alt}
+            width={96}
+            height={96}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
+    </div>
+  ),
+);
+CardImage.displayName = "CardImage";
+
+const SimpleCard = React.forwardRef<HTMLDivElement, { title: string; description: string; image?: StaticImageData | string; imageAlt?: string; } & React.HTMLAttributes<HTMLDivElement>>(
+  ({ title, description, image, imageAlt, className, ...props }, ref) => (
+    <Card ref={ref} className={cn("h-full", className)} {...props}>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      {image && (
+        <CardImage image={image} alt={imageAlt} />
+      )}
+      <CardContent />
+    </Card>
+  ),
+);
+SimpleCard.displayName = "SimpleCard";
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, CardSpotlight, SimpleCard, CardImage };
