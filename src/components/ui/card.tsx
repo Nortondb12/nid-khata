@@ -1,5 +1,5 @@
 import * as React from "react";
-import Image, { type StaticImageData } from "next/image";
+type StaticImageData = { src: string };
 
 import { cn } from "@/lib/utils";
 
@@ -102,11 +102,12 @@ const CardImage = React.forwardRef<HTMLDivElement, { image?: StaticImageData | s
     >
       {image && (
         <div className="h-24 w-24 overflow-hidden rounded-2xl border border-border/30">
-          <Image
-            src={image}
+          <img
+            src={typeof image === "string" ? image : image.src}
             alt={alt}
             width={96}
             height={96}
+            loading="lazy"
             className="h-full w-full object-cover"
           />
         </div>

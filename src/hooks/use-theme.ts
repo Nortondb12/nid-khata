@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type ReactElement, type ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -37,4 +37,8 @@ export function useTheme() {
     theme,
     toggleTheme,
   };
+}
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  useTheme();
+  return children as ReactElement;
 }
