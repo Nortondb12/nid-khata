@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/hooks/use-theme';
 
 type Theme = 'light' | 'dark';
 
 interface ThemeToggleProps {
-  theme: Theme;
-  onToggle: () => void;
+  theme?: Theme;
+  onToggle?: () => void;
   className?: string;
 }
 
 export function ThemeToggle({ theme, onToggle, className }: ThemeToggleProps) {
+  const { theme: contextTheme, toggleTheme } = useTheme();
+  const activeTheme = theme ?? contextTheme;
+  const handleToggle = onToggle ?? toggleTheme;
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -30,13 +34,13 @@ export function ThemeToggle({ theme, onToggle, className }: ThemeToggleProps) {
     );
   }
 
-  const isDark = theme === 'dark';
+  const isDark = activeTheme === 'dark';
 
   return (
     <button
       type="button"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={onToggle}
+      onClick={handleToggle}
       className={cn(
         'inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground transition-all duration-300 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         className
