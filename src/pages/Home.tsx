@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../hooks/use-theme';
-import ThemeToggle from '../components/theme-toggle';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const features = [
   {
