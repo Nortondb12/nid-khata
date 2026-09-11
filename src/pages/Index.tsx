@@ -409,6 +409,13 @@ const Index = () => {
         </div>
       </header>
 
+      {/* Floating glass theme control */}
+      <div className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-40 no-print">
+        <div className="glass-theme-toggle rounded-2xl p-1.5">
+          <ThemeToggle className="h-11 w-11 rounded-xl border-0 bg-transparent shadow-none hover:bg-primary/10 hover:text-primary" />
+        </div>
+      </div>
+
       <main className="relative z-10">
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-6 sm:pt-14 pb-12 sm:pb-16 lg:pb-24">
