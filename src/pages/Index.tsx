@@ -325,7 +325,7 @@ const Index = () => {
       </a>
 
       {/* Modern Sticky Header */}
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/85 backdrop-blur-xl transition-all no-print shadow-sm shadow-black/[0.02]">
+      <header className="sticky top-0 z-40 w-full glass-header border-b border-border/60 bg-background/85 backdrop-blur-xl transition-all no-print shadow-sm shadow-black/[0.02]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
             <div className="relative shrink-0">
@@ -420,7 +420,7 @@ const Index = () => {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Hero Text */}
               <div className="lg:col-span-6 text-center lg:text-left space-y-4 sm:space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] text-xs sm:text-sm font-semibold shadow-xs">
+                <div className="glass-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] text-xs sm:text-sm font-semibold shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#f42a41]" />
                   <span>স্মার্ট বাংলাদেশ — দ্রুত ও নির্ভরযোগ্য সেবা</span>
                 </div>
@@ -456,15 +456,15 @@ const Index = () => {
 
                 {/* Trust Badges */}
                 <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-foreground/85 font-medium">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#006a4e]/20 shadow-xs">
+                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#006a4e]/20 shadow-xs">
                     <BadgeCheck className="w-4 h-4 text-[#006a4e]" />
                     <span>১০০% আসল ফরম্যাট</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#f42a41]/20 shadow-xs">
+                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#f42a41]/20 shadow-xs">
                     <QrCode className="w-4 h-4 text-[#f42a41]" />
                     <span>স্মার্ট কিউআর কোড</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-teal-500/20 shadow-xs">
+                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-teal-500/20 shadow-xs">
                     <Shield className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                     <span>নিরাপদ ও তাৎক্ষণিক</span>
                   </div>
@@ -495,7 +495,7 @@ const Index = () => {
         </section>
 
         {/* Live Stats Strip */}
-        <section className="border-y border-border/80 bg-muted/30 py-6 sm:py-8 backdrop-blur-sm">
+        <section className="glass-surface border-y border-border/80 bg-muted/30 py-6 sm:py-8 backdrop-blur-sm">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
               {stats.map((item, idx) => (
@@ -534,7 +534,7 @@ const Index = () => {
                 {steps.map((step, idx) => (
                   <div
                     key={idx}
-                    className="relative group bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                    className="relative group glass-card bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
                   >
                     {/* Subtle flag color accent on hover */}
                     <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] opacity-0 group-hover:opacity-100 transition-opacity" />
