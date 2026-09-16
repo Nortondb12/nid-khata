@@ -570,7 +570,372 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Features Section */}
+        <section id="features" className="py-12 sm:py-20 lg:py-24 scroll-mt-16 bg-muted/20 border-y border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+              <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
+                কেন আমরা
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                আমাদের সেবার বিশেষত্বসমূহ
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                নিরাপত্তা, নির্ভুলতা ও গতির সমন্বয়ে গড়ে তোলা একটি আধুনিক প্ল্যাটফর্ম
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {features.map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="group relative glass-card bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-xs">
+                      <feature.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] border border-[#006a4e]/20">
+                      {feature.badge}
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">{feature.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section id="use-cases" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
+                ব্যবহারের ক্ষেত্র
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                কোথায় কাজে লাগবে সার্ভার কপি?
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                দৈনন্দিন জীবনের প্রায় প্রতিটি অফিসিয়াল কাজে NID সার্ভার কপি প্রয়োজন হয়
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {useCases.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group flex items-start gap-4 glass-card bg-card border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 transition-all duration-300"
+                >
+                  <div className="w-11 h-11 shrink-0 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
+                    <item.icon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm sm:text-base font-bold text-foreground mb-1">{item.title}</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Perks Section */}
+        <section id="perks" className="py-12 sm:py-20 lg:py-24 scroll-mt-16 bg-muted/20 border-y border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
+                  সুবিধাসমূহ
+                </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground leading-tight">
+                  একটি কপিতেই যা যা পাবেন
+                </h2>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  আমাদের প্রতিটি সার্ভার কপি অফিসিয়াল ফরম্যাট অনুসরণ করে তৈরি, যাতে যেকোনো দাপ্তরিক কাজে সরাসরি ব্যবহার করা যায়।
+                </p>
+                <ul className="space-y-3 pt-2">
+                  {samplePerks.map((perk, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-foreground/90">
+                      <span className="w-5 h-5 shrink-0 rounded-full bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center mt-0.5">
+                        <Check className="w-3.5 h-3.5" />
+                      </span>
+                      <span className="leading-relaxed">{perk}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-3">
+                  <a
+                    href="#form-section"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                  >
+                    <Search className="w-4 h-4" />
+                    এখনই কপি সংগ্রহ করুন
+                  </a>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#006a4e]/25 via-[#f42a41]/15 to-teal-500/20 blur-xl opacity-70 -z-10" />
+                <div className="glass-card bg-card border border-border/80 rounded-3xl p-6 sm:p-8 shadow-lg space-y-5">
+                  <div className="flex items-center gap-3 pb-4 border-b border-border/60">
+                    <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#006a4e] to-teal-600 text-white flex items-center justify-center shadow-md">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-foreground">নমুনা সার্ভার কপি</p>
+                      <p className="text-xs text-muted-foreground">অফিসিয়াল ফরম্যাট প্রিভিউ</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { label: "নাম (বাংলা)", value: "মোঃ রহিম উদ্দিন" },
+                      { label: "নাম (English)", value: "Md. Rahim Uddin" },
+                      { label: "NID নম্বর", value: "১৯৯০ •••••••• ৫৬৭৮" },
+                      { label: "জন্ম তারিখ", value: "০১ জানুয়ারি ১৯৯০" },
+                      { label: "ঠিকানা", value: "ঢাকা, বাংলাদেশ" },
+                    ].map((row, idx) => (
+                      <div key={idx} className="flex items-center justify-between gap-3 text-xs sm:text-sm py-2 border-b border-dashed border-border/50 last:border-0">
+                        <span className="text-muted-foreground">{row.label}</span>
+                        <span className="font-semibold text-foreground text-right">{row.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 pt-2 text-[11px] text-muted-foreground">
+                    <QrCode className="w-4 h-4 text-[#006a4e] shrink-0" />
+                    <span>প্রতিটি কপিতে যাচাইযোগ্য QR কোড সংযুক্ত থাকে</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
+                ব্যবহারকারীদের মতামত
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                যারা সেবা নিয়েছেন তাদের অভিজ্ঞতা
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                সারা দেশ ও প্রবাস থেকে হাজারো ব্যবহারকারীর আস্থার প্রতিদান
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+              {testimonials.map((t, idx) => (
+                <div
+                  key={idx}
+                  className="group glass-card bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 transition-all duration-300 flex flex-col"
+                >
+                  <Quote className="w-7 h-7 text-[#006a4e]/30 mb-3" />
+                  <p className="text-sm text-foreground/90 leading-relaxed flex-1">{t.text}</p>
+                  <div className="flex items-center gap-1 mt-4">
+                    {Array.from({ length: t.rating }).map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#f42a41] text-[#f42a41]" />
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border/60">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#006a4e]/20 to-[#f42a41]/20 flex items-center justify-center text-sm font-bold text-[#006a4e]">
+                      {t.name.charAt(0)}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-foreground truncate">{t.name}</p>
+                      <p className="text-xs text-muted-foreground truncate">{t.role}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-12 sm:py-20 lg:py-24 scroll-mt-16 bg-muted/20 border-y border-border/60">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+              <span className="px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
+                প্রশ্নোত্তর
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                সাধারণ জিজ্ঞাসা
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                আপনার প্রশ্নের উত্তর এখানেই পেয়ে যেতে পারেন
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              {faqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="glass-card bg-card border border-border/80 rounded-2xl overflow-hidden shadow-xs transition-colors"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      aria-expanded={isOpen}
+                      className="w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 hover:bg-muted/40 transition-colors"
+                    >
+                      <span className="flex items-center gap-3 text-sm sm:text-base font-bold text-foreground">
+                        <HelpCircle className="w-5 h-5 text-[#006a4e] shrink-0" />
+                        {faq.q}
+                      </span>
+                      <span className="shrink-0 w-7 h-7 rounded-full bg-[#006a4e]/10 text-[#006a4e] flex items-center justify-center">
+                        {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 sm:px-6 sm:pb-6 -mt-1">
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed pl-8">
+                          {faq.a}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact / CTA Section */}
+        <section id="contact" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="relative overflow-hidden rounded-3xl border border-[#006a4e]/25 bg-gradient-to-br from-[#006a4e]/10 via-card to-[#f42a41]/10 p-6 sm:p-10 lg:p-14 shadow-lg">
+              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#006a4e]/15 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#f42a41]/10 blur-3xl pointer-events-none" />
+
+              <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="space-y-4 sm:space-y-5">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
+                    <BellRing className="w-3.5 h-3.5" />
+                    সহায়তা কেন্দ্র
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground leading-tight">
+                    যেকোনো সমস্যায় আমরা পাশে আছি
+                  </h2>
+                  <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                    সার্ভার কপি ডাউনলোড, যাচাই বা যেকোনো কারিগরি সহায়তার জন্য আমাদের সাপোর্ট টিমের সাথে যোগাযোগ করুন। আমরা দ্রুততম সময়ে সমাধান দিতে প্রস্তুত।
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <a
+                      href="#form-section"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                    >
+                      <Search className="w-4 h-4" />
+                      কপি খুঁজুন
+                    </a>
+                    <a
+                      href="mailto:support@nidservicebd.com"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-card border border-border text-foreground font-bold text-sm hover:border-[#006a4e]/40 hover:shadow-md transition-all"
+                    >
+                      <Mail className="w-4 h-4 text-[#006a4e]" />
+                      ইমেইল করুন
+                    </a>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[
+                    { icon: PhoneCall, title: "হটলাইন", value: "১৬২৪৭", note: "সকাল ৯টা - রাত ৯টা" },
+                    { icon: MessageSquare, title: "লাইভ চ্যাট", value: "২৪/৭ সাপোর্ট", note: "তাৎক্ষণিক উত্তর" },
+                    { icon: Mail, title: "ইমেইল", value: "support@nidservicebd.com", note: "২৪ ঘণ্টার মধ্যে রিপ্লাই" },
+                    { icon: MapPin, title: "অফিস", value: "ঢাকা, বাংলাদেশ", note: "শনিবার - বৃহস্পতিবার" },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="glass-card bg-card/80 border border-border/80 rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md hover:border-[#006a4e]/40 transition-all"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center mb-3">
+                        <item.icon className="w-5 h-5" />
+                      </div>
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{item.title}</p>
+                      <p className="text-sm font-bold text-foreground mt-0.5 break-words">{item.value}</p>
+                      <p className="text-[11px] text-muted-foreground mt-1">{item.note}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-border/60 bg-muted/30 backdrop-blur-sm no-print">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2.5">
+                <img src={logo} alt="NID Service BD লোগো" className="w-10 h-10 rounded-2xl object-contain" />
+                <div className="leading-tight">
+                  <p className="text-sm font-black text-foreground">NID Service BD</p>
+                  <p className="text-[11px] text-muted-foreground">জাতীয় পরিচয়পত্র অনলাইন পোর্টাল</p>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                দ্রুত, নিরাপদ ও নির্ভুলভাবে জাতীয় পরিচয়পত্রের সার্ভার কপি সংগ্রহ ও যাচাইয়ের আধুনিক প্ল্যাটফর্ম।
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-bold text-foreground mb-3">দ্রুত লিংক</h3>
+              <ul className="space-y-2 text-xs sm:text-sm">
+                <li><a href="#form-section" className="text-muted-foreground hover:text-primary transition-colors">যাচাই ফর্ম</a></li>
+                <li><a href="#steps" className="text-muted-foreground hover:text-primary transition-colors">কার্যপদ্ধতি</a></li>
+                <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">বিশেষত্বসমূহ</a></li>
+                <li><a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">প্রশ্নোত্তর</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-bold text-foreground mb-3">সেবাসমূহ</h3>
+              <ul className="space-y-2 text-xs sm:text-sm">
+                <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">ব্যাংক ও KYC</a></li>
+                <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সিম রেজিস্ট্রেশন</a></li>
+                <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সরকারি সেবা</a></li>
+                <li><a href="#perks" className="text-muted-foreground hover:text-primary transition-colors">সার্ভার কপি সুবিধা</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-bold text-foreground mb-3">যোগাযোগ</h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-[#006a4e] shrink-0" />
+                  <span>হটলাইন: ১৬২৪৭</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#006a4e] shrink-0" />
+                  <a href="mailto:support@nidservicebd.com" className="hover:text-primary transition-colors break-all">support@nidservicebd.com</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#006a4e] shrink-0" />
+                  <span>ঢাকা, বাংলাদেশ</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+            <p>© {new Date().getFullYear()} NID Service BD — সর্বস্বত্ব সংরক্ষিত।</p>
+            <p className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#006a4e]" />
+              নিরাপদ ও এনক্রিপ্টেড সংযোগ
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

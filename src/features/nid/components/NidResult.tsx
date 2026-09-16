@@ -18,9 +18,10 @@ import {
   Share2,
   Check,
   Fingerprint,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import type { NidData } from "../types";
-import InfoRow from "./InfoRow";
 import { safeText } from "@/lib/safeText";
 import { downloadNidCopy, DownloadCancelledError, type DownloadFormat, type DownloadProgress } from "../utils/downloadCopy";
 
@@ -38,6 +39,7 @@ const NidResult = ({ data }: NidResultProps) => {
   const [provenance, setProvenance] = useState<{ checksum: string; issuedAt: string } | null>(null);
   const [copied, setCopied] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const handleDownload = async (format: DownloadFormat) => {
     if (busy) return;
@@ -121,6 +123,8 @@ const NidResult = ({ data }: NidResultProps) => {
     { icon: <CreditCard className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />, label: "NID নম্বর", value: nid_number, accent: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/20" },
     { icon: <MapPin className="w-5 h-5 text-violet-600 dark:text-violet-400" />, label: "ঠিকানা", value: address, accent: "from-violet-500/10 to-violet-500/5 border-violet-500/20 sm:col-span-2" },
   ];
+
+  const visibleFields = showAll ? fieldData : fieldData.slice(0, 4);
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -276,7 +280,7 @@ const NidResult = ({ data }: NidResultProps) => {
 
             {/* Info Grid */}
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {fieldData.map((field) => (
+              {visibleFields.map((field) => (
                 <div 
                   key={field.label}
                   className={`group relative overflow-hidden p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br ${field.accent} border shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.01] ${field.label === "ঠিকানা" ? "sm:col-span-2" : ""}`}
@@ -314,6 +318,30 @@ const NidResult = ({ data }: NidResultProps) => {
                 </div>
               ))}
             </dl>
+
+            {/* Show more / less toggle */}
+            <div className="flex justify-center">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowAll((v) => !v)}
+                aria-expanded={showAll}
+                className="text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-emerald-500/10 h-9 gap-1.5 rounded-xl px-4"
+              >
+                {showAll ? (
+                  <>
+                    <ChevronUp className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    কম দেখান
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    সম্পূর্ণ ঠিকানা দেখুন
+                  </>
+                )}
+              </Button>
+            </div>
 
             {/* Security & Actions Line */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1 sm:pt-2">

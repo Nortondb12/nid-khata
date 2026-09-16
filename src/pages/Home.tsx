@@ -23,6 +23,7 @@ import {
 import { useState } from 'react';
 import { useTheme } from '../hooks/use-theme';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { NidForm } from '@/features/nid';
 
 const features = [
   {
@@ -283,6 +284,38 @@ const Home: React.FC = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* NID Server Copy Section */}
+      <section id="form-section" className="py-12 md:py-20 px-4 scroll-mt-20">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10 md:mb-14 max-w-3xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+              NID সার্ভার কপি{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                ডাউনলোড করুন
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              আপনার NID নম্বর ও জন্ম তারিখ দিয়ে যাচাই করে প্রিন্ট-রেডি সার্ভার কপি সংগ্রহ করুন
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <NidForm />
+          </motion.div>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -16,13 +16,25 @@ import {
   Fingerprint,
   FileCheck2,
   Database,
+  Download,
+  FileImage,
+  FileDown,
+  Check,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { nidRequestFormSchema, type NidRequestFormInput } from "../schema";
 import { useNidLookup } from "../hooks/useNidLookup";
 import { NidLookupError } from "../api/nidClient";
+import {
+  downloadNidCopy,
+  DownloadCancelledError,
+  type DownloadFormat,
+  type DownloadProgress,
+} from "../utils/downloadCopy";
 
 const NidResult = lazy(() => import("./NidResult"));
 
@@ -121,8 +133,63 @@ const NidForm = () => {
   const nidValue = watch("nid_number") ?? "";
   const dobValue = watch("date_of_birth");
 
+  // Server-copy download state
+  const abortRef = useRef<AbortController | null>(null);
+  const [downloadBusy, setDownloadBusy] = useState<DownloadFormat | null>(null);
+  const [downloadProgress, setDownloadProgress] = useState<DownloadProgress | null>(null);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+  const [downloadDone, setDownloadDone] = useState<{ checksum: string; issuedAt: string } | null>(null);
+  const [downloadCancelled, setDownloadCancelled] = useState(false);
+
   const onSubmit = (values: NidRequestFormInput) => {
     mutate(values as Required<NidRequestFormInput>);
+  };
+
+  const handleDownloadCopy = async (format: DownloadFormat) => {
+    if (downloadBusy) return;
+    setDownloadError(null);
+    setDownloadCancelled(false);
+    setDownloadDone(null);
+    setDownloadProgress({ stage: "preparing", percent: 0, message: "শুরু হচ্ছে..." });
+    setDownloadBusy(format);
+    const controller = new AbortController();
+    abortRef.current = controller;
+    try {
+      const result = await downloadNidCopy(
+        {
+          name_bn: "",
+          name_en: "",
+          father_name: "",
+          mother_name: "",
+          date_of_birth: dobValue ?? "",
+          nid_number: nidValue,
+          address: "",
+        },
+        format,
+        (p) => {
+          if (!controller.signal.aborted) setDownloadProgress(p);
+        },
+        controller.signal,
+      );
+      setDownloadDone(result);
+      setTimeout(() => setDownloadProgress(null), 1200);
+    } catch (err) {
+      if (err instanceof DownloadCancelledError) {
+        setDownloadCancelled(true);
+        setDownloadProgress(null);
+        setTimeout(() => setDownloadCancelled(false), 2500);
+      } else {
+        setDownloadError(err instanceof Error ? err.message : "ডাউনলোড ব্যর্থ হয়েছে।");
+        setDownloadProgress(null);
+      }
+    } finally {
+      abortRef.current = null;
+      setDownloadBusy(null);
+    }
+  };
+
+  const handleCancelDownload = () => {
+    abortRef.current?.abort();
   };
 
   // Derived state for form visual feedback
@@ -492,6 +559,161 @@ const NidForm = () => {
                 </span>
               )}
             </button>
+
+            {/* Server Copy Download */}
+            <div className="pt-1 sm:pt-2 space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="h-px flex-1 bg-border/70" aria-hidden="true" />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                  <FileDown className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
+                  সার্ভার কপি ডাউনলোড
+                </span>
+                <div className="h-px flex-1 bg-border/70" aria-hidden="true" />
+              </div>
+
+              <p className="text-[11px] sm:text-xs text-muted-foreground text-center leading-relaxed">
+                উপরের তথ্য দিয়ে সরাসরি সার্ভার-জেনারেটেড ওয়াটারমার্কযুক্ত কপি ডাউনলোড করুন
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <Button
+                  type="button"
+                  onClick={() => handleDownloadCopy("pdf")}
+                  disabled={downloadBusy !== null || !fieldsCompleted}
+                  size="lg"
+                  className="relative h-12 sm:h-13 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/25 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed w-full"
+                  aria-label="সার্ভার কপি PDF হিসেবে ডাউনলোড করুন"
+                >
+                  {downloadBusy === "pdf" ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin shrink-0" aria-hidden="true" />
+                      <span>তৈরি হচ্ছে...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-5 h-5 mr-2 shrink-0" aria-hidden="true" />
+                      <span>PDF ডাউনলোড</span>
+                    </>
+                  )}
+                </Button>
+
+                <Button
+                  type="button"
+                  onClick={() => handleDownloadCopy("png")}
+                  disabled={downloadBusy !== null || !fieldsCompleted}
+                  variant="outline"
+                  size="lg"
+                  className="relative h-12 sm:h-13 py-3.5 font-bold rounded-2xl bg-gradient-to-r from-emerald-600/5 to-teal-600/5 hover:from-emerald-600/10 hover:to-teal-600/10 border-emerald-500/40 text-emerald-700 dark:text-emerald-300 w-full"
+                  aria-label="সার্ভার কপি PNG ছবি হিসেবে ডাউনলোড করুন"
+                >
+                  {downloadBusy === "png" ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin shrink-0" aria-hidden="true" />
+                      <span>তৈরি হচ্ছে...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FileImage className="w-5 h-5 mr-2 shrink-0" aria-hidden="true" />
+                      <span>PNG ডাউনলোড</span>
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {!fieldsCompleted && (
+                <p className="text-[11px] sm:text-xs text-muted-foreground text-center flex items-center justify-center gap-1.5">
+                  <AlertCircle className="w-3 h-3 shrink-0" aria-hidden="true" />
+                  ডাউনলোড করতে NID নম্বর ও জন্ম তারিখ পূরণ করুন
+                </p>
+              )}
+
+              {downloadProgress && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-500/5 via-teal-500/5 to-cyan-500/5 p-4 space-y-3 shadow-sm"
+                >
+                  <div className="flex items-center gap-3">
+                    {downloadProgress.stage === "done" ? (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />
+                    ) : (
+                      <Loader2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 animate-spin shrink-0" aria-hidden="true" />
+                    )}
+                    <p className="text-sm font-semibold text-foreground flex-1 min-w-0 truncate">
+                      {downloadProgress.message}
+                    </p>
+                    <span className="font-mono text-xs tabular-nums text-muted-foreground shrink-0">
+                      {Math.round(downloadProgress.percent)}%
+                    </span>
+                  </div>
+                  <Progress value={downloadProgress.percent} className="h-2 rounded-full bg-emerald-500/10" aria-label="ডাউনলোড অগ্রগতি" />
+                  {downloadProgress.stage !== "done" && (
+                    <div className="flex justify-end">
+                      <Button
+                        type="button"
+                        onClick={handleCancelDownload}
+                        variant="ghost"
+                        size="sm"
+                        className="h-8 text-xs text-destructive hover:text-destructive hover:bg-destructive/10 rounded-xl px-3"
+                        aria-label="ডাউনলোড বাতিল করুন"
+                      >
+                        <X className="w-4 h-4 mr-1.5" aria-hidden="true" />
+                        বাতিল করুন
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {downloadError && (
+                <div
+                  role="alert"
+                  className="flex items-start gap-3 text-destructive text-sm bg-destructive/10 border border-destructive/25 p-4 rounded-2xl"
+                >
+                  <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" aria-hidden="true" />
+                  <div className="space-y-1 min-w-0">
+                    <p className="font-bold">ডাউনলোড ব্যর্থ হয়েছে</p>
+                    <p className="text-destructive/90 break-words">{downloadError}</p>
+                  </div>
+                </div>
+              )}
+
+              {downloadCancelled && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="flex items-center gap-3 text-sm bg-orange-500/10 border border-orange-500/25 p-4 rounded-2xl text-orange-700 dark:text-orange-300"
+                >
+                  <AlertCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span className="font-semibold">ডাউনলোড প্রক্রিয়া বাতিল করা হয়েছে।</span>
+                </div>
+              )}
+
+              {downloadDone && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="rounded-2xl border border-emerald-500/25 bg-gradient-to-r from-emerald-50/80 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/10 p-4 space-y-2"
+                >
+                  <div className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-500 shrink-0" aria-hidden="true" />
+                    <h5 className="text-sm font-bold text-foreground">সফলভাবে ডাউনলোড সম্পন্ন</h5>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-background/70 border border-border/50">
+                      <span className="text-muted-foreground">সার্ভারে তৈরি:</span>
+                      <span className="font-semibold text-foreground break-words">{downloadDone.issuedAt}</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-background/70 border border-border/50">
+                      <span className="text-muted-foreground">যাচাই কোড:</span>
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 tracking-wider break-all">
+                        {downloadDone.checksum}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </form>
 
           {/* Trust badges */}
