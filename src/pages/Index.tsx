@@ -419,10 +419,6 @@ const Index = () => {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#f42a41] animate-ping" />
-              সার্ভার সক্রিয়
-            </div>
             <a
               href="#form-section"
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
