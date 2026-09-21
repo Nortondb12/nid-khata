@@ -21,8 +21,6 @@ import {
   LineChart
 } from 'lucide-react';
 import { useState } from 'react';
-import { useTheme } from '../hooks/use-theme';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { NidForm } from '@/features/nid';
 
 const features = [
@@ -103,12 +101,11 @@ const animations = {
 
 const Home: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950 text-gray-900 dark:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 text-gray-900 overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700/50">
+      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -133,11 +130,10 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <ThemeToggle />
-              <Link to="/status" className="px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Link to="/status" className="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 transition-colors">
                 Check Status
               </Link>
-              <Link to="/admin" className="px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <Link to="/admin" className="px-4 py-2 font-medium text-gray-700 hover:text-blue-600 transition-colors">
                 Admin
               </Link>
               <button className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105">
@@ -145,11 +141,8 @@ const Home: React.FC = () => {
               </button>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="md:hidden">
-                <ThemeToggle />
-              </div>
               <button 
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="md:hidden p-2 rounded-lg hover:bg-gray-100"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -159,21 +152,21 @@ const Home: React.FC = () => {
         </div>
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-700/50 px-4 py-4 space-y-2 animate-slideIn">
-            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors">
+          <div className="md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-2 animate-slideIn">
+            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
               Features
             </button>
-            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors">
+            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
               Pricing
             </button>
-            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors">
+            <button className="block w-full text-left px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
               Documentation
             </button>
-            <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <Link to="/status" className="block w-full text-left px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+            <div className="pt-2 border-t border-gray-200">
+              <Link to="/status" className="block w-full text-left px-4 py-2 font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 Check Status
               </Link>
-              <Link to="/admin" className="block w-full text-left px-4 py-2 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+              <Link to="/admin" className="block w-full text-left px-4 py-2 font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
                 Admin
               </Link>
               <button className="w-full mt-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full">
@@ -187,9 +180,9 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="relative pt-28 md:pt-36 pb-20 md:pb-28 px-4">
         {/* Animated background blobs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute top-40 right-10 w-80 h-80 bg-purple-400/20 dark:bg-purple-600/20 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-pink-400/10 dark:bg-pink-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-40 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl"></div>
 
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
@@ -200,7 +193,7 @@ const Home: React.FC = () => {
           >
             <motion.div
               variants={animations.fadeInUp}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 px-5 py-2 rounded-full text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200 text-blue-700 px-5 py-2 rounded-full text-sm font-medium mb-6"
             >
               <Rocket className="w-4 h-4" />
               Introducing NovaTech 3.0
@@ -212,14 +205,14 @@ const Home: React.FC = () => {
               className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8"
             >
               Revolutionize Your
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
                 Digital Workflow
               </span>
             </motion.h1>
 
             <motion.p
               variants={animations.fadeInUp}
-              className="text-lg md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
+              className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed"
             >
               The all-in-one platform that combines cutting-edge AI, seamless collaboration,
               and enterprise-grade security to supercharge your entire team.
@@ -233,23 +226,23 @@ const Home: React.FC = () => {
                 Submit Verification Request
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <button className="px-8 py-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white font-semibold rounded-full text-lg hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                <PlayCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <button className="px-8 py-4 bg-white/80 backdrop-blur border border-gray-200 text-gray-800 font-semibold rounded-full text-lg hover:border-blue-400 hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                <PlayCircle className="w-5 h-5 text-blue-600" />
                 Watch Demo
               </button>
             </motion.div>
 
             <motion.div
               variants={animations.fadeInUp}
-              className="flex items-center gap-3 text-sm md:text-base text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-slate-800/60 backdrop-blur px-5 py-2.5 rounded-full border border-gray-200 dark:border-gray-700"
+              className="flex items-center gap-3 text-sm md:text-base text-gray-600 bg-white/60 backdrop-blur px-5 py-2.5 rounded-full border border-gray-200"
             >
               <span className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 ring-2 ring-white dark:ring-slate-800"></div>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 ring-2 ring-white dark:ring-slate-800"></div>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 ring-2 ring-white dark:ring-slate-800"></div>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 ring-2 ring-white"></div>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 ring-2 ring-white"></div>
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 ring-2 ring-white"></div>
               </span>
               <span>
-                Trusted by <strong className="text-gray-900 dark:text-white">10,000+</strong> teams worldwide
+                Trusted by <strong className="text-gray-900">10,000+</strong> teams worldwide
               </span>
               <span className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -264,7 +257,7 @@ const Home: React.FC = () => {
 
       {/* Stats Section */}
       <section className="py-12 md:py-16 px-4 relative">
-        <div className="max-w-7xl mx-auto bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl px-6 py-8 md:px-12 md:py-10">
+        <div className="max-w-7xl mx-auto bg-white/70 backdrop-blur-xl rounded-3xl border border-gray-200 shadow-xl px-6 py-8 md:px-12 md:py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
               <motion.div
@@ -275,10 +268,10 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
+                <div className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300">
+                <div className="text-sm md:text-base font-medium text-gray-600">
                   {stat.label}
                 </div>
               </motion.div>
@@ -299,11 +292,11 @@ const Home: React.FC = () => {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               NID সার্ভার কপি{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 ডাউনলোড করুন
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               আপনার NID নম্বর ও জন্ম তারিখ দিয়ে যাচাই করে প্রিন্ট-রেডি সার্ভার কপি সংগ্রহ করুন
             </p>
           </motion.div>
@@ -331,11 +324,11 @@ const Home: React.FC = () => {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               Trust through{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Verification
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Simple, transparent verification to keep our community authentic
             </p>
           </motion.div>
@@ -366,13 +359,13 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-xl transition-all"
+                  className="bg-white/70 backdrop-blur-xl rounded-2xl border border-gray-200 p-8 hover:border-blue-400 hover:shadow-xl transition-all"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-5">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{item.description}</p>
+                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
                 </motion.div>
               );
             })}
@@ -399,11 +392,11 @@ const Home: React.FC = () => {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               Everything you need,{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 nothing you don't
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Packed with powerful features designed to make your life easier
             </p>
           </motion.div>
@@ -418,15 +411,15 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:shadow-blue-500/10 transition-all cursor-pointer"
+                  className="group bg-white/70 backdrop-blur-xl rounded-2xl border border-gray-200 p-8 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/10 transition-all cursor-pointer"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -447,11 +440,11 @@ const Home: React.FC = () => {
             className="text-center mb-14 md:mb-20 max-w-3xl mx-auto"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 What's New in NovaTech 3.0
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               We've been busy building the future of work
             </p>
           </motion.div>
@@ -463,17 +456,17 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="aspect-square max-w-lg mx-auto bg-gradient-to-br from-blue-400/30 via-purple-400/30 to-pink-400/30 dark:from-blue-700/30 dark:via-purple-700/30 dark:to-pink-700/30 rounded-full relative overflow-hidden animate-float shadow-2xl shadow-blue-500/20">
+              <div className="aspect-square max-w-lg mx-auto bg-gradient-to-br from-blue-400/30 via-purple-400/30 to-pink-400/30 rounded-full relative overflow-hidden animate-float shadow-2xl shadow-blue-500/20">
                 <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl max-w-sm">
-                    <Users className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-4" />
+                  <div className="bg-white/90 backdrop-blur-lg rounded-3xl p-8 md:p-10 shadow-2xl max-w-sm">
+                    <Users className="w-8 h-8 text-blue-600 mb-4" />
                     <div className="text-3xl font-bold mb-2">AI Copilot</div>
-                    <div className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                    <div className="text-gray-600 mb-6 leading-relaxed">
                       Your intelligent assistant for everything
                     </div>
                     <div className="space-y-2">
                       {['Automated workflow suggestions', 'Real-time meeting summaries', 'Smart task prioritization'].map((item, i) => (
-                        <div key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <div key={i} className="flex items-start gap-2 text-sm text-gray-600">
                           <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
                           <span>{item}</span>
                         </div>
@@ -494,7 +487,7 @@ const Home: React.FC = () => {
               <h3 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                 A complete platform redesign focused on you
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 We listened to our community and rebuilt every single pixel. The result is
                 an interface that's more intuitive, faster, and more beautiful than ever before.
               </p>
@@ -505,7 +498,7 @@ const Home: React.FC = () => {
                   </div>
                   <div>
                     <span className="font-semibold">40% faster interface</span>
-                    <p className="text-gray-600 dark:text-gray-300">Optimized rendering for instant response in every action.</p>
+                    <p className="text-gray-600">Optimized rendering for instant response in every action.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
@@ -514,7 +507,7 @@ const Home: React.FC = () => {
                   </div>
                   <div>
                     <span className="font-semibold">Enhanced collaboration</span>
-                    <p className="text-gray-600 dark:text-gray-300">Share, comment, and work together in real-time.</p>
+                    <p className="text-gray-600">Share, comment, and work together in real-time.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
@@ -523,7 +516,7 @@ const Home: React.FC = () => {
                   </div>
                   <div>
                     <span className="font-semibold">Advanced privacy controls</span>
-                    <p className="text-gray-600 dark:text-gray-300">Granular permissions and end-to-end encryption.</p>
+                    <p className="text-gray-600">Granular permissions and end-to-end encryption.</p>
                   </div>
                 </li>
               </ul>

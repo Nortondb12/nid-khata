@@ -52,7 +52,6 @@ import {
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
 import logo from "@/assets/logo.png";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const stats = [
   { label: "সফল ভেরিফিকেশন", value: "৫,০০,০০০+", icon: Users },
@@ -234,7 +233,6 @@ const Index = () => {
                 <span className="font-bold">NID Service BD</span>
               </div>
               <div className="flex items-center gap-1">
-                <ThemeToggle />
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 rounded-lg hover:bg-muted transition-colors"
@@ -399,11 +397,10 @@ const Index = () => {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] dark:text-emerald-400 text-xs font-semibold">
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] text-xs font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#f42a41] animate-ping" />
               সার্ভার সক্রিয়
             </div>
-            <ThemeToggle />
             <a
               href="#form-section"
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
@@ -421,13 +418,6 @@ const Index = () => {
           </div>
         </div>
       </header>
-
-      {/* Floating glass theme control */}
-      <div className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-40 no-print">
-        <div className="glass-theme-toggle rounded-2xl p-1.5">
-          <ThemeToggle className="h-11 w-11 rounded-xl border-0 bg-transparent shadow-none hover:bg-primary/10 hover:text-primary" />
-        </div>
-      </div>
 
       <main className="relative z-10">
         {/* Hero Section */}
@@ -485,7 +475,7 @@ const Index = () => {
                     <span>স্মার্ট কিউআর কোড</span>
                   </div>
                   <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-teal-500/20 shadow-xs">
-                    <Shield className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <Shield className="w-4 h-4 text-teal-600" />
                     <span>নিরাপদ ও তাৎক্ষণিক</span>
                   </div>
                 </div>
