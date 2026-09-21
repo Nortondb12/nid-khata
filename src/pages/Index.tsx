@@ -430,11 +430,6 @@ const Index = () => {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Hero Text */}
               <div className="lg:col-span-6 text-center lg:text-left space-y-4 sm:space-y-6">
-                <div className="glass-chip inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#006a4e]/10 border border-[#006a4e]/20 text-[#006a4e] text-xs sm:text-sm font-semibold shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#f42a41]" />
-                  <span>স্মার্ট বাংলাদেশ — দ্রুত ও নির্ভরযোগ্য সেবা</span>
-                </div>
-
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[2.75rem] font-black tracking-tight text-foreground leading-[1.2]">
                   জাতীয় পরিচয়পত্রের{" "}
                   <span className="bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] bg-clip-text text-transparent">
