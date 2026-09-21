@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -70,55 +70,14 @@
                           radial-gradient(55% 40% at 10% 90%, hsl(140 90% 20% / 0.06) 0%, transparent 70%),
                           radial-gradient(70% 50% at 90% 85%, hsl(140 90% 25% / 0.04) 0%, transparent 70%);
 
-    --shadow-card: 0 10px 30px -12px hsl(158 40% 10% / 0.08), 0 2px 6px -2px hsl(158 40% 10% / 0.04);
-    --shadow-elevated: 0 24px 48px -18px hsl(158 85% 14% / 0.16), 0 8px 16px -8px hsl(158 40% 10% / 0.06);
-    --shadow-primary: 0 14px 32px -12px hsl(var(--primary) / 0.42);
-    --shadow-glow: 0 0 0 1px hsl(var(--primary) / 0.12), 0 16px 40px -16px hsl(var(--primary) / 0.30);
-    --shadow-lg-emerald: 0 20px 40px -12px hsl(158 85% 14% / 0.18);
-    --shadow-inner-soft: inset 0 2px 8px hsl(158 40% 10% / 0.04);
+    --shadow-card: 0 1px 2px hsl(158 40% 10% / 0.04), 0 8px 24px -14px hsl(158 40% 10% / 0.10);
+    --shadow-elevated: 0 2px 4px hsl(158 40% 10% / 0.04), 0 20px 44px -20px hsl(158 85% 14% / 0.18);
+    --shadow-primary: 0 10px 26px -12px hsl(var(--primary) / 0.38);
+    --shadow-glow: 0 0 0 1px hsl(var(--primary) / 0.10), 0 14px 36px -18px hsl(var(--primary) / 0.28);
+    --shadow-lg-emerald: 0 2px 6px hsl(158 40% 10% / 0.05), 0 22px 44px -18px hsl(158 85% 14% / 0.20);
+    --shadow-inner-soft: inset 0 1px 3px hsl(158 40% 10% / 0.04);
 
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --background: 150 30% 6%;
-    --foreground: 150 10% 95%;
-    --card: 150 25% 10%;
-    --card-foreground: 150 10% 95%;
-    --popover: 150 25% 10%;
-    --popover-foreground: 150 10% 95%;
-    --primary: 152 72% 48%;
-    --primary-foreground: 150 30% 6%;
-    --primary-glow: 152 72% 60%;
-    --primary-soft: 152 30% 14%;
-    --secondary: 150 20% 15%;
-    --secondary-foreground: 150 10% 95%;
-    --muted: 150 15% 18%;
-    --muted-foreground: 150 10% 65%;
-    --accent: 42 75% 55%;
-    --accent-foreground: 0 0% 100%;
-    --accent-glow: 42 85% 65%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 150 15% 20%;
-    --input: 150 15% 20%;
-    --ring: 152 72% 48%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    --gradient-flag-glow: radial-gradient(60% 45% at 85% 15%, hsl(0 80% 45% / 0.04) 0%, transparent 70%),
-                          radial-gradient(55% 40% at 10% 90%, hsl(140 90% 25% / 0.05) 0%, transparent 70%),
-                          radial-gradient(70% 50% at 90% 85%, hsl(140 90% 30% / 0.03) 0%, transparent 70%);
-    --gradient-hero-strong: radial-gradient(80% 70% at 50% -10%, hsl(var(--primary) / 0.18) 0%, transparent 70%),
-                            radial-gradient(50% 50% at 85% 30%, hsl(var(--accent) / 0.12) 0%, transparent 60%),
-                            radial-gradient(45% 45% at 10% 50%, hsl(var(--primary) / 0.08) 0%, transparent 60%),
-                            linear-gradient(180deg, hsl(var(--background)) 0%, hsl(150 25% 10%) 100%);
   }
 }
 
@@ -141,7 +100,6 @@
     background-image: var(--gradient-flag-glow);
     background-attachment: fixed;
     overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
   }
 
   .font-bengali {
@@ -187,13 +145,9 @@
     scroll-margin-top: 110px;
   }
 
-  /* Smooth theme transitions on semantic surfaces */
+  /* Smooth interaction transitions on semantic surfaces */
   a, button, input, select, textarea, [role="button"] {
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .bg-background, .bg-card, .bg-popover, .bg-secondary, .bg-muted, .bg-accent {
-    transition: background-color 0.4s ease;
   }
 }
 
@@ -411,19 +365,12 @@
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
-  .dark .glass-panel {
-    background: rgba(15, 25, 20, 0.75);
-    border: 1px solid hsl(var(--border) / 0.5);
-  }
 
   .glass-card {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border) / 0.6);
-  }
-  .dark .glass-card {
-    background: rgba(20, 30, 25, 0.85);
   }
 
   .glass-strong {
@@ -432,12 +379,8 @@
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--border) / 0.8);
   }
-  .dark .glass-strong {
-    background: rgba(15, 22, 18, 0.92);
-    border: 1px solid hsl(var(--border) / 0.6);
-  }
   .glass-panel, .glass-card, .glass-strong {
-    transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
   }
 
   .shadow-hero-card {

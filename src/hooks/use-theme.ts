@@ -1,43 +1,28 @@
-import { useCallback, useEffect, useState, type ReactElement, type ReactNode } from 'react';
+import { useEffect, type ReactElement, type ReactNode } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light';
 
-const STORAGE_KEY = 'theme';
 const THEME_ATTRIBUTE = 'data-theme';
 
-function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') {
-    return 'light';
-  }
-
-  const storedTheme = window.localStorage.getItem(STORAGE_KEY);
-
-  if (storedTheme === 'light' || storedTheme === 'dark') {
-    return storedTheme;
-  }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const theme: Theme = 'light';
 
   useEffect(() => {
     const root = document.documentElement;
     root.setAttribute(THEME_ATTRIBUTE, theme);
-    root.classList.toggle('dark', theme === 'dark');
-    window.localStorage.setItem(STORAGE_KEY, theme);
+    root.classList.remove('dark');
   }, [theme]);
 
-  const toggleTheme = useCallback(() => {
-    setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'));
-  }, []);
+  const toggleTheme = () => {
+    // Light-only build: dark mode has been removed, so toggling is a no-op.
+  };
 
   return {
     theme,
     toggleTheme,
   };
 }
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   useTheme();
   return children as ReactElement;
