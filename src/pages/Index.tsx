@@ -13,16 +13,9 @@ import {
   Users,
   Search,
   HelpCircle,
-  FileCheck,
   Layers,
-  ArrowRight,
   Shield,
   FileText,
-  Printer,
-  Smartphone,
-  ExternalLink,
-  History,
-  Camera,
   Mail,
   Phone,
   MapPin,
@@ -31,22 +24,15 @@ import {
   Globe,
   FileSignature,
   Wallet,
-  Award,
-  TrendingUp,
   Star,
   Quote,
   Menu,
   X,
-  Download,
-  Eye,
   BellRing,
-  Timer,
-  Cloud,
   Check,
   ChevronRight,
   Minus,
   Plus,
-  Info,
   PhoneCall,
   MessageSquare,
 } from "lucide-react";
@@ -132,6 +118,29 @@ const faqs = [
   {
     q: "মোবাইল থেকে কি সরাসরি PDF সেভ বা প্রিন্ট করা যাবে?",
     a: "হ্যাঁ, আপনার মোবাইলের যেকোনো ব্রাউজার থেকেই এক ক্লিকে 'Print / Save as PDF' বাটনে ক্লিক করে হাই-কোয়ালিটি কপি সেভ করে নিতে পারবেন।",
+  },
+];
+
+const skippedQuestions = [
+  {
+    q: "সার্ভার কপি কি সরকারিভাবে স্বীকৃত?",
+    note: "এই কপিটি তথ্য যাচাইয়ের জন্য প্রস্তুতকৃত অনলাইন সার্ভার কপি; এটি জাতীয় নির্বাচন কমিশন কর্তৃক ইস্যুকৃত মূল স্মার্ট কার্ড নয়।",
+  },
+  {
+    q: "কপিতে থাকা QR কোড কোথায় স্ক্যান করে যাচাই করা যায়?",
+    note: "QR কোডটি কপির তথ্য দ্রুত শেয়ার ও যাচাইয়ের সুবিধার জন্য সংযুক্ত; নির্দিষ্ট যাচাই পোর্টালের ঠিকানা এখনো চূড়ান্ত করা হয়নি।",
+  },
+  {
+    q: "প্রিন্ট করা কপি রঙিন না হলে কী করব?",
+    note: "প্রিন্টারের কালার সেটিং ও কাগজের মানের উপর কপির রঙ নির্ভর করে; সেরা ফলাফলের জন্য কালার প্রিন্টার ব্যবহার করুন।",
+  },
+  {
+    q: "তথ্য ভুল দেখালে সংশোধনের আবেদন কোথায় করব?",
+    note: "সার্ভার থেকে আসা তথ্য সংশোধনের জন্য সংশ্লিষ্ট সরকারি অফিসে আবেদন করতে হয়; এই প্ল্যাটফর্ম থেকে সরাসরি সংশোধন সম্ভব নয়।",
+  },
+  {
+    q: "একটি কপি কতবার ডাউনলোড করা যাবে?",
+    note: "ডাউনলোডের সংখ্যার কোনো নির্দিষ্ট সীমা এখনো নির্ধারিত হয়নি; প্রয়োজনে যেকোনো সময় নতুন করে যাচাই করে কপি নেওয়া যাবে।",
   },
 ];
 
@@ -300,6 +309,13 @@ const Index = () => {
                 প্রশ্নোত্তর
               </a>
               <a
+                href="#skipped-questions"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
+              >
+                অসম্পূর্ণ প্রশ্ন
+              </a>
+              <a
                 href="#contact"
                 onClick={() => setIsMenuOpen(false)}
                 className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
@@ -393,6 +409,12 @@ const Index = () => {
               className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
             >
               প্রশ্নোত্তর
+            </a>
+            <a
+              href="#skipped-questions"
+              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
+            >
+              অসম্পূর্ণ প্রশ্ন
             </a>
           </nav>
 
@@ -849,6 +871,55 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Skipped Questions Section */}
+        <section id="skipped-questions" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
+                অসম্পূর্ণ প্রশ্ন
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                যেসব প্রশ্ন এখনো উত্তর পায়নি
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                ব্যবহারকারীরা যেসব বিষয়ে জানতে চেয়েছেন কিন্তু এখনো নিশ্চিত উত্তর দেওয়া হয়নি — সেগুলো এখানে খোলাখুলি তালিকাভুক্ত করা হয়েছে।
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              {skippedQuestions.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="glass-card bg-card border border-border/80 rounded-2xl p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-[#f42a41]/40 transition-all"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="shrink-0 w-7 h-7 rounded-full bg-[#f42a41]/10 text-[#f42a41] flex items-center justify-center mt-0.5">
+                      <HelpCircle className="w-4 h-4" />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-sm sm:text-base font-bold text-foreground leading-snug">{item.q}</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-1.5">{item.note}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                আপনার প্রশ্নের উত্তর না পেলে সরাসরি যোগাযোগ করুন — আমরা যত দ্রুত সম্ভব উত্তর দেওয়ার চেষ্টা করব।
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 mt-4 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+              >
+                <MessageSquare className="w-4 h-4" />
+                যোগাযোগ করুন
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Contact / CTA Section */}
         <section id="contact" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -936,6 +1007,7 @@ const Index = () => {
                 <li><a href="#steps" className="text-muted-foreground hover:text-primary transition-colors">কার্যপদ্ধতি</a></li>
                 <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">বিশেষত্বসমূহ</a></li>
                 <li><a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">প্রশ্নোত্তর</a></li>
+                <li><a href="#skipped-questions" className="text-muted-foreground hover:text-primary transition-colors">অসম্পূর্ণ প্রশ্ন</a></li>
               </ul>
             </div>
 
