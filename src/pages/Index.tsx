@@ -481,22 +481,6 @@ const Index = () => {
                   </span>
                 </div>
 
-                {/* Trust Badges */}
-                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-foreground/85 font-medium">
-                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#006a4e]/20 shadow-xs">
-                    <BadgeCheck className="w-4 h-4 text-[#006a4e]" />
-                    <span>১০০% আসল ফরম্যাট</span>
-                  </div>
-                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-[#f42a41]/20 shadow-xs">
-                    <QrCode className="w-4 h-4 text-[#f42a41]" />
-                    <span>স্মার্ট কিউআর কোড</span>
-                  </div>
-                  <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-card border border-teal-500/20 shadow-xs">
-                    <Shield className="w-4 h-4 text-teal-600" />
-                    <span>নিরাপদ ও তাৎক্ষণিক</span>
-                  </div>
-                </div>
-
                 {/* Quick Action Link */}
                 <div className="pt-2">
                   <a
