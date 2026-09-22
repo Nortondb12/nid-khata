@@ -4,7 +4,6 @@ import {
   BadgeCheck,
   Clock,
   Lock,
-  Sparkles,
   ChevronDown,
   QrCode,
   FileDown,
@@ -281,13 +280,6 @@ const Index = () => {
                 ব্যবহারের ক্ষেত্র
               </a>
               <a
-                href="#united-air"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                United Air সার্ভিস
-              </a>
-              <a
                 href="#testimonials"
                 onClick={() => setIsMenuOpen(false)}
                 className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
@@ -399,12 +391,6 @@ const Index = () => {
               ব্যবহারের ক্ষেত্র
             </a>
             <a
-              href="#united-air"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              United Air সার্ভিস
-            </a>
-            <a
               href="#faq"
               className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
             >
@@ -495,49 +481,6 @@ const Index = () => {
                   {/* Decorative backdrop for form with Flag Colors */}
                   <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#006a4e]/30 via-[#f42a41]/20 to-teal-500/25 blur-xl opacity-70 -z-10" />
                   <NidForm />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* United Air Service Banner */}
-        <section id="united-air" className="relative scroll-mt-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8">
-            <div className="relative overflow-hidden rounded-3xl border border-[#006a4e]/25 shadow-lg">
-              <img
-                src="/generated/3da202e7-23d-united-air-service-banner.jpg"
-                alt="United Air সার্ভিস — NID Service BD এর সাথে বিমান টিকিট ও ভ্রমণ সেবা"
-                className="absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#006a4e]/90 via-[#006a4e]/70 to-[#f42a41]/60" />
-              <div className="relative px-5 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16 max-w-2xl">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  United Air সার্ভিস
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mt-3 leading-tight">
-                  United Air-এর সাথে ঘরে বসেই বিমান টিকিট বুকিং
-                </h2>
-                <p className="text-white/90 text-sm sm:text-base leading-relaxed mt-3">
-                  NID Service BD-এর গ্রাহকদের জন্য United Air-এর বিশেষ ভ্রমণ সেবা — অভ্যন্তরীণ ও আন্তর্জাতিক রুটে টিকিট বুকিং, রি-শিডিউল ও যাত্রী সহায়তা একই প্ল্যাটফর্মে।
-                </p>
-                <div className="flex flex-wrap gap-3 pt-5">
-                  <a
-                    href="#form-section"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#006a4e] font-bold text-sm hover:bg-white/90 shadow-md transition-all active:scale-95"
-                  >
-                    <Search className="w-4 h-4" />
-                    টিকিট বুক করুন
-                  </a>
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 border border-white/30 text-white font-bold text-sm hover:bg-white/20 transition-all"
-                  >
-                    <PhoneCall className="w-4 h-4" />
-                    সহায়তা নিন
-                  </a>
                 </div>
               </div>
             </div>
@@ -997,7 +940,6 @@ const Index = () => {
                 <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">ব্যাংক ও KYC</a></li>
                 <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সিম রেজিস্ট্রেশন</a></li>
                 <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সরকারি সেবা</a></li>
-                <li><a href="#united-air" className="text-muted-foreground hover:text-primary transition-colors">United Air টিকিট</a></li>
                 <li><a href="#perks" className="text-muted-foreground hover:text-primary transition-colors">সার্ভার কপি সুবিধা</a></li>
               </ul>
             </div>
