@@ -435,9 +435,14 @@ const NidForm = () => {
                   {errors.nid_number.message}
                 </p>
               ) : (
-                <p id="nid-hint" className="text-[11px] sm:text-xs text-muted-foreground flex items-center gap-1.5">
-                  <Database className="w-3 h-3 shrink-0" aria-hidden="true" />
-                  <span className="truncate">স্মার্ট কার্ড: ১০ সংখ্যা | সাধারণ কার্ড: ১৩ অথবা ১৭ সংখ্যা</span>
+                <p
+                  id="nid-hint"
+                  className="text-[11px] sm:text-xs text-muted-foreground flex items-start sm:items-center gap-1.5 leading-relaxed"
+                >
+                  <Database className="w-3 h-3 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" />
+                  <span>
+                    ১৭ সংখ্যার NID নম্বর দিন — স্মার্ট কার্ড হলে ১০ সংখ্যা, পুরনো কার্ড হলে ১৩ সংখ্যা। শুধু ইংরেজি সংখ্যায় লিখুন।
+                  </span>
                 </p>
               )}
             </div>
@@ -464,7 +469,7 @@ const NidForm = () => {
                     max={new Date().toISOString().slice(0, 10)}
                     min="1900-01-01"
                     aria-invalid={!!errors.date_of_birth}
-                    aria-describedby={errors.date_of_birth ? "dob-error" : undefined}
+                    aria-describedby={errors.date_of_birth ? "dob-error" : "dob-hint"}
                     className={`h-12 sm:h-14 bg-muted/30 hover:bg-muted/40 rounded-2xl pl-12 sm:pl-16 pr-3 sm:pr-4 border-2 focus-visible:bg-card transition-all duration-300 text-sm sm:text-base font-medium w-full ${
                       hasDob && !errors.date_of_birth
                         ? "border-emerald-500/50 focus-visible:border-emerald-500"
@@ -475,10 +480,18 @@ const NidForm = () => {
                     {...register("date_of_birth")}
                   />
                 </div>
-                {errors.date_of_birth && (
+                {errors.date_of_birth ? (
                   <p id="dob-error" role="alert" className="text-xs font-semibold text-destructive flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse shrink-0" aria-hidden="true" />
                     {errors.date_of_birth.message}
+                  </p>
+                ) : (
+                  <p
+                    id="dob-hint"
+                    className="text-[11px] sm:text-xs text-muted-foreground flex items-start sm:items-center gap-1.5 leading-relaxed"
+                  >
+                    <Calendar className="w-3 h-3 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" />
+                    <span>সঠিক জন্মতারিখ (দিন-মাস-বছর) দিন — NID-তে যেভাবে আছে ঠিক সেভাবেই।</span>
                   </p>
                 )}
               </div>
@@ -545,6 +558,7 @@ const NidForm = () => {
             <button
               type="submit"
               disabled={isPending}
+              aria-busy={isPending}
               className="relative w-full overflow-hidden rounded-2xl h-12 sm:h-14 bg-gradient-to-r from-primary to-teal-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 group"
             >
               {isPending ? (
@@ -559,6 +573,19 @@ const NidForm = () => {
                 </span>
               )}
             </button>
+
+            {/* Submit loading status — directly below the submit button */}
+            {isPending && (
+              <div
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                className="flex items-center justify-center gap-2.5 rounded-2xl border border-primary/25 bg-gradient-to-r from-primary/10 via-primary/5 to-teal-500/10 px-4 py-3 text-xs sm:text-sm font-semibold text-primary animate-in fade-in slide-in-from-top-2 duration-300"
+              >
+                <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin shrink-0" aria-hidden="true" />
+                <span>অনুরোধ পাঠানো হচ্ছে…</span>
+              </div>
+            )}
 
             {/* Server Copy Download */}
             <div className="pt-1 sm:pt-2 space-y-3 sm:space-y-4">
