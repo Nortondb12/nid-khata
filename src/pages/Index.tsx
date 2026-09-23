@@ -351,7 +351,7 @@ const Index = () => {
             </div>
             <div className="leading-tight truncate">
               <div className="flex items-center gap-1 sm:gap-1.5">
-                <span className="text-sm sm:text-lg font-black tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent truncate">
+                <span className="text-base sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent truncate">
                   NID Service BD
                 </span>
                 <span className="shrink-0 text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
