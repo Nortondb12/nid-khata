@@ -39,6 +39,11 @@ const checkAborted = (signal?: AbortSignal) => {
 const sanitizeFilename = (input: string) =>
   input.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24) || "nid";
 
+const buildFileStamp = (date: Date) => {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
+};
+
 export interface NidCopyPayload {
   name_bn: string;
   name_en: string;
@@ -65,7 +70,8 @@ export async function downloadNidCopy(
   onProgress?: DownloadProgressHandler,
   signal?: AbortSignal,
 ): Promise<GeneratedCopy> {
-  const filename = `nid-server-copy-${sanitizeFilename(data.nid_number.slice(-4))}`;
+  const nidPart = sanitizeFilename(data.nid_number);
+  const filename = `nid-server-copy-${nidPart}-${buildFileStamp(new Date())}`;
 
   try {
     checkAborted(signal);
@@ -97,6 +103,34 @@ export async function downloadNidCopy(
       err instanceof Error && err.message ? err.message : "ডাউনলোড তৈরি করা যায়নি। আবার চেষ্টা করুন।",
     );
   }
+}
+
+/**
+ * Builds a plain-text data file from the successful lookup response and
+ * saves it locally. The filename carries the NID number and the date so
+ * the user can identify the file later.
+ */
+export function downloadNidDataFile(data: NidCopyPayload): void {
+  const nidPart = sanitizeFilename(data.nid_number);
+  const filename = `nid-data-${nidPart}-${buildFileStamp(new Date())}.txt`;
+
+  const lines = [
+    "NID Khata — সার্ভার কপি তথ্য",
+    "================================",
+    `NID নম্বর: ${data.nid_number}`,
+    `জন্ম তারিখ: ${data.date_of_birth}`,
+    `নাম (বাংলা): ${data.name_bn}`,
+    `নাম (English): ${data.name_en}`,
+    `পিতার নাম: ${data.father_name}`,
+    `মাতার নাম: ${data.mother_name}`,
+    `ঠিকানা: ${data.address}`,
+    "--------------------------------",
+    `সার্ভার কপি তৈরি: ${new Date().toLocaleString("bn-BD")}`,
+    "সূত্র: NID Khata অনলাইন সার্ভার কপি সেবা",
+  ];
+
+  const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+  triggerDownload(blob, filename);
 }
 
 function base64ToBlob(base64: string, mimeType: string): Blob {

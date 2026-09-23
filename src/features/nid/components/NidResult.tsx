@@ -24,7 +24,13 @@ import {
 } from "lucide-react";
 import type { NidData } from "../types";
 import { safeText } from "@/lib/safeText";
-import { downloadNidCopy, DownloadCancelledError, type DownloadFormat, type DownloadProgress } from "../utils/downloadCopy";
+import {
+  downloadNidCopy,
+  downloadNidDataFile,
+  DownloadCancelledError,
+  type DownloadFormat,
+  type DownloadProgress,
+} from "../utils/downloadCopy";
 
 interface NidResultProps {
   data: NidData;
@@ -86,6 +92,22 @@ const NidResult = ({ data }: NidResultProps) => {
 
   const handleCancel = () => {
     abortRef.current?.abort();
+  };
+
+  const handleDownloadDataFile = () => {
+    try {
+      downloadNidDataFile({
+        name_bn: data.name_bn,
+        name_en: data.name_en,
+        father_name: data.father_name,
+        mother_name: data.mother_name,
+        date_of_birth: data.date_of_birth,
+        nid_number: data.nid_number,
+        address: data.address,
+      });
+    } catch (err) {
+      setDownloadError(err instanceof Error ? err.message : "ফাইল ডাউনলোড ব্যর্থ হয়েছে।");
+    }
   };
 
   const handleCopySummary = async () => {
@@ -491,6 +513,19 @@ const NidResult = ({ data }: NidResultProps) => {
 
       {/* Action Buttons */}
       <div className="no-print grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1 sm:pt-2">
+        <Button
+          type="button"
+          onClick={handleDownloadDataFile}
+          disabled={busy !== null}
+          variant="outline"
+          size="lg"
+          className="relative h-12 sm:h-13 py-3.5 font-bold rounded-2xl bg-gradient-to-r from-teal-600/5 to-cyan-600/5 hover:from-teal-600/10 hover:to-cyan-600/10 border-teal-500/40 text-teal-700 dark:text-teal-300 w-full overflow-hidden group sm:col-span-2"
+          aria-label="সার্ভার কপির তথ্য ফাইল হিসেবে ডাউনলোড করুন"
+        >
+          <Download className="w-5 h-5 mr-2 shrink-0" aria-hidden="true" />
+          <span>তথ্য ফাইল ডাউনলোড করুন</span>
+        </Button>
+
         <Button
           onClick={() => handleDownload("pdf")}
           disabled={busy !== null}

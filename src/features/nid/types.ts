@@ -14,3 +14,10 @@ export interface NidLookupRequest {
   date_of_birth: string;
 }
 
+export type NidLookupStatus = "idle" | "loading" | "success" | "error";
+
+export interface NidLookupState {
+  status: NidLookupStatus;
+  data: NidData | null;
+  error: string | null;
+}
