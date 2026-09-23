@@ -918,7 +918,7 @@ const Index = () => {
                   <p className="text-[11px] text-muted-foreground">জাতীয় পরিচয়পত্র অনলাইন পোর্টাল</p>
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
+              <p className="text-sm text-foreground/80 dark:text-foreground/90 leading-relaxed">
                 দ্রুত, নিরাপদ ও নির্ভুলভাবে জাতীয় পরিচয়পত্রের সার্ভার কপি সংগ্রহ ও যাচাইয়ের আধুনিক প্ল্যাটফর্ম।
               </p>
             </div>
