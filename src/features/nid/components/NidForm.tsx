@@ -560,6 +560,20 @@ const NidForm = () => {
               )}
             </button>
 
+            {/* Processing time note */}
+            <p
+              role="note"
+              className="flex items-start justify-center gap-1.5 text-center text-[11px] sm:text-xs text-muted-foreground leading-relaxed"
+            >
+              <Loader2
+                className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 mt-0.5 text-primary ${isPending ? "animate-spin" : ""}`}
+                aria-hidden="true"
+              />
+              <span>
+                অনুগ্রহ করে অপেক্ষা করুন — অনুরোধ প্রক্রিয়া করতে কয়েক সেকেন্ড সময় লাগতে পারে।
+              </span>
+            </p>
+
             {/* Server Copy Download */}
             <div className="pt-1 sm:pt-2 space-y-3 sm:space-y-4">
               <div className="flex items-center gap-2">
