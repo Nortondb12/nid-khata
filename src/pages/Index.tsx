@@ -38,6 +38,16 @@ import {
 import { NidForm } from "@/features/nid";
 import logo from "@/assets/logo.png";
 
+const navLinks = [
+  { href: "#form-section", label: "যাচাই ফর্ম" },
+  { href: "#steps", label: "কার্যপদ্ধতি" },
+  { href: "#features", label: "বিশেষত্বসমূহ" },
+  { href: "#use-cases", label: "ব্যবহারের ক্ষেত্র" },
+  { href: "#testimonials", label: "মতামত" },
+  { href: "#faq", label: "প্রশ্নোত্তর" },
+  { href: "#contact", label: "যোগাযোগ" },
+];
+
 const stats = [
   { label: "সফল ভেরিফিকেশন", value: "৫,০০,০০০+", icon: Users },
   { label: "গড় যাচাই সময়", value: "< ৩ সেকেন্ড", icon: Zap },
@@ -250,70 +260,18 @@ const Index = () => {
                 </button>
               </div>
             </div>
-            <nav className="flex-1 flex flex-col gap-2 p-4 overflow-y-auto">
-              <a
-                href="#form-section"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                যাচাই ফর্ম
-              </a>
-              <a
-                href="#steps"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                কার্যপদ্ধতি
-              </a>
-              <a
-                href="#features"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                বিশেষত্বসমূহ
-              </a>
-              <a
-                href="#use-cases"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                ব্যবহারের ক্ষেত্র
-              </a>
-              <a
-                href="#testimonials"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                ব্যবহারকারীদের মতামত
-              </a>
-              <a
-                href="#perks"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                সুবিধাসমূহ
-              </a>
-              <a
-                href="#faq"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                প্রশ্নোত্তর
-              </a>
-              <a
-                href="#skipped-questions"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                অসম্পূর্ণ প্রশ্ন
-              </a>
-              <a
-                href="#contact"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors font-medium"
-              >
-                যোগাযোগ
-              </a>
+            <nav aria-label="মোবাইল মেন্যু" className="flex-1 flex flex-col gap-1.5 p-4 overflow-y-auto">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center justify-between px-4 py-3 rounded-xl text-foreground/80 hover:text-foreground hover:bg-muted/70 transition-colors font-semibold"
+                >
+                  <span>{link.label}</span>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground/60" aria-hidden="true" />
+                </a>
+              ))}
             </nav>
             <div className="p-4 border-t border-border">
               <a
@@ -365,43 +323,16 @@ const Index = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <nav aria-label="প্রধান মেন্যু" className="hidden lg:flex items-center gap-1 text-sm font-medium">
-            <a
-              href="#form-section"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              যাচাই ফর্ম
-            </a>
-            <a
-              href="#steps"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              কার্যপদ্ধতি
-            </a>
-            <a
-              href="#features"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              বিশেষত্বসমূহ
-            </a>
-            <a
-              href="#use-cases"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              ব্যবহারের ক্ষেত্র
-            </a>
-            <a
-              href="#faq"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              প্রশ্নোত্তর
-            </a>
-            <a
-              href="#skipped-questions"
-              className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
-            >
-              অসম্পূর্ণ প্রশ্ন
-            </a>
+          <nav aria-label="প্রধান মেন্যু" className="hidden lg:flex items-center gap-0.5 text-sm font-medium">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3.5 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
@@ -434,6 +365,10 @@ const Index = () => {
             <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               {/* Left Column: Hero Text */}
               <div className="lg:col-span-6 text-center lg:text-left space-y-4 sm:space-y-6">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-[11px] sm:text-xs font-bold uppercase tracking-wider border border-[#006a4e]/20">
+                  <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                  নিরাপদ ও নির্ভরযোগ্য সেবা
+                </span>
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[2.75rem] font-black tracking-tight text-foreground leading-[1.2]">
                   জাতীয় পরিচয়পত্রের{" "}
                   <span className="bg-gradient-to-r from-[#006a4e] via-[#f42a41] to-[#006a4e] bg-clip-text text-transparent">
@@ -463,14 +398,21 @@ const Index = () => {
                   </span>
                 </div>
 
-                {/* Quick Action Link */}
-                <div className="pt-2">
+                {/* Quick Action Links */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                  <a
+                    href="#form-section"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                  >
+                    <Search className="w-4 h-4" aria-hidden="true" />
+                    এখনই যাচাই করুন
+                  </a>
                   <a
                     href="#steps"
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-card border border-border text-foreground font-bold text-sm hover:border-[#006a4e]/40 hover:shadow-md transition-all"
                   >
-                    সার্ভার কপি ডাউনলোড পদ্ধতি বিস্তারিত দেখুন
-                    <ChevronDown className="w-4 h-4 animate-bounce" />
+                    কার্যপদ্ধতি দেখুন
+                    <ChevronDown className="w-4 h-4" aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -795,7 +737,7 @@ const Index = () => {
         </section>
 
         {/* Skipped Questions Section */}
-        <section id="skipped-questions" className="py-12 sm:py-20 lg:py-24 scroll-mt-16">
+        <section id="skipped-questions" className="py-12 sm:py-20 lg:py-24 scroll-mt-16 bg-muted/20 border-y border-border/60">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
               <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
@@ -930,6 +872,7 @@ const Index = () => {
                 <li><a href="#steps" className="text-muted-foreground hover:text-primary transition-colors">কার্যপদ্ধতি</a></li>
                 <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">বিশেষত্বসমূহ</a></li>
                 <li><a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">প্রশ্নোত্তর</a></li>
+                <li><a href="#testimonials" className="text-muted-foreground hover:text-primary transition-colors">ব্যবহারকারীদের মতামত</a></li>
                 <li><a href="#skipped-questions" className="text-muted-foreground hover:text-primary transition-colors">অসম্পূর্ণ প্রশ্ন</a></li>
               </ul>
             </div>

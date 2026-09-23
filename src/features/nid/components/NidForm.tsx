@@ -20,6 +20,7 @@ import {
   FileImage,
   FileDown,
   Check,
+  Clock,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -559,6 +560,12 @@ const NidForm = () => {
                 </span>
               )}
             </button>
+
+            {/* Processing note */}
+            <p className="text-[11px] sm:text-xs text-muted-foreground text-center leading-relaxed flex items-center justify-center gap-1.5">
+              <Clock className="w-3 h-3 shrink-0" aria-hidden="true" />
+              অনুরোধ প্রক্রিয়া হতে কয়েক সেকেন্ড সময় লাগতে পারে — অনুগ্রহ করে অপেক্ষা করুন।
+            </p>
 
             {/* Server Copy Download */}
             <div className="pt-1 sm:pt-2 space-y-3 sm:space-y-4">

@@ -20,6 +20,7 @@ import {
   Fingerprint,
   ChevronDown,
   ChevronUp,
+  Copy,
 } from "lucide-react";
 import type { NidData } from "../types";
 import { safeText } from "@/lib/safeText";
@@ -125,6 +126,7 @@ const NidResult = ({ data }: NidResultProps) => {
   ];
 
   const visibleFields = showAll ? fieldData : fieldData.slice(0, 4);
+  const hiddenCount = fieldData.length - 4;
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -279,7 +281,7 @@ const NidResult = ({ data }: NidResultProps) => {
             </div>
 
             {/* Info Grid */}
-            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <dl id="nid-extra-fields" className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {visibleFields.map((field) => (
                 <div 
                   key={field.label}
@@ -298,19 +300,19 @@ const NidResult = ({ data }: NidResultProps) => {
                         {field.value}
                       </dd>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
+                    <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-200 shrink-0">
                       <Button
                         type="button"
                         variant="ghost"
                         size="sm"
                         onClick={() => copyField(field.label, field.value)}
-                        className="h-7 w-7 p-0 rounded-full hover:bg-emerald-500/20"
+                        className="h-8 w-8 p-0 rounded-full hover:bg-emerald-500/20 focus-visible:ring-2 focus-visible:ring-emerald-500/40"
                         aria-label={`${field.label} কপি করুন`}
                       >
                         {copiedField === field.label ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                          <Check className="w-4 h-4 text-emerald-500" aria-hidden="true" />
                         ) : (
-                          <Share2 className="w-3.5 h-3.5 text-muted-foreground" />
+                          <Copy className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
                         )}
                       </Button>
                     </div>
@@ -327,6 +329,7 @@ const NidResult = ({ data }: NidResultProps) => {
                 size="sm"
                 onClick={() => setShowAll((v) => !v)}
                 aria-expanded={showAll}
+                aria-controls="nid-extra-fields"
                 className="text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-emerald-500/10 h-9 gap-1.5 rounded-xl px-4"
               >
                 {showAll ? (
@@ -338,6 +341,11 @@ const NidResult = ({ data }: NidResultProps) => {
                   <>
                     <ChevronDown className="w-4 h-4 shrink-0" aria-hidden="true" />
                     সম্পূর্ণ ঠিকানা দেখুন
+                    {hiddenCount > 0 && (
+                      <span className="ml-1 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold">
+                        {hiddenCount}
+                      </span>
+                    )}
                   </>
                 )}
               </Button>
@@ -490,7 +498,7 @@ const NidResult = ({ data }: NidResultProps) => {
           className="relative h-12 sm:h-13 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/30 transition-all active:scale-[0.98] hover:shadow-2xl hover:shadow-emerald-600/40 group overflow-hidden w-full"
           aria-label="সার্ভার কপি PDF হিসেবে ডাউনলোড করুন"
         >
-          <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" aria-hidden="true" />
+          <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 motion-reduce:hidden" aria-hidden="true" />
           {busy === "pdf" ? (
             <>
               <Loader2 className="w-5 h-5 mr-2 animate-spin shrink-0" aria-hidden="true" />
