@@ -345,7 +345,7 @@ const Index = () => {
               <img
                 src={logo}
                 alt="NID Service Logo"
-                className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl object-contain shadow-xs group-hover:scale-105 transition-transform duration-300"
+                className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl object-contain shadow-xs group-hover:scale-105 transition-transform duration-300"
               />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#006a4e] border-2 border-background rounded-full animate-pulse" />
             </div>
