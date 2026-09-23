@@ -36,7 +36,8 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
-import logo from "@/assets/logo.png";
+
+const brandMark = "/generated/e7ed8c66-6c0-nid-khata-mark.jpg";
 
 const stats = [
   { label: "সফল ভেরিফিকেশন", value: "৫,০০,০০০+", icon: Users },
@@ -237,8 +238,8 @@ const Index = () => {
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between px-4 py-4 border-b border-border">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="Logo" className="w-8 h-8 rounded-xl object-contain" />
-                <span className="font-bold">NID Service BD</span>
+                <img src={brandMark} alt="NID Khata লোগো" className="w-8 h-8 rounded-xl object-contain" />
+                <span className="font-bold">NID Khata</span>
               </div>
               <div className="flex items-center gap-1">
                 <button
@@ -343,8 +344,8 @@ const Index = () => {
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
             <div className="relative shrink-0">
               <img
-                src={logo}
-                alt="NID Service Logo"
+                src={brandMark}
+                alt="NID Khata লোগো"
                 className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl object-contain shadow-xs group-hover:scale-105 transition-transform duration-300"
               />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#006a4e] border-2 border-background rounded-full animate-pulse" />
@@ -352,7 +353,7 @@ const Index = () => {
             <div className="leading-tight truncate">
               <div className="flex items-center gap-1 sm:gap-1.5">
                 <span className="text-sm sm:text-lg font-black tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent truncate">
-                  NID Service BD
+                  NID Khata
                 </span>
                 <span className="shrink-0 text-[9px] sm:text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
                   ভেরিফাইড
@@ -912,9 +913,9 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-3">
               <div className="flex items-center gap-2.5">
-                <img src={logo} alt="NID Service BD লোগো" className="w-10 h-10 rounded-2xl object-contain" />
+                <img src={brandMark} alt="NID Khata লোগো" className="w-10 h-10 rounded-2xl object-contain" />
                 <div className="leading-tight">
-                  <p className="text-sm font-black text-foreground">NID Service BD</p>
+                  <p className="text-sm font-black text-foreground">NID Khata</p>
                   <p className="text-[11px] text-muted-foreground">জাতীয় পরিচয়পত্র অনলাইন পোর্টাল</p>
                 </div>
               </div>
@@ -964,7 +965,7 @@ const Index = () => {
           </div>
 
           <div className="mt-8 pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-            <p>© {new Date().getFullYear()} NID Service BD — সর্বস্বত্ব সংরক্ষিত।</p>
+            <p>© {new Date().getFullYear()} NID Khata — সর্বস্বত্ব সংরক্ষিত।</p>
             <p className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-[#006a4e]" />
               নিরাপদ ও এনক্রিপ্টেড সংযোগ
