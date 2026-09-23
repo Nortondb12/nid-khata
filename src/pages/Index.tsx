@@ -971,6 +971,27 @@ const Index = () => {
             </p>
           </div>
         </div>
+
+        {/* Compact brand footer strip */}
+        <div className="border-t border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 text-center sm:text-left">
+              <img
+                src={logo}
+                alt="NID Service BD লোগো"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shrink-0"
+              />
+              <div className="min-w-0">
+                <p className="text-lg sm:text-xl font-black tracking-tight bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+                  NID Service BD
+                </p>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mt-0.5">
+                  NID নম্বর ও জন্মতারিখ দিয়ে বাংলাদেশ জাতীয় পরিচয়পত্রের সার্ভার কপি দ্রুত ও নিরাপদে ডাউনলোড করুন।
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

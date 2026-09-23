@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { NidForm } from '@/features/nid';
+import logo from '@/assets/logo.png';
 
 const features = [
   {
@@ -531,6 +532,25 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-white/70 backdrop-blur-xl px-4 py-8 md:py-10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 text-center sm:text-left">
+          <img
+            src={logo}
+            alt="NID Khata লোগো"
+            className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-contain shrink-0"
+          />
+          <div className="min-w-0">
+            <p className="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+              NID Khata
+            </p>
+            <p className="text-sm md:text-base text-gray-600 mt-1 leading-relaxed">
+              NID নম্বর ও জন্মতারিখ দিয়ে বাংলাদেশ জাতীয় পরিচয়পত্রের সার্ভার কপি দ্রুত ও নিরাপদে ডাউনলোড করুন
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
