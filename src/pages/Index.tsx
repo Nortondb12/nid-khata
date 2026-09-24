@@ -36,16 +36,160 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { NidForm } from "@/features/nid";
+import { useCart } from "@/features/store/hooks/useCart";
+import { ShoppingCart, Package, Sparkles, Tag, Truck, Headphones, RotateCcw } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
   { href: "#form-section", label: "যাচাই ফর্ম" },
+  { href: "#store", label: "স্টোর" },
   { href: "#steps", label: "কার্যপদ্ধতি" },
   { href: "#features", label: "বিশেষত্বসমূহ" },
   { href: "#use-cases", label: "ব্যবহারের ক্ষেত্র" },
   { href: "#testimonials", label: "মতামত" },
   { href: "#faq", label: "প্রশ্নোত্তর" },
   { href: "#contact", label: "যোগাযোগ" },
+];
+
+const storeCategories = [
+  { name: "সফটওয়্যার লাইসেন্স", count: 128, icon: Package },
+  { name: "সাবস্ক্রিপশন", count: 64, icon: Sparkles },
+  { name: "অ্যাক্টিভেশন কী", count: 92, icon: Tag },
+  { name: "ডিজিটাল কোড", count: 47, icon: QrCode },
+  { name: "টেমপ্লেট", count: 156, icon: FileText },
+  { name: "ডাউনলোডযোগ্য ফাইল", count: 83, icon: FileDown },
+];
+
+const featuredProducts = [
+  {
+    name: "Microsoft Office 365 — ১ বছর",
+    category: "সাবস্ক্রিপশন",
+    price: "৪,৯৯০",
+    oldPrice: "৭,৫০০",
+    badge: "ফিচার্ড",
+    rating: 4.9,
+    reviews: 312,
+  },
+  {
+    name: "Windows 11 Pro লাইসেন্স কী",
+    category: "সফটওয়্যার লাইসেন্স",
+    price: "২,৪৯০",
+    oldPrice: "৪,২০০",
+    badge: "বেস্ট সেলার",
+    rating: 4.8,
+    reviews: 528,
+  },
+  {
+    name: "Adobe Creative Cloud — ১ মাস",
+    category: "সাবস্ক্রিপশন",
+    price: "১,৮৯০",
+    oldPrice: "২,৯০০",
+    badge: "জনপ্রিয়",
+    rating: 4.7,
+    reviews: 204,
+  },
+  {
+    name: "Premium WordPress থিম বান্ডেল",
+    category: "টেমপ্লেট",
+    price: "১,২৯০",
+    oldPrice: "২,১০০",
+    badge: "নতুন",
+    rating: 4.9,
+    reviews: 96,
+  },
+];
+
+const popularProducts = [
+  {
+    name: "Canva Pro — ১ বছর",
+    category: "সাবস্ক্রিপশন",
+    price: "৯৯০",
+    oldPrice: "১,৮০০",
+    rating: 4.8,
+    reviews: 412,
+  },
+  {
+    name: "NordVPN — ৬ মাস",
+    category: "সাবস্ক্রিপশন",
+    price: "১,৪৯০",
+    oldPrice: "২,৪০০",
+    rating: 4.7,
+    reviews: 287,
+  },
+  {
+    name: "Grammarly Premium — ১ বছর",
+    category: "সাবস্ক্রিপশন",
+    price: "১,৭৯০",
+    oldPrice: "২,৯০০",
+    rating: 4.6,
+    reviews: 198,
+  },
+  {
+    name: "IDM লাইফটাইম লাইসেন্স",
+    category: "সফটওয়্যার লাইসেন্স",
+    price: "৮৯০",
+    oldPrice: "১,৫০০",
+    rating: 4.9,
+    reviews: 634,
+  },
+];
+
+const newProducts = [
+  {
+    name: "Figma Pro — ১ মাস",
+    category: "সাবস্ক্রিপশন",
+    price: "১,১৯০",
+    oldPrice: "১,৯০০",
+    rating: 4.8,
+    reviews: 42,
+  },
+  {
+    name: "Notion Plus — ১ বছর",
+    category: "সাবস্ক্রিপশন",
+    price: "১,৩৯০",
+    oldPrice: "২,২০০",
+    rating: 4.7,
+    reviews: 31,
+  },
+  {
+    name: "Envato Elements — ১ মাস",
+    category: "ডাউনলোডযোগ্য ফাইল",
+    price: "৯৯০",
+    oldPrice: "১,৬০০",
+    rating: 4.6,
+    reviews: 27,
+  },
+  {
+    name: "ChatGPT Plus — ১ মাস",
+    category: "সাবস্ক্রিপশন",
+    price: "২,২৯০",
+    oldPrice: "৩,২০০",
+    rating: 4.9,
+    reviews: 58,
+  },
+];
+
+const trustItems = [
+  {
+    icon: ShieldCheck,
+    title: "১০০% নিরাপদ পেমেন্ট",
+    desc: "সার্ভার-সাইড ভেরিফিকেশন ও এনক্রিপ্টেড ট্রানজেকশন",
+  },
+  {
+    icon: Zap,
+    title: "তাৎক্ষণিক ডেলিভারি",
+    desc: "পেমেন্ট নিশ্চিত হওয়ার সাথে সাথেই লাইসেন্স কী ও ফাইল",
+  },
+  {
+    icon: RotateCcw,
+    title: "রিফান্ড গ্যারান্টি",
+    desc: "ডেলিভারি ব্যর্থ হলে সম্পূর্ণ অর্থ ফেরত",
+  },
+  {
+    icon: Headphones,
+    title: "২৪/৭ সাপোর্ট",
+    desc: "যেকোনো সমস্যায় দ্রুত সহায়তা ও সমাধান",
+  },
 ];
 
 const stats = [
@@ -210,9 +354,11 @@ const testimonials = [
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [storeSearch, setStoreSearch] = useState("");
+  const { summary } = useCart();
 
   useEffect(() => {
-    document.title = "NID Service BD — আধুনিক জাতীয় পরিচয়পত্র যাচাই পোর্টাল";
+    document.title = "NID Service BD — আধুনিক জাতীয় পরিচয়পত্র যাচাই পোর্টাল";
   }, []);
 
   return (
@@ -337,6 +483,19 @@ const Index = () => {
 
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <a
+              href="#store"
+              className="relative inline-flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-card border border-border text-foreground font-bold text-xs sm:text-sm hover:border-[#006a4e]/40 hover:shadow-md transition-all"
+              aria-label={`কার্ট — ${summary.itemCount} আইটেম`}
+            >
+              <ShoppingCart className="w-4 h-4 text-[#006a4e]" aria-hidden="true" />
+              <span className="hidden sm:inline">কার্ট</span>
+              {summary.itemCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[1.25rem] h-5 px-1 rounded-full bg-[#f42a41] text-white text-[10px] font-bold flex items-center justify-center shadow-md">
+                  {summary.itemCount}
+                </span>
+              )}
+            </a>
+            <a
               href="#form-section"
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
             >
@@ -425,6 +584,256 @@ const Index = () => {
                   <NidForm />
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Storefront Section */}
+        <section id="store" className="py-12 sm:py-20 lg:py-24 scroll-mt-16 bg-muted/20 border-y border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+              <span className="px-3 py-1 rounded-full bg-[#006a4e]/10 text-[#006a4e] text-xs font-bold uppercase tracking-wider">
+                ডিজিটাল স্টোর
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground mt-3">
+                লাইসেন্স, সাবস্ক্রিপশন ও ডিজিটাল প্রোডাক্ট
+              </h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base mt-2">
+                পেমেন্ট নিশ্চিত হওয়ার সাথে সাথেই লাইসেন্স কী ও ডাউনলোড লিংক ডেলিভারি
+              </p>
+            </div>
+
+            {/* Search */}
+            <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
+              <label htmlFor="store-search" className="sr-only">
+                প্রোডাক্ট খুঁজুন
+              </label>
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                <input
+                  id="store-search"
+                  type="search"
+                  value={storeSearch}
+                  onChange={(event) => setStoreSearch(event.target.value)}
+                  placeholder="প্রোডাক্ট, লাইসেন্স বা সাবস্ক্রিপশন খুঁজুন..."
+                  className="w-full pl-11 pr-4 py-3 rounded-2xl bg-card border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#006a4e]/40 focus:border-[#006a4e]/40 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Categories */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10 sm:mb-14">
+              {storeCategories.map((category) => (
+                <a
+                  key={category.name}
+                  href="#store"
+                  className="group glass-card bg-card border border-border/80 rounded-2xl p-4 text-center shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="w-10 h-10 mx-auto rounded-xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                    <category.icon className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <p className="text-xs sm:text-sm font-bold text-foreground leading-snug">{category.name}</p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">{category.count} টি প্রোডাক্ট</p>
+                </a>
+              ))}
+            </div>
+
+            {/* Featured Products */}
+            <div className="mb-10 sm:mb-14">
+              <div className="flex items-center justify-between gap-4 mb-5">
+                <h3 className="text-lg sm:text-xl font-black text-foreground flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#006a4e]" aria-hidden="true" />
+                  ফিচার্ড প্রোডাক্ট
+                </h3>
+                <a href="#store" className="text-xs sm:text-sm font-bold text-[#006a4e] hover:underline">
+                  সব দেখুন
+                </a>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {featuredProducts.map((product) => (
+                  <div
+                    key={product.name}
+                    className="group glass-card bg-card border border-border/80 rounded-2xl overflow-hidden shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="relative h-32 bg-gradient-to-br from-[#006a4e]/10 via-muted/40 to-[#f42a41]/10 flex items-center justify-center">
+                      <Package className="w-10 h-10 text-[#006a4e]/40" aria-hidden="true" />
+                      <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-[#006a4e] text-white">
+                        {product.badge}
+                      </span>
+                    </div>
+                    <div className="p-4 flex flex-col flex-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{product.category}</p>
+                      <h4 className="text-sm font-bold text-foreground mt-1 leading-snug flex-1">{product.name}</h4>
+                      <div className="flex items-center gap-1 mt-2">
+                        <Star className="w-3.5 h-3.5 fill-[#f42a41] text-[#f42a41]" aria-hidden="true" />
+                        <span className="text-xs font-bold text-foreground">{product.rating}</span>
+                        <span className="text-[11px] text-muted-foreground">({product.reviews})</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-3">
+                        <span className="text-base font-black text-foreground">৳{product.price}</span>
+                        <span className="text-xs text-muted-foreground line-through">৳{product.oldPrice}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="mt-3 w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                      >
+                        <ShoppingCart className="w-3.5 h-3.5" aria-hidden="true" />
+                        কার্টে যোগ করুন
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Popular Products */}
+            <div className="mb-10 sm:mb-14">
+              <div className="flex items-center justify-between gap-4 mb-5">
+                <h3 className="text-lg sm:text-xl font-black text-foreground flex items-center gap-2">
+                  <Star className="w-5 h-5 text-[#f42a41]" aria-hidden="true" />
+                  জনপ্রিয় প্রোডাক্ট
+                </h3>
+                <a href="#store" className="text-xs sm:text-sm font-bold text-[#006a4e] hover:underline">
+                  সব দেখুন
+                </a>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {popularProducts.map((product) => (
+                  <div
+                    key={product.name}
+                    className="group glass-card bg-card border border-border/80 rounded-2xl overflow-hidden shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="relative h-32 bg-gradient-to-br from-[#f42a41]/10 via-muted/40 to-[#006a4e]/10 flex items-center justify-center">
+                      <Sparkles className="w-10 h-10 text-[#f42a41]/40" aria-hidden="true" />
+                    </div>
+                    <div className="p-4 flex flex-col flex-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{product.category}</p>
+                      <h4 className="text-sm font-bold text-foreground mt-1 leading-snug flex-1">{product.name}</h4>
+                      <div className="flex items-center gap-1 mt-2">
+                        <Star className="w-3.5 h-3.5 fill-[#f42a41] text-[#f42a41]" aria-hidden="true" />
+                        <span className="text-xs font-bold text-foreground">{product.rating}</span>
+                        <span className="text-[11px] text-muted-foreground">({product.reviews})</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-3">
+                        <span className="text-base font-black text-foreground">৳{product.price}</span>
+                        <span className="text-xs text-muted-foreground line-through">৳{product.oldPrice}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="mt-3 w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                      >
+                        <ShoppingCart className="w-3.5 h-3.5" aria-hidden="true" />
+                        কার্টে যোগ করুন
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* New Products */}
+            <div className="mb-10 sm:mb-14">
+              <div className="flex items-center justify-between gap-4 mb-5">
+                <h3 className="text-lg sm:text-xl font-black text-foreground flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-[#006a4e]" aria-hidden="true" />
+                  নতুন প্রোডাক্ট
+                </h3>
+                <a href="#store" className="text-xs sm:text-sm font-bold text-[#006a4e] hover:underline">
+                  সব দেখুন
+                </a>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {newProducts.map((product) => (
+                  <div
+                    key={product.name}
+                    className="group glass-card bg-card border border-border/80 rounded-2xl overflow-hidden shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="relative h-32 bg-gradient-to-br from-teal-500/10 via-muted/40 to-[#006a4e]/10 flex items-center justify-center">
+                      <Tag className="w-10 h-10 text-teal-600/40" aria-hidden="true" />
+                      <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-[#f42a41] text-white">
+                        নতুন
+                      </span>
+                    </div>
+                    <div className="p-4 flex flex-col flex-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{product.category}</p>
+                      <h4 className="text-sm font-bold text-foreground mt-1 leading-snug flex-1">{product.name}</h4>
+                      <div className="flex items-center gap-1 mt-2">
+                        <Star className="w-3.5 h-3.5 fill-[#f42a41] text-[#f42a41]" aria-hidden="true" />
+                        <span className="text-xs font-bold text-foreground">{product.rating}</span>
+                        <span className="text-[11px] text-muted-foreground">({product.reviews})</span>
+                      </div>
+                      <div className="flex items-baseline gap-2 mt-3">
+                        <span className="text-base font-black text-foreground">৳{product.price}</span>
+                        <span className="text-xs text-muted-foreground line-through">৳{product.oldPrice}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="mt-3 w-full inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 shadow-md shadow-primary/20 transition-all active:scale-95"
+                      >
+                        <ShoppingCart className="w-3.5 h-3.5" aria-hidden="true" />
+                        কার্টে যোগ করুন
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Discount Section */}
+            <div className="mb-10 sm:mb-14">
+              <div className="relative overflow-hidden rounded-3xl border border-[#f42a41]/25 bg-gradient-to-br from-[#f42a41]/10 via-card to-[#006a4e]/10 p-6 sm:p-10 shadow-lg">
+                <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#f42a41]/15 blur-3xl pointer-events-none" />
+                <div className="relative grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+                  <div className="space-y-3">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f42a41]/10 text-[#f42a41] text-xs font-bold uppercase tracking-wider">
+                      <Tag className="w-3.5 h-3.5" aria-hidden="true" />
+                      সীমিত সময়ের অফার
+                    </span>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight">
+                      প্রথম অর্ডারে <span className="text-[#f42a41]">২০% ছাড়</span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      কুপন কোড <span className="font-bold text-foreground">NID20</span> ব্যবহার করে যেকোনো ডিজিটাল প্রোডাক্টে তাৎক্ষণিক ছাড় নিন। অফার সীমিত সময়ের জন্য।
+                    </p>
+                    <a
+                      href="#store"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#f42a41] text-white font-bold text-sm hover:bg-[#f42a41]/90 shadow-md shadow-[#f42a41]/20 transition-all active:scale-95"
+                    >
+                      <Tag className="w-4 h-4" aria-hidden="true" />
+                      অফার দেখুন
+                    </a>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    {[
+                      { label: "সর্বোচ্চ ছাড়", value: "২০%" },
+                      { label: "কুপন কোড", value: "NID20" },
+                      { label: "মেয়াদ", value: "৩০ দিন" },
+                      { label: "প্রযোজ্য", value: "সব প্রোডাক্ট" },
+                    ].map((item) => (
+                      <div key={item.label} className="glass-card bg-card/80 border border-border/80 rounded-2xl p-4 text-center shadow-xs">
+                        <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                        <p className="text-lg font-black text-foreground mt-1">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+              {trustItems.map((item) => (
+                <div
+                  key={item.title}
+                  className="group glass-card bg-card border border-border/80 rounded-2xl p-5 shadow-xs hover:shadow-lg hover:border-[#006a4e]/40 transition-all duration-300"
+                >
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#006a4e]/10 to-[#f42a41]/10 text-[#006a4e] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <item.icon className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <h4 className="text-sm font-bold text-foreground mb-1">{item.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -869,6 +1278,7 @@ const Index = () => {
               <h3 className="text-sm font-bold text-foreground mb-3">দ্রুত লিংক</h3>
               <ul className="space-y-2 text-xs sm:text-sm">
                 <li><a href="#form-section" className="text-muted-foreground hover:text-primary transition-colors">যাচাই ফর্ম</a></li>
+                <li><a href="#store" className="text-muted-foreground hover:text-primary transition-colors">ডিজিটাল স্টোর</a></li>
                 <li><a href="#steps" className="text-muted-foreground hover:text-primary transition-colors">কার্যপদ্ধতি</a></li>
                 <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">বিশেষত্বসমূহ</a></li>
                 <li><a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">প্রশ্নোত্তর</a></li>
@@ -884,6 +1294,7 @@ const Index = () => {
                 <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সিম রেজিস্ট্রেশন</a></li>
                 <li><a href="#use-cases" className="text-muted-foreground hover:text-primary transition-colors">সরকারি সেবা</a></li>
                 <li><a href="#perks" className="text-muted-foreground hover:text-primary transition-colors">সার্ভার কপি সুবিধা</a></li>
+                <li><a href="#store" className="text-muted-foreground hover:text-primary transition-colors">লাইসেন্স ও সাবস্ক্রিপশন</a></li>
               </ul>
             </div>
 
